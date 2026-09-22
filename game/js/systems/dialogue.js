@@ -99,6 +99,7 @@ const Dialogue = {
         // Swallow the opening frame's input (see _ignoreAdvance).
         const ignoreInput = this._ignoreAdvance;
         this._ignoreAdvance = false;
+        const wasTyping = this._typing;
 
         if (this._typing) {
             this._typeTimer += dt;
@@ -117,8 +118,8 @@ const Dialogue = {
             this.nextEl.textContent = "[ E ]  continue";
         }
 
-        // Advance input (works while typing — skips — and once the line is shown).
-        if (!ignoreInput && (Input.Pressed(KEY.E) || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.ENTER))) {
+        // Ignore advance keys while the typewriter is still revealing text.
+        if (!wasTyping && !ignoreInput && (Input.Pressed(KEY.E) || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.ENTER))) {
             this.advance();
         }
     },

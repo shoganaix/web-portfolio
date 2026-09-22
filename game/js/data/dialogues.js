@@ -13,7 +13,7 @@ const DIALOGUES = {
             { who: "Guide", text: "Move with WASD or the arrow keys." },
             { who: "Guide", text: "Press E close to people, chests and signs to interact." },
             { who: "Guide", text: "Press SPACE to swing your sword when enemies show up." },
-            { who: "Guide", text: "Collect the glowing gemstones — the Sage to the east is looking for them." },
+            { who: "Guide", text: "Collect the scattered artworks — the Sage to the east is looking for them." },
         ],
     },
 
@@ -22,21 +22,34 @@ const DIALOGUES = {
         lines: (state) => {
             if (state.gems >= state.requiredGems) {
                 return [
-                    { who: "Sage", text: "Magnificent! All five gemstones, just as the prophecy said." },
-                    { who: "Sage", text: "You have proven yourself a true hero of the valley. The portal to my studio awaits you..." },
+                    { who: "Sage", text: "Magnificent! Five artworks, just as the prophecy said." },
+                    { who: "Sage", text: "Give me five artworks and I will open the portal to my studio." },
                     { who: "Sage", text: "Walk to the old tower in the west and press E to cross into the outer world." },
                 ];
             }
             return [
-                { who: "Sage", text: `The valley weakens, young one. I need ${state.requiredGems - state.gems} more gemstone(s) to reforge the crystal.` },
-                { who: "Sage", text: "They sparkle near the chest, the trees and the edges of the map. Avoid the dark blobs!" },
+                { who: "Sage", text: `The valley weakens, young one. I need ${state.requiredGems - state.gems} more artwork(s) to reforge the crystal.` },
+                { who: "Sage", text: "They are scattered near the chest, the trees and the edges of the map. Avoid the dark blobs!" },
+            ];
+        },
+    },
+
+    prisoner: {
+        lines: (state) => {
+            if (state.enemiesKilled >= 3) {
+                return [
+                    { who: "Prisoner", text: "Uff, thanks!" },
+                ];
+            }
+            return [
+                { who: "Prisoner", text: "Help me!" },
             ];
         },
     },
 
     chest: {
         lines: [
-            { who: "Chest", text: "You pry the lid open... a gemstone gleams inside! (+1)" },
+            { who: "Chest", text: "You pry the lid open... an artwork is hidden inside! (+1)" },
         ],
     },
 
@@ -53,6 +66,24 @@ const DIALOGUES = {
         ],
     },
 
+    portalLocked: {
+        lines: [
+            { who: "Tower", text: "It seems I cannot enter yet... the tower gives off a strange magical energy." },
+        ],
+    },
+
+    enemyPortal: {
+        lines: [
+            { who: "Portal", text: "The portal awakens... enemies will keep coming from the darkness." },
+        ],
+    },
+
+    waveComplete: {
+        lines: [
+            { who: "Portal", text: "The enemy wave is defeated. A reward chest has appeared!" },
+        ],
+    },
+
     empty: {
         lines: [
             { who: "Chest", text: "Empty. Someone got here first..." },
@@ -62,7 +93,7 @@ const DIALOGUES = {
     respawn: {
         lines: [
             { who: "Guide", text: "You fainted from too many hits! Don't worry — the valley always brings you back." },
-            { who: "Guide", text: "You kept your gemstones. Now watch your step!" },
+            { who: "Guide", text: "You kept your artworks. Now watch your step!" },
         ],
     },
 };

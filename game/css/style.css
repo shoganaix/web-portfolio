@@ -30,6 +30,53 @@ body {
     overflow: hidden;
 }
 
+.game-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background: rgba(18, 20, 32, 0.88);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+    min-height: 128px;
+    padding: 0.65rem 1rem 1.15rem;
+}
+
+.game-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.game-brand {
+    background: url('../../web/images/logo.png') no-repeat center center;
+    background-size: contain;
+    width: 82px;
+    height: 82px;
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.game-brand:hover {
+    opacity: 1;
+    transform: translateY(calc(-50% - 1px));
+}
+
+@media (max-width: 767px) {
+    .game-brand {
+        margin-left: 0;
+    }
+}
+
 #game-wrap {
     position: fixed;
     inset: 0;
@@ -39,6 +86,10 @@ body {
     overflow: hidden;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+}
+
+#mobile-controls {
+    display: none;
 }
 
 canvas {
@@ -53,6 +104,106 @@ canvas {
     display: none !important;
 }
 
+@media (max-width: 767px) {
+    body {
+        touch-action: none;
+    }
+
+    .game-navbar {
+        min-height: 82px;
+        padding: 0.35rem 0.7rem;
+    }
+
+    .game-brand {
+        width: 58px;
+        height: 58px;
+        left: 12px;
+    }
+
+    #mobile-controls {
+        position: fixed;
+        inset: auto 0 18px;
+        z-index: 60;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0 20px;
+        pointer-events: none;
+    }
+
+    #touch-joystick {
+        position: relative;
+        width: 118px;
+        height: 118px;
+        border: 3px solid rgba(255, 209, 102, 0.7);
+        border-radius: 50%;
+        background: rgba(13, 15, 24, 0.62);
+        pointer-events: auto;
+        touch-action: none;
+    }
+
+    #touch-knob {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 46px;
+        height: 46px;
+        border: 3px solid #ffd166;
+        border-radius: 50%;
+        background: rgba(255, 209, 102, 0.42);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+
+    .mobile-actions {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+        pointer-events: auto;
+    }
+
+    .mobile-actions button {
+        width: 64px;
+        height: 64px;
+        border: 3px solid #ffd166;
+        border-radius: 50%;
+        background: rgba(13, 15, 24, 0.82);
+        color: #ffd166;
+        font-family: var(--pixel);
+        font-size: 10px;
+        touch-action: none;
+    }
+
+    .mobile-actions #touch-shoot {
+        width: 78px;
+        height: 78px;
+        border-color: #6db8ff;
+        color: #9ed8ff;
+    }
+
+    #hud-hearts {
+        top: 20px;
+        right: 16px;
+        font-size: 16px;
+    }
+
+    #hud-gems {
+        top: 48px;
+        right: 16px;
+        font-size: 10px;
+    }
+
+    #hud-orbs {
+        top: 68px;
+        right: 16px;
+    }
+
+    #artwork-open {
+        top: 94px;
+        right: 16px;
+    }
+}
+
 /* ---------------------------------------------------------------------------
    HUD
    --------------------------------------------------------------------------- */
@@ -62,13 +213,14 @@ canvas {
     pointer-events: none;
     font-family: var(--pixel);
     color: #ffffff;
-    z-index: 5;
+    z-index: 35;
 }
 
 #hud-hearts {
     position: absolute;
-    top: 12px;
-    left: 14px;
+    top: 34px;
+    left: auto;
+    right: 24px;
     font-size: 22px;
     line-height: 1;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
@@ -84,8 +236,8 @@ canvas {
 
 #hud-gems {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 82px;
+    right: 24px;
     font-size: 16px;
     color: #4fd6c1;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
@@ -93,6 +245,138 @@ canvas {
 
 #hud-gems .gems-total {
     color: rgba(255, 255, 255, 0.45);
+}
+
+#hud-orbs {
+    position: absolute;
+    top: 108px;
+    right: 24px;
+    display: flex;
+    gap: 5px;
+}
+
+#hud-orbs .orb {
+    width: 10px;
+    height: 10px;
+    border: 2px solid #f2c14e;
+    border-radius: 50%;
+    background: #f2c14e;
+}
+
+#hud-orbs .orb.empty {
+    background: transparent;
+    opacity: 0.35;
+}
+
+#artwork-open {
+    position: absolute;
+    top: 136px;
+    right: 24px;
+    pointer-events: auto;
+    border: 2px solid #f2c14e;
+    padding: 6px 8px;
+    background: #171825;
+    color: #f2c14e;
+    font-family: var(--pixel);
+    font-size: 8px;
+    cursor: pointer;
+}
+
+#artwork-gallery {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 110px 24px 24px;
+    background: rgba(8, 10, 18, 0.88);
+    pointer-events: auto;
+}
+
+#artwork-gallery.hidden {
+    display: none !important;
+}
+
+.artwork-panel {
+    position: relative;
+    width: min(960px, 100%);
+    max-height: 100%;
+    overflow: auto;
+    padding: 28px;
+    border: 3px solid #f2c14e;
+    background: #171825;
+    color: #ffffff;
+}
+
+.artwork-panel h2 {
+    margin: 0 42px 22px 0;
+    color: #f2c14e;
+    font-family: var(--pixel);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+#artwork-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border: 2px solid #f2c14e;
+    padding: 7px 10px;
+    background: transparent;
+    color: #f2c14e;
+    font-family: var(--pixel);
+    cursor: pointer;
+}
+
+#artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 14px;
+}
+
+.artwork-card {
+    min-height: 132px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    background: #0e111d;
+    text-align: center;
+    overflow: hidden;
+}
+
+.artwork-card img,
+.artwork-lock {
+    display: block;
+    width: 100%;
+    height: 92px;
+    object-fit: contain;
+    background: #070910;
+}
+
+.artwork-card span {
+    display: block;
+    padding: 8px 5px;
+    font-family: var(--pixel);
+    font-size: 7px;
+    line-height: 1.5;
+}
+
+.artwork-card.locked {
+    opacity: 0.42;
+}
+
+.artwork-lock {
+    display: grid;
+    place-items: center;
+    color: #f2c14e;
+    font-family: var(--pixel);
+    font-size: 22px;
+}
+
+#artwork-gallery p {
+    margin: 20px 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--pixel);
+    font-size: 8px;
 }
 
 #hint {

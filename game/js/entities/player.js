@@ -12,7 +12,7 @@ class Player extends Entity {
         super(0, 0, CFG.PLAYER_W, CFG.PLAYER_H);
         this.world = world;
 
-        this.spawnX = 1350;
+        this.spawnX = 1180;
         // Slight north of the sign so the player's feet do not start inside
         // the sign's collision box (that would block walking right).
         this.spawnY = 1180;
@@ -35,6 +35,7 @@ class Player extends Entity {
         // Small cooldown after interacting so a quick second E does not
         // instantly re-open the same prop.
         this.interactCd = 0;
+        this.healTimer = 0;
 
         this.animTimer = 0;
         this.animFrame = 0;
@@ -79,10 +80,27 @@ class Player extends Entity {
         this.attackCd = Math.max(0, this.attackCd - dt);
         this.interactCd = Math.max(0, this.interactCd - dt);
         GameState.invuln = Math.max(0, GameState.invuln - dt);
+        if (GameState.hearts > 0 && GameState.hearts < GameState.maxHearts) {
+            this.healTimer += dt;
+            if (this.healTimer >= CFG.HEALTH_REGEN_INTERVAL) {
+                GameState.hearts = Math.min(GameState.maxHearts, GameState.hearts + 1);
+                this.healTimer = 0;
+            }
+        } else {
+            this.healTimer = 0;
+        }
         this.kbX *= Math.pow(0.0001, dt);
         this.kbY *= Math.pow(0.0001, dt);
 
-        if (Dialogue.isOpen() || GameState.paused) {
+        let chestOpening = false;
+        for (let i = 0; i < world.interactables.length; i++) {
+            if ((world.interactables[i].type === "chest" || world.interactables[i].type === "rewardChest") && world.interactables[i].opening) {
+                chestOpening = true;
+                break;
+            }
+        }
+
+        if (Dialogue.isOpen() || GameState.paused || chestOpening) {
             this.moving = false;
             return;
         }
@@ -101,11 +119,21 @@ class Player extends Entity {
             const len = Math.sqrt(hDir * hDir + vDir * vDir) || 1;
             hDir /= len;
             vDir /= len;
-            if (hDir !== 0) this.facing.x = hDir;
-            if (vDir !== 0) this.facing.y = vDir;
 
-            const dispX = (hDir * this.speed + this.kbX) * dt;
-            const dispY = (vDir * this.speed + this.kbY) * dt;
+            // Keep the animation direction cardinal. Vertical input takes
+            // priority during diagonals so the side sheet cannot leak into
+            // front/back movement when the previous input was horizontal.
+            if (vDir !== 0) {
+                this.facing.x = 0;
+                this.facing.y = vDir;
+            } else {
+                this.facing.x = hDir;
+                this.facing.y = 0;
+            }
+
+            const moveSpeed = Input.Held(KEY.SHIFT) ? this.speed * 1.6 : this.speed;
+            const dispX = (hDir * moveSpeed + this.kbX) * dt;
+            const dispY = (vDir * moveSpeed + this.kbY) * dt;
             this._moveAxis(dispX, dispY, world.solids);
         } else {
             this._moveAxis(this.kbX * dt, this.kbY * dt, world.solids);
@@ -117,10 +145,14 @@ class Player extends Entity {
         }
 
         // ----- 3. Attack -----
-        if (Input.Pressed(KEY.SPACE) && this.attackCd <= 0 && !GameState.paused) {
-            this.attacking = CFG.ATTACK_DURATION;
-            this.attackCd = CFG.ATTACK_COOLDOWN;
-            this._swing(world);
+        if (Input.Pressed(KEY.SPACE) && !GameState.paused && world.projectiles.length < 3) {
+            const targetX = world.camera.x + Input.mouse.x;
+            const targetY = world.camera.y + Input.mouse.y;
+            const startX = this.x + this.w / 2;
+            const startY = this.y + this.h / 2;
+            const spreadAngles = [-0.12, 0, 0.12];
+            const spreadAngle = spreadAngles[world.projectiles.length];
+            world.spawnProjectile(startX, startY, targetX, targetY, spreadAngle);
         }
     }
 
@@ -134,7 +166,7 @@ class Player extends Entity {
                 else if (dispX < 0) this.x = r.x + r.width - this.offX;
             }
         }
-        this.x = Clamp(this.x, 0, CFG.WORLD_W - this.w);
+        this._clampToWorld();
 
         this.y += dispY;
         for (let i = 0; i < solids.length; i++) {
@@ -144,7 +176,14 @@ class Player extends Entity {
                 else if (dispY < 0) this.y = r.y + r.height - this.h + this.collH;
             }
         }
-        this.y = Clamp(this.y, 0, CFG.WORLD_H - this.h);
+        this._clampToWorld();
+    }
+
+    _clampToWorld() {
+        // Use the complete sprite bounds so neither its top nor its feet can
+        // cross the world edge.
+        this.x = Clamp(this.x, 0, Math.max(0, CFG.WORLD_W - this.w));
+        this.y = Clamp(this.y, 0, Math.max(0, CFG.WORLD_H - this.h));
     }
 
     _tryInteract(world) {
@@ -188,12 +227,6 @@ class Player extends Entity {
     }
 
     draw(ctx) {
-        // Grounding shadow
-        ctx.fillStyle = "rgba(0,0,0,0.25)";
-        ctx.beginPath();
-        ctx.ellipse(this.x + this.w / 2, this.y + this.h - 6, this.collW / 2 + 4, this.collH / 4, 0, 0, Math.PI * 2);
-        ctx.fill();
-
         // Blink while invulnerable
         if (GameState.invuln > 0 && Math.floor(GameState.invuln * 12) % 2 === 0) {
             return;
@@ -212,13 +245,14 @@ class Player extends Entity {
             else if (this.facing.x < 0) row = 4;
         }
 
-        if (this.moving || this.attacking > 0) {
-            if (this.animTimer > 0.13) {
-                this.animTimer = 0;
-                this.animFrame = (this.animFrame + 1) % 4;
-            }
-        } else {
-            this.animFrame = 0;
+        // Keep idle animation alive: only the frame pacing changes between
+        // movement and idle, instead of freezing the sprite on frame 0.
+        const animationInterval = this.moving || this.attacking > 0
+            ? (Input.Held(KEY.SHIFT) ? 0.07 : 0.13)
+            : 0.2;
+        if (this.animTimer > animationInterval) {
+            this.animTimer = 0;
+            this.animFrame = (this.animFrame + 1) % 4;
         }
 
         const scale = CFG.SPRITE_SCALE;
@@ -245,6 +279,7 @@ class Player extends Entity {
             return;
         }
 
+        ctx.save();
         if (this.facing.x < 0) {
             ctx.translate(this.x + this.w, this.y);
             ctx.scale(-1, 1);

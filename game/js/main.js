@@ -23,6 +23,7 @@ const Game = {
 
         SetupKeyboardEvents();
         SetupMouseEvents(canvas);
+        SetupTouchControls(canvas);
         Dialogue.OnReady();
         HUD.OnReady();
 
@@ -32,6 +33,7 @@ const Game = {
         window.addEventListener("resize", () => this.fit());
         document.addEventListener("keydown", (e) => {
             if (e.keyCode === KEY.ESC) this.togglePause();
+            if (e.keyCode === KEY.G && !e.repeat) HUD.toggleGallery();
         });
 
         this.fit();
@@ -42,10 +44,10 @@ const Game = {
     // Cover-fit the canvas to the window: scale up so the internal view
     // always fills the screen, cropping the overflow around the edges.
     fit() {
-        const scale = Math.max(
-            window.innerWidth / CFG.VIEW_W,
-            window.innerHeight / CFG.VIEW_H
-        );
+        const isMobile = window.innerWidth <= 767;
+        const scale = isMobile
+            ? Math.min(window.innerWidth / CFG.VIEW_W, window.innerHeight / CFG.VIEW_H)
+            : Math.max(window.innerWidth / CFG.VIEW_W, window.innerHeight / CFG.VIEW_H);
         const w = Math.ceil(CFG.VIEW_W * scale);
         const h = Math.ceil(CFG.VIEW_H * scale);
 
@@ -57,7 +59,7 @@ const Game = {
         if (Dialogue.isOpen()) return;
         GameState.paused = !GameState.paused;
         HUD.updatePause();
-        HUD.update();
+        HUD.update(this.scene ? this.scene.projectiles.length : 0);
     },
 
     loop(t) {
@@ -67,7 +69,7 @@ const Game = {
         if (!GameState.paused) {
             this.scene.Update(dt);
         } else {
-            HUD.update();
+            HUD.update(this.scene.projectiles.length);
         }
         this.scene.Draw(this.ctx);
 

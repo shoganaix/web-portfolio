@@ -5,26 +5,35 @@ html {
 }
 
 .portfolio {
-    height: 100vh;
+    position: relative;
+    height: 100dvh;
     overflow: hidden;
     background: linear-gradient(160deg, #11131d 0%, #1b1d29 55%, #14161f 100%);
-    padding: 88px 24px 16px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
 /* ---------- Heading ---------- */
 .heading {
+    position: absolute;
+    top: 92px;
+    left: 0;
+    right: 0;
+    z-index: 3;
     text-align: center;
-    margin-bottom: 14px;
+    margin: 0;
+    padding: 12px 12px 8px;
+    flex: 0 0 auto;
 }
 
 .animate-head {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
     color: #ffffff;
+    margin: 0;
 }
 
 .animate-head span {
@@ -32,28 +41,25 @@ html {
 }
 
 .heading p {
-    color: #a7abc4;
-    font-weight: 300;
-    margin-top: 6px;
-    font-size: 0.95rem;
+    display: none;
 }
 
 /* ---------- Works strip ---------- */
 .works {
-    flex: 1 1 auto;
-    min-height: 0;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    max-width: 1600px;
+    max-width: none;
     display: flex;
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: 0;
 }
 
 .work {
     flex: 1 1 0;
     min-width: 0;
     position: relative;
-    border-radius: 14px;
+    border-radius: 0;
     overflow: hidden;
     cursor: pointer;
     border: none;
@@ -74,6 +80,10 @@ html {
 .work:nth-child(7) { animation-delay: 0.47s; }
 .work:nth-child(8) { animation-delay: 0.54s; }
 .work:nth-child(9) { animation-delay: 0.61s; }
+.work:nth-child(10) { animation-delay: 0.68s; }
+.work:nth-child(11) { animation-delay: 0.75s; }
+.work:nth-child(12) { animation-delay: 0.82s; }
+.work:nth-child(13) { animation-delay: 0.89s; }
 
 .work:focus-visible {
     outline: 2px solid #ffd166;
@@ -153,12 +163,14 @@ html {
 
 /* ---------- Modal ---------- */
 .project-modal {
-    background: #171a26;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #000000;
+    border: 5px solid rgba(255, 255, 255, 0.95);
     border-radius: 18px;
     color: #ffffff;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    padding: 2px;
 }
 
 .btn-close-white {
@@ -166,10 +178,12 @@ html {
     top: 14px;
     right: 14px;
     z-index: 5;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #000000;
+    border: 2px solid rgba(255, 255, 255, 0.95);
     border-radius: 50%;
     padding: 10px;
-    opacity: 0.9;
+    opacity: 1;
+    box-shadow: none;
 }
 
 .nav-arrow {
@@ -177,21 +191,36 @@ html {
     top: 50%;
     transform: translateY(-50%);
     z-index: 5;
-    width: 46px;
-    height: 46px;
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffd166;
+    font-size: 1.45rem;
+    line-height: 1;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
     border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    font-size: 1.1rem;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transform-origin: center;
+}
+
+.nav-arrow i {
+    display: block;
+    transform: translateY(-1px);
+    color: #ffd166;
 }
 
 .nav-arrow:hover {
     background: #ffd166;
+    color: #11131d;
+    border-color: rgba(255, 209, 102, 0.9);
+    transform: translateY(-50%) scale(1.04);
+}
+
+.nav-arrow:hover i {
     color: #11131d;
 }
 
@@ -205,6 +234,7 @@ html {
     padding: 40px;
     min-height: 60vh;
     align-items: center;
+    background: #000000;
 }
 
 .modal-img {
@@ -213,9 +243,12 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 18px 22px 20px 18px / 16px 18px 22px 20px;
     overflow: hidden;
-    background: #000;
+    background: #000000;
+    border: none;
+    box-shadow: none;
+    position: relative;
 }
 
 .modal-img img {
@@ -223,32 +256,40 @@ html {
     max-height: 66vh;
     object-fit: contain;
     display: block;
+    padding: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .modal-info .badge {
-    background: rgba(255, 209, 102, 0.15);
-    color: #ffd166;
-    border: 1px solid rgba(255, 209, 102, 0.4);
+    background: rgba(255, 209, 102, 0.18);
+    color: #ffe7a3;
+    border: 1px solid rgba(255, 209, 102, 0.5);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 6px 12px;
     border-radius: 999px;
     margin-bottom: 16px;
+    font-weight: 700;
 }
 
 .modal-info .modal-title {
     font-family: "Montserrat", sans-serif;
-    font-weight: 300;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
     text-align: left;
     margin-bottom: 14px;
+    color: #ffffff;
+    letter-spacing: 0.02em;
 }
 
 .modal-desc {
-    color: #b9bdd4;
-    font-weight: 300;
-    line-height: 1.7;
+    color: #edf1ff;
+    font-weight: 400;
+    line-height: 1.75;
+    font-size: 1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .modal-tags {
@@ -259,41 +300,42 @@ html {
 }
 
 .modal-tags .tag {
-    background: rgba(255, 255, 255, 0.07);
-    color: #cfd3e6;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f3f6ff;
     font-size: 0.8rem;
     padding: 5px 12px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-weight: 500;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 767px) {
     .portfolio {
-        height: auto;
-        overflow: visible;
-        padding: 104px 24px 40px;
+        height: 100dvh;
+        overflow: hidden;
+        padding: 0;
     }
 
     .works {
-        flex-wrap: wrap;
-        flex: none;
+        flex-wrap: nowrap;
+        flex: 1 1 auto;
         height: auto;
-        gap: 12px;
+        gap: 0;
     }
 
     .work {
-        flex: 1 1 42%;
-        min-height: 240px;
+        flex: 1 1 0;
+        min-height: 0;
         opacity: 1;
         transform: none;
         animation: none;
     }
 
-    .work:nth-child(odd) { flex: 1 1 42%; }
+    .work:nth-child(odd) { flex: 1 1 0; }
 
     .work:hover {
-        flex: 1 1 42%;
+        flex: 1 1 0;
     }
 
     .caption {

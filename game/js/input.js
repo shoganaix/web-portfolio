@@ -10,7 +10,7 @@ const KEY = {
     LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40,
     A: 65, D: 68, W: 87, S: 83,
     SPACE: 32, ENTER: 13,
-    E: 69, F: 70, ESC: 27,
+    E: 69, F: 70, G: 71, SHIFT: 16, ESC: 27,
 };
 
 const GAME_BLOCKED_KEYS = [KEY.LEFT, KEY.RIGHT, KEY.UP, KEY.DOWN, KEY.SPACE];
@@ -82,7 +82,81 @@ function SetupMouseEvents(canvas) {
     });
     canvas.addEventListener("mousemove", function (e) {
         const rect = canvas.getBoundingClientRect();
-        Input.mouse.x = e.clientX - rect.left;
-        Input.mouse.y = e.clientY - rect.top;
+        Input.mouse.x = (e.clientX - rect.left) * canvas.width / rect.width;
+        Input.mouse.y = (e.clientY - rect.top) * canvas.height / rect.height;
     });
+}
+
+function SetupTouchControls(canvas) {
+    const joystick = document.getElementById("touch-joystick");
+    const knob = document.getElementById("touch-knob");
+    const interact = document.getElementById("touch-interact");
+    const shoot = document.getElementById("touch-shoot");
+    let joystickPointer = null;
+
+    const setAction = (keycode) => {
+        Input._down[keycode] = true;
+        Input._held[keycode] = true;
+        window.setTimeout(() => { Input._held[keycode] = false; }, 80);
+    };
+
+    const clearDirections = () => {
+        Input._held[KEY.UP] = false;
+        Input._held[KEY.DOWN] = false;
+        Input._held[KEY.LEFT] = false;
+        Input._held[KEY.RIGHT] = false;
+        knob.style.transform = "translate(-50%, -50%)";
+    };
+
+    const updateJoystick = (event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        const rect = joystick.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dx = touch.clientX - centerX;
+        const dy = touch.clientY - centerY;
+        const radius = rect.width * 0.36;
+        const distance = Math.min(radius, Math.sqrt(dx * dx + dy * dy));
+        const angle = Math.atan2(dy, dx);
+        const knobX = Math.cos(angle) * distance;
+        const knobY = Math.sin(angle) * distance;
+        knob.style.transform = `translate(calc(-50% + ${knobX}px), calc(-50% + ${knobY}px))`;
+
+        clearDirections();
+        if (Math.abs(dx) > 12) Input._held[dx > 0 ? KEY.RIGHT : KEY.LEFT] = true;
+        if (Math.abs(dy) > 12) Input._held[dy > 0 ? KEY.DOWN : KEY.UP] = true;
+    };
+
+    joystick.addEventListener("touchstart", (event) => {
+        joystickPointer = event.touches[0].identifier;
+        updateJoystick(event);
+        event.preventDefault();
+    }, { passive: false });
+    joystick.addEventListener("touchmove", (event) => {
+        if (joystickPointer !== null) updateJoystick(event);
+        event.preventDefault();
+    }, { passive: false });
+    joystick.addEventListener("touchend", (event) => {
+        joystickPointer = null;
+        clearDirections();
+        event.preventDefault();
+    }, { passive: false });
+
+    interact.addEventListener("touchstart", (event) => {
+        setAction(KEY.E);
+        event.preventDefault();
+    }, { passive: false });
+    shoot.addEventListener("touchstart", (event) => {
+        setAction(KEY.SPACE);
+        event.preventDefault();
+    }, { passive: false });
+
+    canvas.addEventListener("touchstart", (event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        const rect = canvas.getBoundingClientRect();
+        Input.mouse.x = (touch.clientX - rect.left) * canvas.width / rect.width;
+        Input.mouse.y = (touch.clientY - rect.top) * canvas.height / rect.height;
+    }, { passive: true });
 }

@@ -94,8 +94,16 @@ class Enemy extends Entity {
         if (vx < -2) this.dir = -1;
         if (vx > 2) this.dir = 1;
 
-        this.x = Clamp(this.x + (vx + this.kbX) * dt, 0, CFG.WORLD_W - this.w);
-        this.y = Clamp(this.y + (vy + this.kbY) * dt, 0, CFG.WORLD_H - this.h);
+        const nextX = Clamp(this.x + (vx + this.kbX) * dt, 0, CFG.WORLD_W - this.w);
+        const nextY = Clamp(this.y + (vy + this.kbY) * dt, 0, CFG.WORLD_H - this.h);
+        const nextRect = MakeRect(nextX, nextY, this.w, this.h);
+        const blockedByPortal = this.scene && this.scene.interactables.some((item) =>
+            (item.type === "portal" || item.type === "enemyPortal") && IsColliding(nextRect, item.rect())
+        );
+        if (!blockedByPortal) {
+            this.x = nextX;
+            this.y = nextY;
+        }
 
         // Contact damage
         if (IsColliding(this.rect(), player.rect()) && GameState.invuln <= 0) {

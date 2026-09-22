@@ -14,10 +14,15 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #191c2c 0%, #262a3d 45%, #1b1f35 75%, #212640 100%);
-    background-size: 240% 240%;
+    background:
+        linear-gradient(180deg, rgba(18, 20, 30, 0.58) 0%, rgba(18, 20, 30, 0.8) 40%, rgba(18, 20, 30, 0.92) 100%),
+        url('../images/1.png') center bottom / cover no-repeat,
+        linear-gradient(135deg, #191c2c 0%, #262a3d 45%, #1b1f35 75%, #212640 100%);
+    background-size: cover, cover, 240% 240%;
+    background-position: center, center bottom, center;
+    background-blend-mode: multiply, screen, normal;
     animation: aboutFlow 26s ease-in-out infinite;
-    padding: 132px 24px 12px;
+    padding: 172px 24px 12px;
 }
 
 @keyframes aboutFlow {
@@ -34,7 +39,7 @@
     height: 520px;
     border-radius: 50%;
     filter: blur(110px);
-    opacity: 0.16;
+    opacity: 0.12;
     pointer-events: none;
     z-index: 0;
 }
@@ -142,7 +147,7 @@
     font-size: clamp(0.95rem, 1.4vw, 1.1rem);
     line-height: 1.45;
     font-weight: 300;
-    margin-bottom: 10px;
+    margin-bottom: 26px;
 }
 
 .keywords {
@@ -161,9 +166,10 @@
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px 24px;
+    gap: 12px 24px;
     opacity: 0;
     animation: fadeInLeft 2s 0.6s forwards;
+    margin-top: 6px;
 }
 
 .list ul {

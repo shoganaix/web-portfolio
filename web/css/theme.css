@@ -27,8 +27,9 @@ body {
     background-color: rgba(18, 20, 32, 0.88);
     backdrop-filter: blur(5px);
     box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
-    padding-top: 0.35rem;
-    padding-bottom: 0.35rem;
+    min-height: 128px;
+    padding-top: 0.65rem;
+    padding-bottom: 1.15rem;
 }
 
 .navbar-brand {
@@ -36,6 +37,10 @@ body {
     background-size: contain;
     width: 84px;
     height: 84px;
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     opacity: 0.35;
@@ -105,6 +110,33 @@ body {
     .navbar-brand {
         width: 62px;
         height: 62px;
+        margin-left: 0;
+    }
+
+    .navbarScroll .navbar-toggler {
+        position: absolute;
+        top: 50%;
+        right: 18px;
+        margin: 0;
+        transform: translateY(-50%);
+    }
+
+    .navbarScroll .navbar-collapse {
+        text-align: right;
+    }
+
+    .navbarScroll .navbar-nav {
+        width: max-content;
+        margin-left: auto !important;
+        align-items: flex-end;
+    }
+
+    .navbarScroll .nav-item {
+        width: 100%;
+    }
+
+    .navbarScroll .nav-link {
+        text-align: right;
     }
 
     .page-section {

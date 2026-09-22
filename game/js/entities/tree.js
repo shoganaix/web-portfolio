@@ -13,24 +13,29 @@ class WorldTree extends Entity {
         const trunkW = 11 * S;
         const trunkH = 29 * S;
 
-        super(x, y + artH, trunkW, trunkH);
+        super(x, y, artW, artH + trunkH);
 
-        this.artX = x;
+        this.artX = x + 7;
         this.artY = y;
         this.artW = artW;
         this.artH = artH;
+        this.trunkW = trunkW;
+        this.trunkH = trunkH;
+        this.trunkX = x + (artW - trunkW) / 2;
+        this.trunkY = y + artH;
 
         this.imgTop = LoadImage("img/Arbol.png");
         this.imgTrunk = LoadImage("img/Tronco.png");
 
-        // Center the trunk under the art.
-        this.x = x + (artW - trunkW) / 2;
-        this.y = y + artH - trunkH;
         this.layer = 1; // draw crown above the player
     }
 
     draw(ctx) {
-        ctx.drawImage(this.imgTrunk, this.x, this.y, this.w, this.h);
+        ctx.drawImage(this.imgTrunk, this.trunkX, this.trunkY, this.trunkW, this.trunkH);
+    }
+
+    rect() {
+        return MakeRect(this.trunkX, this.trunkY, this.trunkW, this.trunkH);
     }
 
     drawAfter(ctx) {

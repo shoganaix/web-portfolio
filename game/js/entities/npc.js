@@ -6,7 +6,7 @@
 // close enough to talk.
 // ---------------------------------------------------------------------------
 class NPC extends Entity {
-    constructor(x, y, name, dialogueId, sprite) {
+    constructor(x, y, name, dialogueId, sprite, path) {
         const S = CFG.SPRITE_SCALE;
         const w = 24 * S;
         const h = 34 * S;
@@ -17,6 +17,9 @@ class NPC extends Entity {
         this.sprite = sprite;
         this.near = false;
         this.time = Math.random() * 10;
+        this.path = path || [];
+        this.pathIndex = 0;
+        this.pathSpeed = 48;
         this.colRect = () => MakeRect(this.x + 5 * S, this.y + 20 * S, 14 * S, 14 * S);
     }
 
@@ -26,11 +29,35 @@ class NPC extends Entity {
 
     update(dt, player) {
         this.time += dt;
+
+        if (this.path.length > 0) {
+            const target = this.path[this.pathIndex];
+            const dx = target.x - this.x;
+            const dy = target.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 3) {
+                this.x = target.x;
+                this.y = target.y;
+                this.pathIndex = (this.pathIndex + 1) % this.path.length;
+            } else {
+                this.x += (dx / distance) * this.pathSpeed * dt;
+                this.y += (dy / distance) * this.pathSpeed * dt;
+            }
+        }
+
         this.near = IsInTrigger(player.rect(), this.rect());
     }
 
     interact() {
-        Dialogue.start(this.dialogueId, GameState);
+        const onClose = this.dialogueId === "sage"
+            ? () => {
+                if (GameState.gems >= GameState.requiredGems) {
+                    GameState.gems -= GameState.requiredGems;
+                    GameState.sageSpoken = true;
+                }
+            }
+            : null;
+        Dialogue.start(this.dialogueId, GameState, onClose);
     }
 
     draw(ctx) {
