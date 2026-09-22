@@ -36,35 +36,19 @@ html {
     margin-top: 8px;
 }
 
-/* ---------- Works (grouped gallery) ---------- */
+/* ---------- Works strip ---------- */
 .works {
     width: 100%;
     max-width: 1600px;
+    height: clamp(420px, 64vh, 640px);
     display: flex;
-    flex-direction: column;
-    gap: 44px;
-}
-
-.work-group .group-title {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 300;
-    font-size: 1.05rem;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #ffd166;
-    margin-bottom: 18px;
-    text-align: center;
-}
-
-.group-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    flex-wrap: nowrap;
+    gap: 10px;
 }
 
 .work {
-    width: calc(25% - 12px);
-    aspect-ratio: 4 / 3;
+    flex: 1 1 0;
+    min-width: 0;
     position: relative;
     border-radius: 14px;
     overflow: hidden;
@@ -75,27 +59,32 @@ html {
     opacity: 0;
     transform: translateY(40px);
     animation: rise 0.7s ease forwards;
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, box-shadow 0.35s ease;
+    transition: flex 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, filter 0.35s ease;
 }
 
 .work:nth-child(1) { animation-delay: 0.05s; }
-.work:nth-child(2) { animation-delay: 0.10s; }
-.work:nth-child(3) { animation-delay: 0.15s; }
-.work:nth-child(4) { animation-delay: 0.20s; }
-.work:nth-child(5) { animation-delay: 0.25s; }
-.work:nth-child(6) { animation-delay: 0.30s; }
-.work:nth-child(7) { animation-delay: 0.35s; }
-.work:nth-child(8) { animation-delay: 0.40s; }
-.work:nth-child(9) { animation-delay: 0.45s; }
+.work:nth-child(2) { animation-delay: 0.12s; }
+.work:nth-child(3) { animation-delay: 0.19s; }
+.work:nth-child(4) { animation-delay: 0.26s; }
+.work:nth-child(5) { animation-delay: 0.33s; }
+.work:nth-child(6) { animation-delay: 0.40s; }
+.work:nth-child(7) { animation-delay: 0.47s; }
+.work:nth-child(8) { animation-delay: 0.54s; }
+.work:nth-child(9) { animation-delay: 0.61s; }
 
 .work:focus-visible {
     outline: 2px solid #ffd166;
 }
 
+/* Enlarge the hovered one, dim the rest */
 .work:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    flex: 5 1 0;
     z-index: 2;
+}
+
+.works:has(.work:hover) .work:not(:hover) {
+    opacity: 0.35;
+    filter: saturate(0.5) brightness(0.7);
 }
 
 .img-wrap {
@@ -275,32 +264,31 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.modal-count {
-    color: #6d7290;
-    font-size: 0.85rem;
-    margin-top: 22px;
-    letter-spacing: 0.05em;
-}
-
 /* ---------- Footer spacing ---------- */
 #footer {
     position: static;
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1100px) {
-    .work {
-        width: calc(33.333% - 11px);
+@media (max-width: 900px) {
+    .works {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 12px;
     }
-}
 
-@media (max-width: 800px) {
     .work {
-        width: calc(50% - 8px);
-        aspect-ratio: 4 / 3;
+        flex: 1 1 42%;
+        min-height: 240px;
         opacity: 1;
         transform: none;
         animation: none;
+    }
+
+    .work:nth-child(odd) { flex: 1 1 42%; }
+
+    .work:hover {
+        flex: 1 1 42%;
     }
 
     .caption {
@@ -311,8 +299,11 @@ html {
 
 @media (max-width: 600px) {
     .work {
-        width: 100%;
-        aspect-ratio: 4 / 3;
+        flex: 1 1 100%;
+    }
+
+    .work:hover {
+        flex: 1 1 100%;
     }
 
     .project-modal .modal-body {

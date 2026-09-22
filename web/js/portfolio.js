@@ -10,7 +10,6 @@
     const category = document.getElementById("modalCategory");
     const desc = document.getElementById("modalDesc");
     const tags = document.getElementById("modalTags");
-    const count = document.getElementById("modalCount");
 
     const bootstrapModal = (typeof bootstrap !== "undefined") ? new bootstrap.Modal(modalEl) : null;
     let current = 0;
@@ -24,7 +23,6 @@
         title.textContent = el.dataset.title;
         category.textContent = el.dataset.category;
         desc.textContent = el.dataset.description;
-        count.textContent = `${current + 1} / ${works.length}`;
 
         tags.innerHTML = "";
         (el.dataset.tags || "").split(",").forEach(function (tag) {

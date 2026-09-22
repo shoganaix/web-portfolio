@@ -13,15 +13,16 @@
 /* Mouse parallax: three image layers moving at different depths */
 .parallax {
     position: absolute;
-    inset: -90px 0 0;
-    height: calc(100vh + 180px);
+    inset: 0;
     overflow: hidden;
     pointer-events: none;
 }
 
+/* Each layer is slightly larger than the container so the parallax
+   translation never exposes an empty edge. Far stays back, near comes up. */
 .layer {
     position: absolute;
-    inset: 0;
+    inset: -70px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
