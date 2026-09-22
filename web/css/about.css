@@ -8,9 +8,64 @@
 }
 
 .about {
+    position: relative;
+    overflow: hidden;
     min-height: 100vh;
-    background: linear-gradient(160deg, #1b1d29 0%, #262a3d 60%, #1b1d29 100%);
+    background: linear-gradient(135deg, #191c2c 0%, #262a3d 45%, #1b1f35 75%, #212640 100%);
+    background-size: 240% 240%;
+    animation: aboutFlow 26s ease-in-out infinite;
     padding: 120px 24px 80px;
+}
+
+@keyframes aboutFlow {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+}
+
+/* Floating glow orbs drifting behind the content */
+.about::before,
+.about::after {
+    content: "";
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.about::before {
+    top: -140px;
+    left: -140px;
+    background: #ffd166;
+    animation: orbDriftA 18s ease-in-out infinite;
+}
+
+.about::after {
+    bottom: -160px;
+    right: -120px;
+    background: #4fd6c1;
+    animation: orbDriftB 22s ease-in-out infinite;
+}
+
+@keyframes orbDriftA {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(120px, 90px) scale(1.25); }
+}
+
+@keyframes orbDriftB {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-100px, -80px) scale(0.85); }
+}
+
+/* Keep the page content above the orbs */
+.animate,
+.responsiveme,
+.skills {
+    position: relative;
+    z-index: 1;
 }
 
 /* ---------- Animated title ---------- */
