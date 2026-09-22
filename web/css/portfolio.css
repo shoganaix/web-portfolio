@@ -274,7 +274,7 @@ html {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 900px) {
+@media (max-width: 767px) {
     .portfolio {
         height: auto;
         overflow: visible;

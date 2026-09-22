@@ -1,13 +1,14 @@
 /* ---------- Contact page ---------- */
 
 .contactbgimage {
-    min-height: 100vh;
+    height: 100vh;
     background: linear-gradient(160deg, #1b1d29 0%, #262a3d 60%, #1b1d29 100%);
-    padding: 130px 24px 80px;
+    padding: 108px 24px 110px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: visible;
+    justify-content: center;
+    overflow: hidden;
 }
 
 /* ---------- Typing title ---------- */
@@ -18,9 +19,9 @@
     white-space: nowrap;
     overflow: hidden;
     font-family: Consolas, "Courier New", monospace;
-    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    font-size: clamp(1.3rem, 3.6vw, 2rem);
     animation: typist 5s steps(18) infinite, blink 1s infinite;
-    margin-bottom: 40px;
+    margin-bottom: 26px;
     max-width: 100%;
 }
 
@@ -93,6 +94,14 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media (max-width: 767px) {
+    .contactbgimage {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 110px;
     }
 }
 

@@ -1,7 +1,7 @@
 /* ---------- Home page ---------- */
 
 .bgimage {
-    min-height: 100vh;
+    height: 100vh;
     background-color: #1d1e22;
     position: relative;
     overflow: hidden;
