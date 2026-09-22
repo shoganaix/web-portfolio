@@ -17,8 +17,8 @@
 .animate {
     width: 100%;
     text-align: center;
-    font-family: 'Lato', sans-serif;
-    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     text-transform: uppercase;
     font-size: clamp(2.2rem, 6vw, 3.6rem);
     margin-bottom: 24px;
@@ -71,7 +71,8 @@
 }
 
 .textmebig {
-    font-family: 'Edu TAS Beginner', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
     color: #ffd166;
     font-size: clamp(1.8rem, 4vw, 2.6rem);
     margin-bottom: 12px;
@@ -288,42 +289,72 @@ figure.snip0016:hover figcaption::before {
     text-align: center;
 }
 
-.skills .progress {
-    height: 60px;
-    display: block;
-    background: none;
-    border-radius: 0;
-    margin-bottom: 10px;
-}
-
-.skills .progress .skill {
-    padding: 10px 0;
-    margin: 0;
-    text-transform: uppercase;
-    display: block;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: #ffffff;
-}
-
-.skills .progress .skill .val {
-    float: right;
-    font-style: normal;
+.skin-color-primary {
     color: #ffd166;
 }
 
-.skills .progress-bar-wrap {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 999px;
-    overflow: hidden;
+/* ---------- Skill groups ---------- */
+.skills {
+    max-width: 960px;
 }
 
-.skills .progress-bar {
-    width: 1px;
-    height: 12px;
-    transition: width 0.9s ease;
-    background: linear-gradient(90deg, #ffd166, #ffe9ad);
+.skill-group {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 22px 26px 24px;
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.skill-group.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skill-group h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffd166;
+    font-weight: 500;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 14px;
+}
+
+.skill-group h3 i {
+    font-size: 1.1em;
+    opacity: 0.85;
+}
+
+.skill-group ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-group ul li {
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: #e8eaf6;
+    background: rgba(255, 209, 102, 0.08);
+    border: 1px solid rgba(255, 209, 102, 0.25);
     border-radius: 999px;
+    padding: 6px 16px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.skill-group ul li:hover {
+    background: rgba(255, 209, 102, 0.2);
+    transform: translateY(-2px);
 }
 
 /* ---------- Animations ---------- */

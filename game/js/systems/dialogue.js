@@ -18,6 +18,9 @@ const Dialogue = {
     _typeTimer: 0,
     _typing: false,
     _onClose: null,
+    // True for exactly one frame after open() so the key press that opened the
+    // box does not immediately advance/skip it too (reported E-weirdness).
+    _ignoreAdvance: false,
 
     CHAR_INTERVAL: 0.018,
 
@@ -46,6 +49,7 @@ const Dialogue = {
         this._index = 0;
         this._onClose = onClose || null;
         this._open = true;
+        this._ignoreAdvance = true;
         this.box.classList.remove("hidden");
         this._beginLine();
     },
@@ -92,6 +96,10 @@ const Dialogue = {
     update(dt) {
         if (!this._open) return;
 
+        // Swallow the opening frame's input (see _ignoreAdvance).
+        const ignoreInput = this._ignoreAdvance;
+        this._ignoreAdvance = false;
+
         if (this._typing) {
             this._typeTimer += dt;
             while (this._typeTimer >= this.CHAR_INTERVAL) {
@@ -110,7 +118,7 @@ const Dialogue = {
         }
 
         // Advance input (works while typing — skips — and once the line is shown).
-        if (Input.Pressed(KEY.E) || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.ENTER)) {
+        if (!ignoreInput && (Input.Pressed(KEY.E) || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.ENTER))) {
             this.advance();
         }
     },

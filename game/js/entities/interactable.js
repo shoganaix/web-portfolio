@@ -31,22 +31,27 @@ class Interactable extends Entity {
         this.near = false;
         this.confirmPortal = false;
 
+        // Chest opening animation state (5 frames, see img/openchestsheet.png).
+        this.opening = false;
+        this.openTimer = 0;
+        this.openFrame = 0;
+
         if (type === "chest") {
             this.img = LoadImage("img/Cofre.png");
             this.imgSelected = LoadImage("img/CofreSeleccion.png");
-            this.imgOpen = Placeholders.ChestOpen();
+            this.imgOpenSheet = LoadImage("img/openchestsheet.png");
         } else if (type === "sign") {
             this.img = LoadImage("img/Cartel.png");
             this.imgSelected = this.img;
-            this.imgOpen = null;
+            this.imgOpenSheet = null;
         } else if (type === "portal") {
             this.img = LoadImage("img/Tower.png");
             this.imgSelected = LoadImage("img/TowerSeleccion.png");
-            this.imgOpen = null;
+            this.imgOpenSheet = null;
         } else {
             this.img = null;
             this.imgSelected = null;
-            this.imgOpen = null;
+            this.imgOpenSheet = null;
         }
 
         // collision box sits just above the entity's feet
@@ -72,6 +77,17 @@ class Interactable extends Entity {
             this.confirmPortal = false;
         }
 
+        // Chest opening animation: play frames, then show the message below.
+        if (this.opening) {
+            const FRAME_TIME = 0.12;
+            this.openTimer += dt;
+            this.openFrame = Math.min(4, Math.floor(this.openTimer / FRAME_TIME));
+            if (this.openTimer >= FRAME_TIME * 5) {
+                this.opening = false;
+                Dialogue.start("chest", GameState);
+            }
+        }
+
         // Confirmed portal: pressing E while still near the tower goes to web.
         if (this.type === "portal" && this.near && this.confirmPortal && !Dialogue.isOpen() && Input.Pressed(KEY.E)) {
             window.location.href = "../web/index.html";
@@ -84,12 +100,15 @@ class Interactable extends Entity {
     interact() {
         switch (this.type) {
             case "chest":
+                if (this.opening) break;
                 if (GameState.chestOpened) {
                     Dialogue.start("empty", GameState);
                 } else {
                     GameState.chestOpened = true;
                     GameState.gems += 1;
-                    Dialogue.start("chest", GameState);
+                    this.opening = true;
+                    this.openTimer = 0;
+                    this.openFrame = 0;
                 }
                 break;
 
@@ -112,10 +131,23 @@ class Interactable extends Entity {
     draw(ctx) {
         if (!this.img) return;
 
-        let sprite = this.img;
         if (this.type === "chest" && GameState.chestOpened) {
-            sprite = this.imgOpen;
-        } else if (this.near && this.imgSelected) {
+            // Draw one frame of the open-chest sheet, anchored at the feet.
+            const cellW = 43, cellH = 64;
+            const drawW = cellW * CFG.SPRITE_SCALE;
+            const drawH = cellH * CFG.SPRITE_SCALE;
+            const dx = this.x + (this.w - drawW) / 2;
+            const dy = this.y + this.h - drawH;
+            ctx.drawImage(
+                this.imgOpenSheet,
+                this.openFrame * cellW, 0, cellW, cellH,
+                dx, dy, drawW, drawH
+            );
+            return;
+        }
+
+        let sprite = this.img;
+        if (this.near && this.imgSelected) {
             sprite = this.imgSelected;
         }
 

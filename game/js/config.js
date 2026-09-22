@@ -9,8 +9,12 @@
 const CFG = {
     WORLD_W: 3600,
     WORLD_H: 1950,
-    VIEW_W: 640,
-    VIEW_H: 360,
+    // Wide 16:9 window so the camera shows far more of the valley.
+    // The canvas cover-fits the browser window (see Game.fit), so the view
+    // only defines the lens: a wider lens means the world feels smaller
+    // and the player sees much more around them.
+    VIEW_W: 1152,
+    VIEW_H: 648,
 
     // Every sprite is authored ~3x smaller than the world, pixel-perfect.
     SPRITE_SCALE: 3,

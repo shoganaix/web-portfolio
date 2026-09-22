@@ -1,15 +1,38 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const elem = document.querySelector("#parallax");
-    if (!elem) return;
+(function () {
+    "use strict";
 
-    document.addEventListener("mousemove", function (e) {
-        const w = window.innerWidth / 2;
-        const h = window.innerHeight / 2;
-        const mx = e.clientX;
-        const my = e.clientY;
-        const depth1 = `${50 - (mx - w) * 0.01}% ${50 - (my - h) * 0.01}%`;
-        const depth2 = `${50 - (mx - w) * 0.02}% ${50 - (my - h) * 0.02}%`;
-        const depth3 = `${50 - (mx - w) * 0.06}% ${50 - (my - h) * 0.06}%`;
-        elem.style.backgroundPosition = `${depth3}, ${depth2}, ${depth1}`;
+    // Mouse-parallax for the home hero. Each landscape layer moves by a
+    // different amount, following the cursor (with a smoothing loop).
+    const wrap = document.getElementById("parallax");
+    if (!wrap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const layers = Array.prototype.slice.call(wrap.querySelectorAll(".layer"));
+    const DEPTH = { "layer-far": 18, "layer-mid": 38, "layer-near": 62 };
+
+    const target = { x: 0, y: 0 };
+    const current = { x: 0, y: 0 };
+
+    window.addEventListener("mousemove", function (e) {
+        target.x = (e.clientX / window.innerWidth - 0.5) * 2;
+        target.y = (e.clientY / window.innerHeight - 0.5) * 2;
     });
-});
+
+    function loop() {
+        current.x += (target.x - current.x) * 0.06;
+        current.y += (target.y - current.y) * 0.06;
+
+        layers.forEach(function (layer) {
+            for (const cls in DEPTH) {
+                if (layer.classList.contains(cls)) {
+                    const d = DEPTH[cls];
+                    layer.style.transform =
+                        "translate3d(" + (current.x * d).toFixed(2) + "px," + (current.y * d).toFixed(2) + "px,0)";
+                    break;
+                }
+            }
+        });
+
+        requestAnimationFrame(loop);
+    }
+    loop();
+})();

@@ -10,13 +10,34 @@
     justify-content: center;
 }
 
-#parallax {
+/* Mouse parallax: three image layers moving at different depths */
+.parallax {
+    position: absolute;
+    inset: -90px 0 0;
+    height: calc(100vh + 180px);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.layer {
     position: absolute;
     inset: 0;
-    background-image: url(../images/1.png), url(../images/2.png), url(../images/3.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    will-change: transform;
+}
+
+.layer-far {
+    background-image: url(../images/1.png);
+}
+
+.layer-mid {
+    background-image: url(../images/2.png);
+}
+
+.layer-near {
+    background-image: url(../images/3.png);
 }
 
 .hero-text {
@@ -27,7 +48,8 @@
 }
 
 .hero_title {
-    font-family: "Fredoka", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
     font-size: clamp(3rem, 8vw, 6rem);
     text-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
     animation: fadeInAnimation 1.6s ease forwards;

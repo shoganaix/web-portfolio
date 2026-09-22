@@ -39,23 +39,18 @@ const Game = {
         requestAnimationFrame((t) => this.loop(t));
     },
 
-    // Scale the canvas (and its overlay) to the window, centered, crisp.
+    // Cover-fit the canvas to the window: scale up so the internal view
+    // always fills the screen, cropping the overflow around the edges.
     fit() {
-        const scale = Math.min(
+        const scale = Math.max(
             window.innerWidth / CFG.VIEW_W,
             window.innerHeight / CFG.VIEW_H
         );
-        const w = Math.floor(CFG.VIEW_W * scale);
-        const h = Math.floor(CFG.VIEW_H * scale);
+        const w = Math.ceil(CFG.VIEW_W * scale);
+        const h = Math.ceil(CFG.VIEW_H * scale);
 
         this.canvas.style.width = w + "px";
         this.canvas.style.height = h + "px";
-
-        const wrap = document.getElementById("game-wrap");
-        if (wrap) {
-            wrap.style.width = w + "px";
-            wrap.style.height = h + "px";
-        }
     },
 
     togglePause() {

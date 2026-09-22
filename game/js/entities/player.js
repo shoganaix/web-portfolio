@@ -13,9 +13,12 @@ class Player extends Entity {
         this.world = world;
 
         this.spawnX = 1350;
-        this.spawnY = 1200;
+        // Slight north of the sign so the player's feet do not start inside
+        // the sign's collision box (that would block walking right).
+        this.spawnY = 1180;
 
         this.sprite = LoadImage("img/spritesheet.png");
+        this.sideSprite = LoadImage("img/sidewalk.png");
         this.collW = 60;
         this.collH = 44;
         this.offX = (this.w - this.collW) / 2;
@@ -28,6 +31,10 @@ class Player extends Entity {
         this.attackCd = 0;
         this.kbX = 0;
         this.kbY = 0;
+
+        // Small cooldown after interacting so a quick second E does not
+        // instantly re-open the same prop.
+        this.interactCd = 0;
 
         this.animTimer = 0;
         this.animFrame = 0;
@@ -70,6 +77,7 @@ class Player extends Entity {
         this.animTimer += dt;
         this.attacking = Math.max(0, this.attacking - dt);
         this.attackCd = Math.max(0, this.attackCd - dt);
+        this.interactCd = Math.max(0, this.interactCd - dt);
         GameState.invuln = Math.max(0, GameState.invuln - dt);
         this.kbX *= Math.pow(0.0001, dt);
         this.kbY *= Math.pow(0.0001, dt);
@@ -104,7 +112,7 @@ class Player extends Entity {
         }
 
         // ----- 2. Interact -----
-        if (Input.Pressed(KEY.E)) {
+        if (Input.Pressed(KEY.E) && this.interactCd <= 0) {
             this._tryInteract(world);
         }
 
@@ -155,7 +163,10 @@ class Player extends Entity {
                 best = c;
             }
         }
-        if (best) best.interact();
+        if (best) {
+            best.interact();
+            this.interactCd = 0.35;
+        }
     }
 
     // ---- Sword sweep: hitbox in front of the player. ----
@@ -211,7 +222,29 @@ class Player extends Entity {
         }
 
         const scale = CFG.SPRITE_SCALE;
-        ctx.save();
+
+        // Side walking uses its own sheet (img/sidewalk.png, 4 frames of
+        // 64x64) so left/right reads correctly, mirrored for the left.
+        if (this.moving && this.facing.x !== 0 && this.attacking <= 0) {
+            const cellW = 64, cellH = 64;
+            const drawW = cellW * scale;
+            const drawH = cellH * scale;
+            const dx = this.x + (this.w - drawW) / 2;
+            const dy = this.y;
+
+            ctx.save();
+            ctx.imageSmoothingEnabled = false;
+            if (this.facing.x < 0) {
+                ctx.translate(dx + drawW, dy);
+                ctx.scale(-1, 1);
+                ctx.drawImage(this.sideSprite, this.animFrame * cellW, 0, cellW, cellH, 0, 0, drawW, drawH);
+            } else {
+                ctx.drawImage(this.sideSprite, this.animFrame * cellW, 0, cellW, cellH, dx, dy, drawW, drawH);
+            }
+            ctx.restore();
+            return;
+        }
+
         if (this.facing.x < 0) {
             ctx.translate(this.x + this.w, this.y);
             ctx.scale(-1, 1);

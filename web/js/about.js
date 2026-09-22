@@ -2,27 +2,28 @@
     "use strict";
     const select = (el, all = false) => {
       el = el.trim()
-      if (all) 
+      if (all)
       {
         return [...document.querySelectorAll(el)]
-      } else 
+      } else
       {
         return document.querySelector(el)
       }
     }
-  
+
     /**
-     * Skills animation
+     * Skills reveal
      */
-    let skilsContent = select('.skills-content');
-    if (skilsContent) {
+    let skillsEl = select('.skills');
+    if (skillsEl && typeof Waypoint !== 'undefined') {
       new Waypoint({
-        element: skilsContent,
-        offset: '80%',
-        handler: function(direction) {
-          let progress = select('.progress .progress-bar', true);
-          progress.forEach((el) => {
-            el.style.width = el.getAttribute('aria-valuenow') + '%'
+        element: skillsEl,
+        offset: '75%',
+        handler: function() {
+          let groups = select('.skill-group', true);
+          groups.forEach((el, i) => {
+            el.style.transitionDelay = (i * 0.08) + 's';
+            el.classList.add('visible');
           });
         }
       })
