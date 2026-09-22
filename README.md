@@ -2,6 +2,8 @@
 
 **_"An interactive game-like experience"_**
 
+<img width="256" height="64" alt="idlespritesheettext" src="https://github.com/user-attachments/assets/26d6d703-4142-4e0e-ace2-1ecae29fd46f" />
+
 A portfolio that lives in two places: a classic **web** experience and a playable
 **pixel-art game**. Built with plain HTML, CSS and JavaScript (no frameworks),
 plus Aseprite/Photoshop for the art.
@@ -76,16 +78,14 @@ entity → interactable → tree → gem → npc → enemy → player → scene 
 ### Game — Programming
 
 - [x] 8-directional movement (normalized diagonals)
-- [x] Character animations (idle / walk / sword attack)
+- [x] Character animations (idle / walk / attack)
 - [x] Axis-separated collisions (no infinite-loop bugs)
-- [x] Camera: follow, clamp, shake
 - [x] HUD: hearts, gems, contextual hint
 - [x] Dialogue system (typewriter, skip, click/E/space/enter)
-- [x] NPCs with dialogues (Guide, Sage)
-- [x] Enemies: patrol, chase, hit, knockback, drops
-- [x] Gemstones quest + goal indicator
+- [x] NPCs with dialogues
+- [x] Enemies: patrol, chase, hit
+- [x] Artworks quest + counter
 - [x] Tutorial sign + interactable props (chest, sign, tower)
-- [x] Pause menu with resume / switch-to-web / restart
 - [x] Portal to `web/index.html` (after confirming with the tower)
 - [ ] Final art swap
 
@@ -95,8 +95,10 @@ entity → interactable → tree → gem → npc → enemy → player → scene 
 - [x] 4-direction movement animation wired
 - [ ] Grass tiles / stone stairs
 - [ ] Second character: animation + dialogue
-- [ ] Sanctuary background finalization
-- [ ] Enemy + NPC final sprites
+- [ ] Third character
+- [ ] Fourth character
+- [ ] Sanctuary
+- [ ] Enemyies
 - [ ] Soundtrack integration
 
 ### Web
@@ -106,8 +108,9 @@ entity → interactable → tree → gem → npc → enemy → player → scene 
 - [x] Portfolio: 8 pieces, hover effect, dynamic modal, responsive
 - [x] Contact: working form semantics, responsive
 - [x] Shared theme (navbar, footer, fonts) across pages
-- [ ] Background/line polish on About
-- [ ] Form back-end (currently front-end only)
+- [x] Background polish
+- [ ] Definive artworks
+- [ ] Mobile responsive final touches
 
 ## Credits
 
