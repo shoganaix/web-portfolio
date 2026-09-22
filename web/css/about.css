@@ -17,7 +17,7 @@
     background: linear-gradient(135deg, #191c2c 0%, #262a3d 45%, #1b1f35 75%, #212640 100%);
     background-size: 240% 240%;
     animation: aboutFlow 26s ease-in-out infinite;
-    padding: 102px 24px 12px;
+    padding: 132px 24px 12px;
 }
 
 @keyframes aboutFlow {
@@ -370,8 +370,8 @@ figure.snip0016:hover figcaption::before {
     border-radius: 14px;
     padding: 10px 14px 12px;
     margin-bottom: 0;
-    opacity: 0;
-    transform: translateY(18px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -474,5 +474,58 @@ figure.snip0016:hover figcaption::before {
 
     .list ul li {
         min-height: auto;
+    }
+}
+
+/* Compact layout for short desktop screens (landscape monitors / laptops) */
+@media (min-width: 901px) and (max-height: 700px) {
+    .about {
+        padding-top: 94px;
+        padding-bottom: 8px;
+    }
+
+    .animate {
+        font-size: 2rem;
+    }
+
+    .responsiveme {
+        gap: 12px;
+    }
+
+    .textmesmall {
+        font-size: 0.9rem;
+        line-height: 1.35;
+        margin-bottom: 8px;
+    }
+
+    .list ul li {
+        font-size: 0.82rem;
+        margin-bottom: 2px;
+    }
+
+    .picme {
+        max-width: 240px;
+    }
+
+    .skill-group {
+        padding: 8px 10px 9px;
+    }
+
+    .skill-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .skill-group h3 {
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+    }
+
+    .skill-group ul {
+        gap: 5px;
+    }
+
+    .skill-group ul li {
+        font-size: 0.68rem;
+        padding: 3px 8px;
     }
 }
