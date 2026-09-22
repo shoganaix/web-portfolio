@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Portfolio / Shoganai</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<!-- linking css files -->
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="stylesheet" href="css/portfolio.css">
+	<!-- Menu hamburguesa (bootstrap CDN)-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- icons -->
+	<script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<!-- (navbar) Menu arriba -->
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark navbarScroll">
+		<div class="container">
+			<a class="navbar-brand" href="../game/index.html" aria-label="Switch to the game experience"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="about.html">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="portfolio.html">Portfolio</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="contact.html">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- main banner -->
+	<section class="portfolio" id="portfolio">
+		<div class="heading">
+			<h1 class="animate-head">Selected <span>Work</span></h1>
+			<p>Concept art, sprites and game environments — hover an image and click to enlarge it.</p>
+		</div>
+
+		<!-- artworks strip -->
+		<div class="works" id="works">
+			<article class="work" tabindex="0"
+				data-title="Sanctuary Tower"
+				data-category="Game Environment"
+				data-description="Concept piece for an explorable sanctuary landmark in the portfolio world. This is a placeholder — the final artwork is on its way."
+				data-tags="Pixel Art, Environment, Aseprite"
+				data-image="images/image1.jpg">
+				<div class="img-wrap"><img src="images/image1.jpg" alt="Sanctuary Tower" /></div>
+				<div class="caption">
+					<h3>Sanctuary Tower</h3>
+					<span>Game Environment</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="Hero — Idle Study"
+				data-category="Character Art"
+				data-description="Idle frames for the main character. Getting the idle loop to feel alive is half the personality of the sprite."
+				data-tags="Spritesheet, Character, Animation"
+				data-image="images/image2.jpg">
+				<div class="img-wrap"><img src="images/image2.jpg" alt="Hero Idle Study" /></div>
+				<div class="caption">
+					<h3>Hero — Idle Study</h3>
+					<span>Character Art</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="Village Concept"
+				data-category="Concept Art"
+				data-description="Early color/value study for a cozy village hub where the player will meet NPCs, buy items and rest."
+				data-tags="Concept, Color Study, Environment"
+				data-image="images/image3.jpg">
+				<div class="img-wrap"><img src="images/image3.jpg" alt="Village Concept" /></div>
+				<div class="caption">
+					<h3>Village Concept</h3>
+					<span>Concept Art</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="Tower Silhouette"
+				data-category="Game Environment"
+				data-description="Silhouette exploration to nail the shape language of the sanctuary before committing to color."
+				data-tags="Silhouette, Environment, Aseprite"
+				data-image="images/image4.jpg">
+				<div class="img-wrap"><img src="images/image4.jpg" alt="Tower Silhouette" /></div>
+				<div class="caption">
+					<h3>Tower Silhouette</h3>
+					<span>Game Environment</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="Meadow Scene"
+				data-category="Concept Art"
+				data-description="A calm meadow between biomes. Intended as a resting area with light puzzles before the first boss fight."
+				data-tags="Environment, Lighting, Pixel Art"
+				data-image="images/image5.jpg">
+				<div class="img-wrap"><img src="images/image5.jpg" alt="Meadow Scene" /></div>
+				<div class="caption">
+					<h3>Meadow Scene</h3>
+					<span>Concept Art</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="UI Experiments"
+				data-category="Interface"
+				data-description="Quick mock-ups for in-game UI: hearts, gems and dialogue frames. Kept chunky to match the world's pixel density."
+				data-tags="UI, HUD, Prototype"
+				data-image="images/image6.jpg">
+				<div class="img-wrap"><img src="images/image6.jpg" alt="UI Experiments" /></div>
+				<div class="caption">
+					<h3>UI Experiments</h3>
+					<span>Interface</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="Level Sketch"
+				data-category="Game Design"
+				data-description="Top-down plan of the first map showing spawn point, key landmarks, NPC spots and enemy patrol routes."
+				data-tags="Level Design, Map, Planning"
+				data-image="images/image7.jpg">
+				<div class="img-wrap"><img src="images/image7.jpg" alt="Level Sketch" /></div>
+				<div class="caption">
+					<h3>Level Sketch</h3>
+					<span>Game Design</span>
+				</div>
+			</article>
+
+			<article class="work" tabindex="0"
+				data-title="Hero — Walk Cycle"
+				data-category="Character Art"
+				data-description="Final run/walk cycle frames for the player character, tuned for readability on a top-down camera."
+				data-tags="Spritesheet, Character, Pixel Art"
+				data-image="images/image8.jpg">
+				<div class="img-wrap"><img src="images/image8.jpg" alt="Hero Walk Cycle" /></div>
+				<div class="caption">
+					<h3>Hero — Walk Cycle</h3>
+					<span>Character Art</span>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- Dynamic project modal -->
+	<div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-xl modal-dialog-centered">
+			<div class="modal-content project-modal">
+				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				<button type="button" class="nav-arrow prev" id="prevProject" aria-label="Previous project">
+					<i class="fas fa-chevron-left"></i>
+				</button>
+				<button type="button" class="nav-arrow next" id="nextProject" aria-label="Next project">
+					<i class="fas fa-chevron-right"></i>
+				</button>
+				<div class="modal-body">
+					<div class="modal-img">
+						<img id="modalImg" src="" alt="Project image" />
+					</div>
+					<div class="modal-info">
+						<span class="badge" id="modalCategory"></span>
+						<h3 class="modal-title" id="modalTitle"></h3>
+						<p class="modal-desc" id="modalDesc"></p>
+						<div class="modal-tags" id="modalTags"></div>
+						<p class="modal-count" id="modalCount"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer section-->
+	<footer id="footer">
+		<div class="container-fluid">
+			<!-- social media icons -->
+			<div class="social-icons mt-2">
+				<a href="https://www.artstation.com/shoganai" target="_blank" aria-label="ArtStation"><i class="fab fa-artstation"></i></a>
+				<a href="https://www.instagram.com/lashoganai/?hl=es" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+				<a href="https://github.com/shoganaix" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+				<a href="https://es.linkedin.com/in/maria-soriano-palacios" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+			</div>
+		</div>
+	</footer>
+
+	<script src="js/portfolio.js"></script>
+</body>
+</html>

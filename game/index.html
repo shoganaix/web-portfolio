@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Shoganai — Game Portfolio</title>
+	<meta name="description" content="An interactive game-like portfolio. Talk to NPCs, defeat enemies, collect gemstones and explore Shoganai's world." />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id="game-wrap">
+		<canvas id="myCanvas" width="640" height="360"></canvas>
+
+		<!-- HUD -->
+		<div id="hud">
+			<div id="hud-hearts" aria-label="Health"></div>
+			<div id="hud-gems">&#9670; 0 <span class="gems-total">/ 5</span></div>
+			<div id="hint" class="hidden"></div>
+		</div>
+
+		<!-- Dialogue -->
+		<div id="dialogue-box" class="hidden">
+			<div id="dialogue-name"></div>
+			<p id="dialogue-text"></p>
+			<span id="dialogue-next"></span>
+		</div>
+
+		<!-- Pause / menu -->
+		<div id="pause-overlay" class="hidden">
+			<h1 class="pause-title">Paused</h1>
+			<ul class="controls">
+				<li><span>WASD / Arrows</span> move</li>
+				<li><span>E</span> interact</li>
+				<li><span>SPACE</span> attack</li>
+				<li><span>ESC</span> pause</li>
+			</ul>
+			<div class="pause-actions">
+				<button id="btn-resume" class="pixel-btn">Resume</button>
+				<a id="btn-switch-web" class="pixel-btn" href="../web/index.html">Switch to Web</a>
+				<button id="btn-restart" class="pixel-btn" onclick="window.location.reload()">Restart</button>
+			</div>
+			<p class="pause-note">
+				Your quest: collect the 5 gemstones and visit the Tower of Creation to open this portfolio's website.
+			</p>
+		</div>
+	</div>
+
+	<script src="js/config.js"></script>
+	<script src="js/input.js"></script>
+	<script src="js/helper.js"></script>
+	<script src="js/camera.js"></script>
+	<script src="js/placeholder.js"></script>
+	<script src="js/data/dialogues.js"></script>
+	<script src="js/systems/dialogue.js"></script>
+	<script src="js/systems/hud.js"></script>
+	<script src="js/entities/entity.js"></script>
+	<script src="js/entities/interactable.js"></script>
+	<script src="js/entities/tree.js"></script>
+	<script src="js/entities/gem.js"></script>
+	<script src="js/entities/npc.js"></script>
+	<script src="js/entities/enemy.js"></script>
+	<script src="js/entities/player.js"></script>
+	<script src="js/scene.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# dependencies / builds (none currently)
+node_modules/
+dist/
+build/
+
+# logs
+*.log
+npm-debug.log*
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# runtime scratch
+temp/
+*.tmp

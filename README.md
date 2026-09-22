@@ -1,45 +1,114 @@
-# My Web Portfolio 
-> **_"An interactive game-like experience"_**
- 
-This website showcases my portfolio, highlighting my career in videogames. 
+# Shoganai — Portfolio
 
-*The project has been coded using HTML, CSS, JavaScript and PHP. It has also been thoughtfully crafted using Aseprite and Photoshop for the pixel art visuals, along with ProTools for the creation of an original soundtrack*
+**_"An interactive game-like experience"_**
 
-For visitors who prefer a more direct way to explore my work, the project also includes a **traditional portfolio website** where projects, experience and skills can be viewed quickly without navigating through the interactive experience.
+A portfolio that lives in two places: a classic **web** experience and a playable
+**pixel-art game**. Built with plain HTML, CSS and JavaScript (no frameworks),
+plus Aseprite/Photoshop for the art.
 
-## Key Features
-![idlespritesheettext](https://github.com/user-attachments/assets/14fe0e98-a945-4951-a1a4-3d3f5aec8109)
+> The current art in the game is a mixture of real assets and procedural
+> placeholders — swap `game/img/*` with the final sprites when ready.
 
-- **8-Directional Movement Character:** Navigate your way through my career with my magical frog. With eight-directional movement, you can explore all the fun highlights along the way!
+## Structure
 
-- **Pixel Art:** Dive into a world of pixel art that brings a magical atmosphere to the website, inviting you to explore whimsical landscapes and charming characters.
+```
+.
+├── index.html          Landing: choose Web or Game
+├── style.css
+├── web/                Classic website
+│   ├── index.html      Home (hero + parallax)
+│   ├── about.html      About (skills, contact form link)
+│   ├── portfolio.html  Gallery with dynamic modal
+│   ├── contact.html    Contact form (email JS-free)
+│   ├── css/            theme.css + per-page styles
+│   ├── js/             page scripts
+│   └── images/         web art
+├── game/               Playable portfolio game
+│   ├── index.html      Canvas 640x360 + HUD/dialogue/pause overlays
+│   ├── css/style.css
+│   ├── img/            background, spritesheets, props
+│   └── js/
+│       ├── config.js        CFG + GameState
+│       ├── input.js         keyboard/mouse manager
+│       ├── helper.js        math + collision helpers
+│       ├── camera.js        follow camera with shake + clamp
+│       ├── placeholder.js   procedural sprite placeholders
+│       ├── data/dialogues.js
+│       ├── systems/dialogue.js
+│       ├── systems/hud.js
+│       ├── entities/entity.js, player.js, tree.js, gem.js,
+│       │            npc.js, enemy.js, interactable.js
+│       ├── scene.js         composes the world
+│       └── main.js          bootstrap + game loop (rAF)
+└── art/               Source / final art folders
+    ├── final/spritesheets
+    ├── final/sources
+    ├── wip
+    └── refs
+```
 
-- **Original Soundtrack:** Enchanting original OST crafted by a talented music designer and composer.
+## Game
 
-- **Immersive portfolio:** Intricate details, animations, and sounds that are seamlessly integrated into every aspect of the website, ensuring a captivating and immersive experience.
+Explore the valley, talk to the Guide and the Sage, gather the 5 gemstones,
+defeat the enemies watching the tower, and touch the **Tower of Creation** to
+open the web portfolio.
 
-- **Interactivity:** Engage with elements on the screen, interact with my work, and unlock hidden surprises as you navigate through my portfolio.
+| Input | Action |
+| --- | --- |
+| WASD / Arrows | Move |
+| E | Interact / Talk / Open chest / Read sign |
+| SPACE | Attack |
+| ESC | Pause |
 
--  **Direct Portfolio Version:** A conventional web-based portfolio is also available for visitors who prefer to browse my projects, experience and skills directly without using the game-like interface.
+Script loading order matters (classic scripts, works from `file://`):
+`config → input → helper → camera → placeholder → dialogues → dialogue → hud →
+entity → interactable → tree → gem → npc → enemy → player → scene → main`.
 
+### Engine notes
 
-## Updates
+- World is the full `Background.png` (3600x1950 px). The internal view is
+  640x360 and the camera follows the player, clamped to the map edges.
+- Every entity is authored in pixel units and scaled by `CFG.SPRITE_SCALE` (3).
+- Run `node --check` on every `game/js/**/*.js` to validate syntax.
 
-### Programming
-- [x] 4 Directional Movement
-- [x] 8 Directional Movement
-- [ ] Collisions
-- [ ] Camera
-- [ ] Links
-- [ ] Dialogues
+## Status
 
-### Art
-- [x] Character 4 Directional Movement Animations
-- [ ] Character 8 Directional Movement Animations
-- [ ] Enemy Sprite
-- [ ] Enemy 8 Directional Movement Animations
-- [ ] Enemy 4 Directional Movement Animations
-- [ ] Starting Building Sprite
-- [ ] Link Building Sprite
-- [ ] Link Building Animation
-- [ ] Background
+### Game — Programming
+
+- [x] 8-directional movement (normalized diagonals)
+- [x] Character animations (idle / walk / sword attack)
+- [x] Axis-separated collisions (no infinite-loop bugs)
+- [x] Camera: follow, clamp, shake
+- [x] HUD: hearts, gems, contextual hint
+- [x] Dialogue system (typewriter, skip, click/E/space/enter)
+- [x] NPCs with dialogues (Guide, Sage)
+- [x] Enemies: patrol, chase, hit, knockback, drops
+- [x] Gemstones quest + goal indicator
+- [x] Tutorial sign + interactable props (chest, sign, tower)
+- [x] Pause menu with resume / switch-to-web / restart
+- [x] Portal to `web/index.html` (after confirming with the tower)
+- [ ] Final art swap
+
+### Game — Art (awaiting final assets)
+
+- [x] Chest, sign, tower, tree sprites wired
+- [x] 4-direction movement animation wired
+- [ ] Grass tiles / stone stairs
+- [ ] Second character: animation + dialogue
+- [ ] Sanctuary background finalization
+- [ ] Enemy + NPC final sprites
+- [ ] Soundtrack integration
+
+### Web
+
+- [x] Responsive landing with hover GIFs
+- [x] About: table with info, skills, no title margins
+- [x] Portfolio: 8 pieces, hover effect, dynamic modal, responsive
+- [x] Contact: working form semantics, responsive
+- [x] Shared theme (navbar, footer, fonts) across pages
+- [ ] Background/line polish on About
+- [ ] Form back-end (currently front-end only)
+
+## Credits
+
+Original concept and art by Maria Soriano (a.k.a. Shoganai).

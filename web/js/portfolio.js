@@ -1,30 +1,68 @@
+(function () {
+    "use strict";
 
-document.addEventListener("DOMContentLoaded", function ()
-{
-	// Obtén el elemento contenedor que se desplazará horizontalmente
-	var scrollContainer = document.getElementById("scrollContainer");
+    const works = Array.prototype.slice.call(document.querySelectorAll("#works .work"));
+    const modalEl = document.getElementById("projectModal");
+    if (!modalEl || works.length === 0) return;
 
-	// Ajusta la velocidad de desplazamiento horizontal
-	var scrollSpeed = 500;
+    const img = document.getElementById("modalImg");
+    const title = document.getElementById("modalTitle");
+    const category = document.getElementById("modalCategory");
+    const desc = document.getElementById("modalDesc");
+    const tags = document.getElementById("modalTags");
+    const count = document.getElementById("modalCount");
 
-	// Manejar el evento de desplazamiento de la rueda del ratón
-	function handleMouseWheel(event) {
-		// Verifica si la rueda se ha movido hacia arriba o hacia abajo
-		var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+    const bootstrapModal = (typeof bootstrap !== "undefined") ? new bootstrap.Modal(modalEl) : null;
+    let current = 0;
 
-		// Calcula el nuevo desplazamiento horizontal
-		scrollContainer.scrollLeft -= delta * scrollSpeed;
+    function openProject(index) {
+        current = (index + works.length) % works.length;
+        const el = works[current];
 
-		// Evita el desplazamiento vertical predeterminado
-		event.preventDefault();
-	}
+        img.src = el.dataset.image;
+        img.alt = el.dataset.title;
+        title.textContent = el.dataset.title;
+        category.textContent = el.dataset.category;
+        desc.textContent = el.dataset.description;
+        count.textContent = `${current + 1} / ${works.length}`;
 
-	// Agrega el event listener para el desplazamiento de la rueda del ratón
-	if (scrollContainer.addEventListener) {
-		// Para navegadores modernos
-		scrollContainer.addEventListener("mousewheel", handleMouseWheel, { passive: false });
-	} else {
-		// Para navegadores antiguos
-		scrollContainer.attachEvent("onmousewheel", handleMouseWheel);
-	}
-});
+        tags.innerHTML = "";
+        (el.dataset.tags || "").split(",").forEach(function (tag) {
+            const chip = document.createElement("span");
+            chip.className = "tag";
+            chip.textContent = tag.trim();
+            tags.appendChild(chip);
+        });
+
+        if (bootstrapModal) bootstrapModal.show();
+    }
+
+    function close() {
+        if (bootstrapModal) bootstrapModal.hide();
+    }
+
+    works.forEach(function (el, index) {
+        el.addEventListener("click", function () { openProject(index); });
+        el.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openProject(index);
+            }
+        });
+    });
+
+    document.getElementById("prevProject").addEventListener("click", function () {
+        openProject(current - 1);
+    });
+
+    document.getElementById("nextProject").addEventListener("click", function () {
+        openProject(current + 1);
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (!modalEl.classList.contains("show")) return;
+        if (e.key === "ArrowLeft") openProject(current - 1);
+        if (e.key === "ArrowRight") openProject(current + 1);
+        if (e.key === "Escape") close();
+    });
+})();

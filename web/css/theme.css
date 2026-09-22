@@ -1,0 +1,106 @@
+/* Shared layout: navbar, footer, social icons + fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --dark: #171825;
+    --dark-2: #1d1e22;
+    --accent: #ffd166;
+    --text: #eef0ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: var(--text);
+}
+
+/* ---------- Navbar ---------- */
+.navbarScroll {
+    background-color: rgba(18, 20, 32, 0.88);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+}
+
+.navbar-brand {
+    background: url('../images/logo.png') no-repeat center center;
+    background-size: contain;
+    width: 84px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+}
+
+.navbar-brand:hover {
+    opacity: 0.9;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    opacity: 0.95;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    opacity: 0.55;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+    color: var(--accent);
+    opacity: 1;
+}
+
+/* ---------- Footer ---------- */
+#footer {
+    background-color: rgba(20, 22, 36, 0.9);
+    text-align: center;
+    padding: 14px 0;
+}
+
+.social-icons {
+    font-size: 34px;
+    cursor: pointer;
+}
+
+.social-icons a {
+    color: #ffffff;
+    margin: 0 12px;
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: var(--accent);
+    transform: translateY(-3px);
+}
+
+/* ---------- Page sections ---------- */
+.page-section {
+    min-height: 100vh;
+    padding: 110px 24px 60px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        width: 62px;
+        height: 62px;
+    }
+
+    .page-section {
+        padding: 96px 18px 60px;
+    }
+}
