@@ -267,12 +267,6 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- Footer ---------- */
-#footer {
-    position: static;
-    display: none;
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 767px) {
     .portfolio {

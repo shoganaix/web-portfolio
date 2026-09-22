@@ -476,8 +476,3 @@ figure.snip0016:hover figcaption::before {
         min-height: auto;
     }
 }
-
-/* Keep the page to a single screen: hide the footer on this page */
-#footer {
-    display: none;
-}
