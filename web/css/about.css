@@ -9,12 +9,14 @@
 
 .about {
     position: relative;
+    height: 100vh;
     overflow: hidden;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(135deg, #191c2c 0%, #262a3d 45%, #1b1f35 75%, #212640 100%);
     background-size: 240% 240%;
     animation: aboutFlow 26s ease-in-out infinite;
-    padding: 120px 24px 80px;
+    padding: 88px 24px 16px;
 }
 
 @keyframes aboutFlow {
@@ -75,8 +77,8 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     text-transform: uppercase;
-    font-size: clamp(2.2rem, 6vw, 3.6rem);
-    margin-bottom: 24px;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 8px;
     letter-spacing: 0.12em;
 }
 
@@ -112,10 +114,11 @@
 
 /* ---------- Layout ---------- */
 .responsiveme {
+    flex: 0 0 auto;
     display: grid;
     grid-template-columns: 1.4fr 1fr;
-    gap: 40px;
-    max-width: 1200px;
+    gap: 24px;
+    max-width: 1160px;
     margin: 0 auto;
     align-items: center;
 }
@@ -129,16 +132,16 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     color: #ffd166;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    margin-bottom: 12px;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    margin-bottom: 8px;
 }
 
 .textmesmall {
     color: #cfd3e6;
-    font-size: clamp(1rem, 1.6vw, 1.2rem);
-    line-height: 1.7;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.6;
     font-weight: 300;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
 }
 
 .keywords {
@@ -157,7 +160,7 @@
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px 32px;
+    gap: 8px 24px;
     opacity: 0;
     animation: fadeInLeft 2s 0.6s forwards;
 }
@@ -168,8 +171,8 @@
 }
 
 .list ul li {
-    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-    margin-bottom: 14px;
+    font-size: clamp(0.88rem, 1.2vw, 1rem);
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -198,7 +201,7 @@
 
 /* ---------- Photo card ---------- */
 .picme {
-    max-width: 440px;
+    max-width: 320px;
     margin: 0 auto;
     width: 100%;
     opacity: 0;
@@ -328,19 +331,23 @@ figure.snip0016:hover figcaption::before {
 
 /* ---------- Skills ---------- */
 .skills {
-    max-width: 900px;
-    margin: 90px auto 0;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-width: 1160px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: auto;
     opacity: 0;
-    animation: fadeInLeft 2s 1s forwards;
+    animation: fadeInLeft 1.6s 0.8s forwards;
 }
 
 .section-title h2 {
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     color: #ffd166;
     letter-spacing: 4px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -349,16 +356,19 @@ figure.snip0016:hover figcaption::before {
 }
 
 /* ---------- Skill groups ---------- */
-.skills {
-    max-width: 960px;
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    align-content: start;
 }
 
 .skill-group {
     background: rgba(255, 255, 255, 0.045);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 22px 26px 24px;
-    margin-bottom: 18px;
+    padding: 14px 18px 16px;
+    margin-bottom: 0;
     opacity: 0;
     transform: translateY(18px);
     transition: opacity 0.6s ease, transform 0.6s ease;
@@ -375,10 +385,10 @@ figure.snip0016:hover figcaption::before {
     gap: 10px;
     color: #ffd166;
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin: 0 0 14px;
+    margin: 0 0 10px;
 }
 
 .skill-group h3 i {
@@ -389,21 +399,21 @@ figure.snip0016:hover figcaption::before {
 .skill-group ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .skill-group ul li {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 300;
     letter-spacing: 0.04em;
     color: #e8eaf6;
     background: rgba(255, 209, 102, 0.08);
     border: 1px solid rgba(255, 209, 102, 0.25);
     border-radius: 999px;
-    padding: 6px 16px;
+    padding: 4px 12px;
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -437,12 +447,22 @@ figure.snip0016:hover figcaption::before {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
+    .about {
+        height: auto;
+        overflow: visible;
+        padding: 104px 24px 40px;
+    }
+
     .responsiveme {
         grid-template-columns: 1fr;
     }
 
     .picme {
         max-width: 340px;
+    }
+
+    .skill-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -454,4 +474,9 @@ figure.snip0016:hover figcaption::before {
     .list ul li {
         min-height: auto;
     }
+}
+
+/* Keep the page to a single screen: hide the footer on this page */
+#footer {
+    display: none;
 }

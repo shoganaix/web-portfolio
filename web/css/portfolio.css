@@ -5,9 +5,10 @@ html {
 }
 
 .portfolio {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     background: linear-gradient(160deg, #11131d 0%, #1b1d29 55%, #14161f 100%);
-    padding: 120px 24px 60px;
+    padding: 88px 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,13 +17,13 @@ html {
 /* ---------- Heading ---------- */
 .heading {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 14px;
 }
 
 .animate-head {
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
     color: #ffffff;
 }
 
@@ -33,14 +34,16 @@ html {
 .heading p {
     color: #a7abc4;
     font-weight: 300;
-    margin-top: 8px;
+    margin-top: 6px;
+    font-size: 0.95rem;
 }
 
 /* ---------- Works strip ---------- */
 .works {
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
     max-width: 1600px;
-    height: 100vh;
     display: flex;
     flex-wrap: nowrap;
     gap: 10px;
@@ -264,15 +267,23 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- Footer spacing ---------- */
+/* ---------- Footer ---------- */
 #footer {
     position: static;
+    display: none;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
+    .portfolio {
+        height: auto;
+        overflow: visible;
+        padding: 104px 24px 40px;
+    }
+
     .works {
         flex-wrap: wrap;
+        flex: none;
         height: auto;
         gap: 12px;
     }
