@@ -1,261 +1,719 @@
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Portfolio / Shoganai</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="utf-8">
-	<!-- linking css files -->
-	<link rel="stylesheet" href="css/theme.css">
-	<link rel="stylesheet" href="css/portfolio.css">
-	<!-- Menu hamburguesa (bootstrap CDN)-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- icons -->
-	<script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
+    <title>Portfolio / Shoganai</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-	<!-- (navbar) Menu arriba -->
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark navbarScroll">
-		<div class="container">
-			<a class="navbar-brand" href="../game/index.html" aria-label="Switch to the game experience"></a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="index.html">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="about.html">About</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="portfolio.html">Portfolio</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="contact.html">Contact</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 
-	<!-- main banner -->
-	<section class="portfolio" id="portfolio">
-		<!-- artworks strip -->
-		<div class="works" id="works">
-			<article class="work" tabindex="0"
-				data-title="Clothing & Wardrobe"
-				data-category="Character Design"
-				data-description="Wardrobe breakdown for the hero — each outfit is picked to reinforce a different trait, from the travel cloak to the worn trail boots."
-				data-tags="Character, Outfit, Aseprite"
-				data-image="images/Portfolio_03_ClothingDesign.png">
-				<div class="img-wrap"><img src="images/Portfolio_03_ClothingDesign.png" alt="Clothing Design" /></div>
-				<div class="caption">
-					<h3>Clothing &amp; Wardrobe</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-			<article class="work" tabindex="0"
-				data-title="Character Design Sheet"
-				data-category="Character Design"
-				data-description="Full character sheet exploring silhouettes and poses before animation. I work loose first and tighten the line art once the read reads well at a glance."
-				data-tags="Character, Sheets, Sketch"
-				data-image="images/Portfolio_04_CharacterDesign.png">
-				<div class="img-wrap"><img src="images/Portfolio_04_CharacterDesign.png" alt="Character Design Sheet" /></div>
-				<div class="caption">
-					<h3>Character Design Sheet</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbarScroll">
 
-			<article class="work" tabindex="0"
-				data-title="Skin & Palette Study"
-				data-category="Character Design"
-				data-description="Palette and shading study — testing how the character reacts to light before locking the art goes into the game engine."
-				data-tags="Color Study, Character, Lighting"
-				data-image="images/Portfolio_05_Skin_design.png">
-				<div class="img-wrap"><img src="images/Portfolio_05_Skin_design.png" alt="Skin Design Study" /></div>
-				<div class="caption">
-					<h3>Skin &amp; Palette Study</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+        <div class="container">
 
-			<article class="work" tabindex="0"
-				data-title="Turnaround — Side Views"
-				data-category="Character Design"
-				data-description="Side views of the design above. Turnarounds keep the volume consistent so the sprite reads the same from every camera angle."
-				data-tags="Character, Turnaround, Reference"
-				data-image="images/Portfolio_05_Skin_design_Sides.png">
-				<div class="img-wrap"><img src="images/Portfolio_05_Skin_design_Sides.png" alt="Turnaround Side Views" /></div>
-				<div class="caption">
-					<h3>Turnaround — Side Views</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+            <a
+                class="navbar-brand"
+                href="../game/index.html"
+                aria-label="Switch to the game experience">
+            </a>
 
-			<article class="work" tabindex="0"
-				data-title="Second Character Sheet"
-				data-category="Character Design"
-				data-description="A companion character in progress: expression, pose and tiny props that hint at personality and backstory."
-				data-tags="Character, Concepts, Inks"
-				data-image="images/Portfolio_06_CharacterDesign.png">
-				<div class="img-wrap"><img src="images/Portfolio_06_CharacterDesign.png" alt="Second Character Sheet" /></div>
-				<div class="caption">
-					<h3>Second Character Sheet</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-			<article class="work" tabindex="0"
-				data-title="Facial Expressions"
-				data-category="Character Design"
-				data-description="Expression sheets used to stay consistent while animating cutscenes and dialogue reactions."
-				data-tags="Expressions, Faces, Animation"
-				data-image="images/Portfolio_09_CharacterFaces.png">
-				<div class="img-wrap"><img src="images/Portfolio_09_CharacterFaces.png" alt="Facial Expressions sheet" /></div>
-				<div class="caption">
-					<h3>Facial Expressions</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+                <span class="navbar-toggler-icon"></span>
 
-			<article class="work" tabindex="0"
-				data-title="More Face Studies"
-				data-category="Character Design"
-				data-description="A second pass on faces — softer features, rounder shapes, and small quirks that give each character a distinct ready-to-animate edge."
-				data-tags="Expressions, Faces, Sketch"
-				data-image="images/Portfolio_10_CharacterFaces.png">
-				<div class="img-wrap"><img src="images/Portfolio_10_CharacterFaces.png" alt="More Face Studies" /></div>
-				<div class="caption">
-					<h3>More Face Studies</h3>
-					<span>Character Design</span>
-				</div>
-			</article>
+            </button>
 
-			<article class="work" tabindex="0"
-				data-title="Game Character Lineup"
-				data-category="Game Characters"
-				data-description="The updated cast for the portfolio game — a lineup where each silhouette should be tellable on a tiny in-game sprite."
-				data-tags="Characters, Lineup, Sprites"
-				data-image="images/Portfolio_11_GameCharacters.png">
-				<div class="img-wrap"><img src="images/Portfolio_11_GameCharacters.png" alt="Game Character Lineup" /></div>
-				<div class="caption">
-					<h3>Game Character Lineup</h3>
-					<span>Game Characters</span>
-				</div>
-			</article>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-			<article class="work" tabindex="0"
-				data-title="Cute Little Croco"
-				data-category="Creature Design"
-				data-description="A themed little croc built for a friendly area in the game — round shapes, big eye and a palette that reads warm even at a glance."
-				data-tags="Creature, Cute, Pixel Art"
-				data-image="images/Portfolio_07_CuteLittleCroco.png">
-				<div class="img-wrap"><img src="images/Portfolio_07_CuteLittleCroco.png" alt="Cute Little Croco" /></div>
-				<div class="caption">
-					<h3>Cute Little Croco</h3>
-					<span>Creature Design</span>
-				</div>
-			</article>
+                <ul class="navbar-nav ms-auto">
 
-			<article class="work" tabindex="0"
-				data-title="Cute Little Sheep"
-				data-category="Creature Design"
-				data-description="A fluffy companion concept — wool handled with chunky dithering so it keeps a hand-made feel at small resolutions."
-				data-tags="Creature, Cute, Fluffy"
-				data-image="images/Portfolio_08_CuteLittleSheep.png">
-				<div class="img-wrap"><img src="images/Portfolio_08_CuteLittleSheep.png" alt="Cute Little Sheep" /></div>
-				<div class="caption">
-					<h3>Cute Little Sheep</h3>
-					<span>Creature Design</span>
-				</div>
-			</article>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
 
-			<article class="work" tabindex="0"
-				data-title="Monster Concept — WIP"
-				data-category="Creature Design"
-				data-description="Work-in-progress fan monster study: redrawing a known species with a fresh silhouette to learn what makes a monster read instantly."
-				data-tags="Monster, Studies, WIP"
-				data-image="images/Portfolio_12_WIPPokemon.png">
-				<div class="img-wrap"><img src="images/Portfolio_12_WIPPokemon.png" alt="Monster Concept WIP" /></div>
-				<div class="caption">
-					<h3>Monster Concept — WIP</h3>
-					<span>Creature Design</span>
-				</div>
-			</article>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
 
-			<article class="work" tabindex="0"
-				data-title="Hero Portrait Vignette"
-				data-category="Environments &amp; Mood"
-				data-description="Atmospheric vignette used on socials — mood and lighting set before the piece goes behind a UI layout."
-				data-tags="Mood, Vignette, Presentation"
-				data-image="images/Portfolio_01_Vignette.png">
-				<div class="img-wrap"><img src="images/Portfolio_01_Vignette.png" alt="Hero Portrait Vignette" /></div>
-				<div class="caption">
-					<h3>Hero Portrait Vignette</h3>
-					<span>Environments &amp; Mood</span>
-				</div>
-			</article>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
 
-			<article class="work" tabindex="0"
-				data-title="Hero Portrait"
-				data-category="Presentation"
-				data-description="The hero portrait — palette, proportions and attitude pinned down in one frame, the reference I come back to while drawing the in-game sprites."
-				data-tags="Pixel Art, Portrait, Render"
-				data-image="images/Portfolio_00_Portrait.png">
-				<div class="img-wrap"><img src="images/Portfolio_00_Portrait.png" alt="Hero Portrait" /></div>
-				<div class="caption">
-					<h3>Hero Portrait</h3>
-					<span>Presentation</span>
-				</div>
-			</article>
-		</div>
-	</section>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
 
-	<!-- Dynamic project modal -->
-	<div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
-		<div class="modal-dialog modal-xl modal-dialog-centered">
-			<div class="modal-content project-modal">
-				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-				<button type="button" class="nav-arrow prev" id="prevProject" aria-label="Previous project">
-					<i class="fas fa-chevron-left"></i>
-				</button>
-				<button type="button" class="nav-arrow next" id="nextProject" aria-label="Next project">
-					<i class="fas fa-chevron-right"></i>
-				</button>
-				<div class="modal-body">
-					<div class="modal-img">
-						<img id="modalImg" src="" alt="Project image" />
-					</div>
-					<div class="modal-info">
-						<span class="badge" id="modalCategory"></span>
-						<h3 class="modal-title" id="modalTitle"></h3>
-						<p class="modal-desc" id="modalDesc"></p>
-						<div class="modal-tags" id="modalTags"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                </ul>
 
-	<!-- footer section-->
-	<footer id="footer">
-		<div class="container-fluid">
-			<!-- social media icons -->
-			<div class="social-icons mt-2">
-				<a href="https://www.artstation.com/shoganai" target="_blank" aria-label="ArtStation"><i class="fab fa-artstation"></i></a>
-				<a href="https://www.instagram.com/lashoganai/?hl=es" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-				<a href="https://github.com/shoganaix" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-				<a href="https://es.linkedin.com/in/maria-soriano-palacios" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-			</div>
-		</div>
-	</footer>
+            </div>
 
-	<script src="js/portfolio.js"></script>
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         PORTFOLIO
+    ===================================================== -->
+
+    <section class="portfolio" id="portfolio">
+
+        <div class="works" id="works">
+
+
+            <!-- =============================================
+                 00 — VEILED IN SHADOWS
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Veiled in Shadows"
+                data-category="Digital Illustration"
+                data-description="A dark cinematic illustration exploring atmosphere, lighting and visual storytelling."
+                data-tags="Illustration, Digital Painting, Atmosphere"
+                data-image="images/Portfolio_00_ComicScene.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_00_ComicScene.png"
+                        alt="Veiled in Shadows">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Veiled in Shadows</h3>
+
+                    <span>Digital Illustration</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 01 — ORIGINAL CHARACTER DESIGNS
+
+                 Includes:
+                 01   Wonderland Character Design
+                 01.1 Jellyfish-Inspired Character
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Original Character Designs"
+                data-category="Character Design"
+                data-description="Original character concepts exploring costumes, silhouettes, colour palettes and personality."
+                data-tags="Character Design, Original Characters, Concept Art"
+                data-image="images/Portfolio_01_OriginalCharacterDesigns.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_01_OriginalCharacterDesigns.png"
+                        alt="Wonderland Character Design">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Original Character Designs</h3>
+
+                    <span>Character Design</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 02 — SUNLIT FOREST
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Sunlit Forest"
+                data-category="Environment Art"
+                data-description="An atmospheric forest landscape exploring natural scenery, warm lighting, depth and colour."
+                data-tags="Environment, Landscape, Digital Painting"
+                data-image="images/Portfolio_02_Landscape.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_02_Landscape.png"
+                        alt="Sunlit Forest">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Sunlit Forest</h3>
+
+                    <span>Environment Art</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 03 — HATSUNE MIKU
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Hatsune Miku — Fan Art"
+                data-category="Fan Art"
+                data-description="A work-in-progress character illustration featuring Hatsune Miku, exploring pose, composition and line art."
+                data-tags="Fan Art, Character Illustration, WIP"
+                data-image="images/Portfolio_03_HatsuneMikuFanArt-WIP.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_03_HatsuneMikuFanArt-WIP.png"
+                        alt="Hatsune Miku Fan Art">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Hatsune Miku</h3>
+
+                    <span>Fan Art / WIP</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 04 — PRINCESS MONONOKE
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Princess Mononoke — Portrait Study"
+                data-category="Fan Art"
+                data-description="A digital portrait inspired by Princess Mononoke, exploring expressive features, painterly textures and colour."
+                data-tags="Fan Art, Portrait, Digital Painting"
+                data-image="images/Portfolio_04_MononokePricessFanart.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_04_MononokePricessFanart.png"
+                        alt="Princess Mononoke Portrait">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Princess Mononoke</h3>
+
+                    <span>Portrait Study</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 05 — A DAY AT SEA
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="A Day at Sea"
+                data-category="Pokémon Fan Art"
+                data-description="A colourful Pokémon-inspired illustration featuring a playful ocean composition, vibrant colours and dynamic shapes."
+                data-tags="Pokémon, Fan Art, Illustration"
+                data-image="images/Portfolio_05_WIPPokemon.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_05_WIPPokemon.png"
+                        alt="A Day at Sea — Pokémon Fan Art">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>A Day at Sea</h3>
+
+                    <span>Pokémon Fan Art</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 06 — CHARACTER TURNAROUNDS
+
+                 Includes:
+                 06   Bunny Witch
+                 06.1 Second Character Turnaround
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Character Turnarounds"
+                data-category="Character Design"
+                data-description="Character design studies exploring proportions, silhouettes and consistency across multiple views."
+                data-tags="Character Design, Turnaround, Concept Art"
+                data-image="images/Portfolio_06_Character_TurnAround.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_06_Character_TurnAround.png"
+                        alt="Bunny Witch Character Turnaround">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Character Turnarounds</h3>
+
+                    <span>Character Design</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 07 — LITTLE ANIMAL CHARACTERS
+
+                 Includes:
+                 07   Little Croco — The Explorer
+                 07.1 Little Sheep — The Wanderer
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Little Animal Characters"
+                data-category="Creature Design"
+                data-description="A collection of small animal characters exploring expressive silhouettes, playful personalities and fantasy-inspired designs."
+                data-tags="Creature Design, Character Design, Concept Art"
+                data-image="images/Portfolio_07_AnimalCroco.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_07_AnimalCroco.png"
+                        alt="Little Croco — The Explorer">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Little Animal Characters</h3>
+
+                    <span>Creature Design</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 08 — THE ADVENTURER CREW
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="The Adventurer Crew"
+                data-category="Game Character Design"
+                data-description="A lineup of four fantasy game characters with distinct silhouettes, outfits, colour palettes and personalities."
+                data-tags="Game Art, Character Design, Fantasy"
+                data-image="images/Portfolio_08.00_GameCharacters.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_08.00_GameCharacters.png"
+                        alt="The Adventurer Crew">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>The Adventurer Crew</h3>
+
+                    <span>Game Character Design</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 09 — CHARACTER EXPRESSIONS
+
+                 Includes:
+                 09.0 Character Expression Studies
+                 09.1 Witch Expressions
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Character Expressions"
+                data-category="Character Design"
+                data-description="Expression sheets and facial studies exploring how changes in features, eyes and gestures communicate personality."
+                data-tags="Expressions, Character Design, Sketches"
+                data-image="images/Portfolio_09.0_CharacterFaces.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_09.0_CharacterFaces.png"
+                        alt="Character Expression Studies">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Character Expressions</h3>
+
+                    <span>Character Design</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 10 — ARCHITECTURAL STUDIES
+
+                 Includes:
+                 10.0 Vertical City
+                 10.1 The Creative Attic
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Architectural Studies"
+                data-category="Traditional Art"
+                data-description="Architectural drawings exploring perspective, spatial design, structural details and imaginative environments."
+                data-tags="Architecture, Environment Design, Pencil"
+                data-image="images/Portfolio_10.0_Tarditional.jpg">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_10.0_Tarditional.jpg"
+                        alt="Vertical City — Architectural Sketch">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Architectural Studies</h3>
+
+                    <span>Traditional Art</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 11 — TRADITIONAL STUDIES
+
+                 Includes:
+                 11.0  Creature Anatomy — Skull Study
+                 11.2  Creature Anatomy — Clawed Foot
+                 11.3  Traditional Study
+                 11.4  Traditional Study
+                 11.5  Traditional Study
+                 11.6  Traditional Study
+                 11.7  Traditional Study
+                 11.8  Traditional Study
+                 11.9  Traditional Study
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="Traditional Studies"
+                data-category="Sketchbook"
+                data-description="A collection of traditional pencil studies exploring creature anatomy, objects, perspective, organic forms and visual construction."
+                data-tags="Traditional Art, Pencil, Anatomy, Sketchbook"
+                data-image="images/Portfolio_11.0_TarditionalStudies.jpg">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_11.0_TarditionalStudies.jpg"
+                        alt="Creature Anatomy — Skull Study">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>Traditional Studies</h3>
+
+                    <span>Sketchbook</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 12 — THE FOOL
+
+                 Includes:
+                 12.00 The Fool — Cover
+                 12.01 The Fool — Overview
+                 12.02 The Fool — Character Development
+                 12.03 The Fool — Research and Studies
+            ============================================= -->
+
+            <article
+                class="work"
+                tabindex="0"
+                data-title="The Fool"
+                data-category="Final Degree Project"
+                data-description="Visual development for The Fool, including its visual identity, character design, concept art and research."
+                data-tags="The Fool, Concept Art, Character Design, Visual Development"
+                data-image="images/Portfolio_12.00_TFG.png">
+
+                <div class="img-wrap">
+
+                    <img
+                        src="images/Portfolio_12.00_TFG.png"
+                        alt="The Fool — Cover">
+
+                </div>
+
+                <div class="caption">
+
+                    <h3>The Fool</h3>
+
+                    <span>Final Degree Project</span>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DYNAMIC PROJECT MODAL
+    ===================================================== -->
+
+    <div
+        class="modal fade"
+        id="projectModal"
+        tabindex="-1"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+
+            <div class="modal-content project-modal">
+
+
+                <!-- Close button -->
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                </button>
+
+
+                <!-- Previous project -->
+
+                <button
+                    type="button"
+                    class="nav-arrow prev"
+                    id="prevProject"
+                    aria-label="Previous project">
+
+                    <i class="fas fa-chevron-left"></i>
+
+                </button>
+
+
+                <!-- Next project -->
+
+                <button
+                    type="button"
+                    class="nav-arrow next"
+                    id="nextProject"
+                    aria-label="Next project">
+
+                    <i class="fas fa-chevron-right"></i>
+
+                </button>
+
+
+                <div class="modal-body">
+
+
+                    <!-- Image gallery -->
+
+                    <div class="modal-img" id="modalImages">
+
+                        <!-- Main image -->
+
+                        <img
+                            id="modalImg"
+                            src=""
+                            alt="Project image">
+
+                        <!--
+                            Additional images are inserted here
+                            by portfolio.js.
+
+                            Example:
+
+                            12.00 — Main image
+                            12.01 — Additional artwork + description
+                            12.02 — Additional artwork + description
+                            12.03 — Additional artwork + description
+
+                        -->
+
+                    </div>
+
+
+                    <!-- Project information -->
+
+                    <div class="modal-info">
+
+                        <span class="badge" id="modalCategory"></span>
+
+                        <h3 class="modal-title" id="modalTitle"></h3>
+
+                        <p class="modal-desc" id="modalDesc"></p>
+
+                        <div class="modal-tags" id="modalTags"></div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer id="footer">
+
+        <div class="container-fluid">
+
+            <div class="social-icons mt-2">
+
+                <a
+                    href="https://www.artstation.com/shoganai"
+                    target="_blank"
+                    aria-label="ArtStation">
+
+                    <i class="fab fa-artstation"></i>
+
+                </a>
+
+
+                <a
+                    href="https://www.instagram.com/lashoganai/?hl=es"
+                    target="_blank"
+                    aria-label="Instagram">
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+
+                <a
+                    href="https://github.com/shoganaix"
+                    target="_blank"
+                    aria-label="GitHub">
+
+                    <i class="fab fa-github"></i>
+
+                </a>
+
+
+                <a
+                    href="https://es.linkedin.com/in/maria-soriano-palacios"
+                    target="_blank"
+                    aria-label="LinkedIn">
+
+                    <i class="fab fa-linkedin"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script src="js/portfolio.js"></script>
+
 </body>
+
 </html>

@@ -141,13 +141,6 @@ html {
     margin: 0;
 }
 
-.caption span {
-    font-size: 0.8rem;
-    color: #ffd166;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
 .work:hover .caption,
 .work:focus-visible .caption {
     opacity: 1;
@@ -307,6 +300,168 @@ html {
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     font-weight: 500;
+}
+
+/* =====================================================
+   ADDITIONAL ARTWORKS INSIDE ORIGINAL MODAL
+===================================================== */
+
+/* Allow scrolling when a project has multiple images */
+
+.project-modal .modal-body {
+    max-height: calc(100dvh - 110px);
+    overflow-y: auto;
+    align-items: start;
+}
+
+
+/* Keep the original image area, allowing extra images */
+
+.project-modal .modal-img {
+    max-height: none;
+    overflow: visible;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 28px;
+}
+
+
+/* Main image keeps its original proportions */
+
+.project-modal .modal-img > #modalImg {
+    max-width: 100%;
+    max-height: 66vh;
+    object-fit: contain;
+}
+
+
+/* Additional artwork */
+
+.project-extra {
+    width: 100%;
+    margin: 0;
+
+    padding-top: 24px;
+
+    border-top: 1px solid rgba(255, 209, 102, 0.25);
+}
+
+
+.project-extra img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: none;
+
+    object-fit: contain;
+}
+
+
+/* Individual artwork title */
+
+.project-extra figcaption {
+    padding-top: 16px;
+}
+
+.project-extra figcaption h4 {
+    color: #ffd166;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+
+    margin-bottom: 8px;
+}
+
+
+/* Individual artwork description */
+
+.project-extra figcaption p {
+    color: #edf1ff;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+
+    margin-bottom: 0;
+}
+
+
+/* =====================================================
+   MAIN ARTWORK CAPTION
+===================================================== */
+
+.main-artwork-caption {
+    width: 100%;
+    padding: 16px 4px 0;
+    text-align: left;
+}
+
+.main-artwork-caption h4 {
+    color: #ffd166;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.main-artwork-caption p {
+    color: #edf1ff;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+
+/* Keep captions aligned with their images */
+
+.project-extra {
+    width: 100%;
+    margin: 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 209, 102, 0.25);
+}
+
+.project-extra figcaption {
+    padding-top: 16px;
+    text-align: left;
+}
+
+
+/* Allow the full project to scroll */
+
+.project-modal .modal-body {
+    max-height: calc(100dvh - 110px);
+    overflow-y: auto;
+    align-items: start;
+}
+
+.project-modal .modal-img {
+    max-height: none;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+
+
+/* Keep project information visible while scrolling */
+
+@media (min-width: 768px) {
+
+    .project-modal .modal-info {
+        position: sticky;
+        top: 0;
+    }
+
 }
 
 /* ---------- Responsive ---------- */

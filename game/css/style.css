@@ -52,10 +52,10 @@ body {
 }
 
 .game-brand {
-    background: url('../../web/images/logo.png') no-repeat center center;
+    background: url('../../web/images/logo2_web.png') no-repeat center center;
     background-size: contain;
-    width: 82px;
-    height: 82px;
+    width: 170px;
+    height: 170px;
     position: absolute;
     top: 50%;
     left: 18px;
