@@ -6,13 +6,14 @@
 // react to progress (e.g. the Sage's response changes once you have enough
 // gemstones).
 // ---------------------------------------------------------------------------
-const DIALOGUES = {
+const DIALOGUES = { 
     guide: {
         lines: [
             { who: "Guide", text: "Hey there, adventurer! I'm the Guide." },
             { who: "Guide", text: "Move with WASD or the arrow keys." },
+            { who: "Guide", text: "Hold SHIFT while moving to sprint!" },
             { who: "Guide", text: "Press E close to people, chests and signs to interact." },
-            { who: "Guide", text: "Press SPACE to swing your sword when enemies show up." },
+            { who: "Guide", text: "Press SPACE to attack when enemies show up." },
             { who: "Guide", text: "Collect the scattered artworks — the Sage to the east is looking for them." },
         ],
     },

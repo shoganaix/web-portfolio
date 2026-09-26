@@ -535,3 +535,92 @@ figure.snip0016:hover figcaption::before {
         padding: 3px 8px;
     }
 }
+/* =====================================================
+   FIX — WHITE GAP ON MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    html,
+    body {
+        background-color: #171825;
+        min-height: 100%;
+    }
+
+    .about {
+        min-height: 100dvh;
+        height: auto;
+
+        background-color: #171825;
+
+        /* Keep the illustration anchored */
+        background-position: center, center bottom, center;
+
+        /* Prevent the animated background from exposing empty areas */
+        background-repeat: no-repeat;
+    }
+
+}
+
+/* =====================================================
+   MOBILE — SUBTLE FLOATING BACKGROUND
+===================================================== */
+
+@media (max-width: 767px) {
+
+    html,
+    body {
+        min-height: 100%;
+        background-color: #171825;
+    }
+
+    body {
+        height: auto;
+        overflow-x: hidden;
+    }
+
+    .about {
+        height: auto;
+        min-height: 100dvh;
+
+        /* Keep the dark base underneath all background layers */
+        background-color: #171825;
+
+        background-size:
+            cover,
+            cover,
+            240% 240%;
+
+        background-repeat:
+            no-repeat,
+            no-repeat,
+            no-repeat;
+
+        /* Smaller, slower movement on mobile */
+        animation: aboutFlowMobile 35s ease-in-out infinite;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE BACKGROUND ANIMATION
+===================================================== */
+
+@keyframes aboutFlowMobile {
+
+    0%, 100% {
+        background-position:
+            center,
+            68% bottom,
+            67% 67%;
+    }
+
+    50% {
+        background-position:
+            center,
+            52% bottom,
+            53% 53%;
+    }
+
+}

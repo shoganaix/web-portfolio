@@ -20,6 +20,8 @@ body {
     height: 100vh;
     overflow: hidden;
     overscroll-behavior: none;
+    background-color: var(--dark);
+    margin: 0;
 }
 
 /* ---------- Navbar ---------- */
@@ -100,35 +102,85 @@ body {
     align-items: center;
 }
 
-@media (max-width: 767px) {
+
+/* =====================================================
+   RESPONSIVE NAVBAR — TABLET & MOBILE
+   Bootstrap hamburger breakpoint: 992px
+===================================================== */
+
+@media (max-width: 991.98px) {
+
     body {
         height: auto;
         overflow: visible;
         overscroll-behavior: auto;
     }
 
+    /* Navbar */
+    .navbarScroll {
+        min-height: 80px;
+        padding: 8px 0;
+    }
+
+    /* Container: logo left, hamburger right */
+    .navbarScroll .container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        min-height: 64px;
+    }
+
+    /* Logo */
     .navbar-brand {
-        width: 62px;
-        height: 62px;
-        margin-left: 0;
-    }
+        position: relative;
 
-    .navbarScroll .navbar-toggler {
-        position: absolute;
-        top: 50%;
-        right: 18px;
+        width: 72px;
+        height: 72px;
+
+        top: auto;
+        left: auto;
+        transform: none;
+
         margin: 0;
-        transform: translateY(-50%);
+        padding: 0;
+
+        flex-shrink: 0;
     }
 
+    /* Hamburger button */
+    .navbarScroll .navbar-toggler {
+        position: relative;
+
+        top: auto;
+        right: auto;
+        transform: none;
+
+        margin: 0 0 0 auto;
+
+        flex-shrink: 0;
+
+        z-index: 10;
+    }
+
+    /* Dropdown menu */
     .navbarScroll .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
         text-align: right;
     }
 
+    /* Align links to the right */
     .navbarScroll .navbar-nav {
         width: max-content;
         margin-left: auto !important;
+
+        display: flex;
+        flex-direction: column;
         align-items: flex-end;
+
+        padding: 12px 0;
     }
 
     .navbarScroll .nav-item {
@@ -137,9 +189,29 @@ body {
 
     .navbarScroll .nav-link {
         text-align: right;
+        padding: 10px 0;
     }
 
+    /* Other page sections */
     .page-section {
         padding: 96px 18px 60px;
     }
+}
+
+
+/* =====================================================
+   SMALL MOBILE SCREENS
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .navbarScroll {
+        min-height: 70px;
+    }
+
+    .navbar-brand {
+        width: 60px;
+        height: 60px;
+    }
+
 }

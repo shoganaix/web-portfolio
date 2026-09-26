@@ -131,7 +131,7 @@ class Player extends Entity {
                 this.facing.y = 0;
             }
 
-            const moveSpeed = Input.Held(KEY.SHIFT) ? this.speed * 1.6 : this.speed;
+            const moveSpeed = Input.Held(KEY.SHIFT) ? this.speed * 2 : this.speed;
             const dispX = (hDir * moveSpeed + this.kbX) * dt;
             const dispY = (vDir * moveSpeed + this.kbY) * dt;
             this._moveAxis(dispX, dispY, world.solids);
@@ -247,9 +247,26 @@ class Player extends Entity {
 
         // Keep idle animation alive: only the frame pacing changes between
         // movement and idle, instead of freezing the sprite on frame 0.
-        const animationInterval = this.moving || this.attacking > 0
-            ? (Input.Held(KEY.SHIFT) ? 0.07 : 0.13)
-            : 0.2;
+        // Animation speed depending on player state
+
+        let animationInterval;
+
+        if (!this.moving && this.attacking <= 0) {
+
+            // IDLE — standing still
+            animationInterval = 0.20;
+
+        } else if (Input.Held(KEY.SHIFT)) {
+
+            // SPRINT
+            animationInterval = 0.07;
+
+        } else {
+
+            // WALK
+            animationInterval = 0.20;
+
+        }
         if (this.animTimer > animationInterval) {
             this.animTimer = 0;
             this.animFrame = (this.animFrame + 1) % 4;

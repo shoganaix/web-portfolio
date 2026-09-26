@@ -1,4 +1,7 @@
-/* ---------- Portfolio page ---------- */
+
+/* =====================================================
+   SHOGANAI — PORTFOLIO PAGE
+===================================================== */
 
 html {
     scroll-behavior: smooth;
@@ -8,14 +11,23 @@ html {
     position: relative;
     height: 100dvh;
     overflow: hidden;
-    background: linear-gradient(160deg, #11131d 0%, #1b1d29 55%, #14161f 100%);
+    background: linear-gradient(
+        160deg,
+        #11131d 0%,
+        #1b1d29 55%,
+        #14161f 100%
+    );
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-/* ---------- Heading ---------- */
+
+/* =====================================================
+   HEADING
+===================================================== */
+
 .heading {
     position: absolute;
     top: 92px;
@@ -44,7 +56,11 @@ html {
     display: none;
 }
 
-/* ---------- Works strip ---------- */
+
+/* =====================================================
+   WORKS STRIP
+===================================================== */
+
 .works {
     position: absolute;
     inset: 0;
@@ -55,50 +71,178 @@ html {
     gap: 0;
 }
 
-.work {
-    flex: 1 1 0;
-    min-width: 0;
-    position: relative;
-    border-radius: 0;
-    overflow: hidden;
-    cursor: pointer;
-    border: none;
-    outline: 2px solid transparent;
-    background: #000;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: rise 0.7s ease forwards;
-    transition: flex 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, filter 0.35s ease;
+
+/* =====================================================
+   WORK CARDS — FALLING ANIMATION
+===================================================== */
+
+    .work {
+        flex: 1 1 0;
+        min-width: 0;
+        position: relative;
+        border-radius: 0;
+        overflow: hidden;
+        cursor: pointer;
+        border: none;
+        outline: 2px solid transparent;
+        background: #000;
+
+        opacity: 0;
+
+        /* Default: fall from above */
+        transform: translateY(-100%);
+        animation: fallFromTop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+        transition:
+            flex 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.35s ease,
+            filter 0.35s ease;
+    }
+
+    /* Odd sections: from top */
+    .work:nth-child(odd) {
+        transform: translateY(-100%);
+        animation-name: fallFromTop;
+    }
+
+    /* Even sections: from bottom */
+    .work:nth-child(even) {
+        transform: translateY(100%);
+        animation-name: riseFromBottom;
+    }
+
+ 
+/* =====================================================
+   STAGGERED ENTRANCE — LEFT TO RIGHT
+===================================================== */
+
+.work:nth-child(1) {
+    animation-delay: 0.05s;
 }
 
-.work:nth-child(1) { animation-delay: 0.05s; }
-.work:nth-child(2) { animation-delay: 0.12s; }
-.work:nth-child(3) { animation-delay: 0.19s; }
-.work:nth-child(4) { animation-delay: 0.26s; }
-.work:nth-child(5) { animation-delay: 0.33s; }
-.work:nth-child(6) { animation-delay: 0.40s; }
-.work:nth-child(7) { animation-delay: 0.47s; }
-.work:nth-child(8) { animation-delay: 0.54s; }
-.work:nth-child(9) { animation-delay: 0.61s; }
-.work:nth-child(10) { animation-delay: 0.68s; }
-.work:nth-child(11) { animation-delay: 0.75s; }
-.work:nth-child(12) { animation-delay: 0.82s; }
-.work:nth-child(13) { animation-delay: 0.89s; }
+.work:nth-child(2) {
+    animation-delay: 0.13s;
+}
+
+.work:nth-child(3) {
+    animation-delay: 0.21s;
+}
+
+.work:nth-child(4) {
+    animation-delay: 0.29s;
+}
+
+.work:nth-child(5) {
+    animation-delay: 0.37s;
+}
+
+.work:nth-child(6) {
+    animation-delay: 0.45s;
+}
+
+.work:nth-child(7) {
+    animation-delay: 0.53s;
+}
+
+.work:nth-child(8) {
+    animation-delay: 0.61s;
+}
+
+.work:nth-child(9) {
+    animation-delay: 0.69s;
+}
+
+.work:nth-child(10) {
+    animation-delay: 0.77s;
+}
+
+.work:nth-child(11) {
+    animation-delay: 0.85s;
+}
+
+.work:nth-child(12) {
+    animation-delay: 0.93s;
+}
+
+.work:nth-child(13) {
+    animation-delay: 1.01s;
+}
+
+
+/* =====================================================
+   FALL ANIMATION
+===================================================== */
+
+
+/* Sections entering from above */
+
+@keyframes fallFromTop {
+
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Sections entering from below */
+
+@keyframes riseFromBottom {
+
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =====================================================
+   WORK INTERACTIONS
+===================================================== */
 
 .work:focus-visible {
     outline: 2px solid #ffd166;
 }
 
-/* Enlarge the hovered one, dim the rest */
+
+/* Enlarge the hovered artwork */
+
 .work:hover {
     flex: 5 1 0;
     z-index: 2;
 }
 
+
+/* Dim the remaining artworks */
+
 .works:has(.work:hover) .work:not(:hover) {
     opacity: 0.35;
     filter: saturate(0.5) brightness(0.7);
 }
+
+
+/* =====================================================
+   IMAGES
+===================================================== */
 
 .img-wrap {
     width: 100%;
@@ -112,6 +256,7 @@ html {
     object-position: center;
     display: block;
     image-rendering: auto;
+
     transition: transform 0.55s ease;
 }
 
@@ -119,17 +264,31 @@ html {
     transform: scale(1.06);
 }
 
-/* Caption overlay */
+
+/* =====================================================
+   CAPTION OVERLAY
+===================================================== */
+
 .caption {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
+
     padding: 26px 20px 20px;
-    background: linear-gradient(transparent, rgba(8, 10, 18, 0.88));
+
+    background: linear-gradient(
+        transparent,
+        rgba(8, 10, 18, 0.88)
+    );
+
     opacity: 0;
     transform: translateY(12px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+
     pointer-events: none;
 }
 
@@ -141,20 +300,24 @@ html {
     margin: 0;
 }
 
+.caption span {
+    font-size: 0.8rem;
+    color: #ffd166;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
 .work:hover .caption,
 .work:focus-visible .caption {
     opacity: 1;
     transform: translateY(0);
 }
 
-@keyframes rise {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-/* ---------- Modal ---------- */
+/* =====================================================
+   PROJECT MODAL
+===================================================== */
+
 .project-modal {
     background: #000000;
     border: 5px solid rgba(255, 255, 255, 0.95);
@@ -162,40 +325,66 @@ html {
     color: #ffffff;
     position: relative;
     overflow: hidden;
+
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+
     padding: 2px;
 }
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
 
 .btn-close-white {
     position: absolute;
     top: 14px;
     right: 14px;
     z-index: 5;
+
     background-color: #000000;
+
     border: 2px solid rgba(255, 255, 255, 0.95);
     border-radius: 50%;
+
     padding: 10px;
     opacity: 1;
     box-shadow: none;
 }
+
+
+/* =====================================================
+   MODAL NAVIGATION ARROWS
+===================================================== */
 
 .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 5;
+
     width: 52px;
     height: 52px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border: 2px solid rgba(255, 255, 255, 0.28);
+
     background: rgba(255, 255, 255, 0.08);
     color: #ffd166;
+
     font-size: 1.45rem;
     line-height: 1;
-    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease;
+
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+
     border-radius: 50%;
     transform-origin: center;
 }
@@ -209,7 +398,9 @@ html {
 .nav-arrow:hover {
     background: #ffd166;
     color: #11131d;
+
     border-color: rgba(255, 209, 102, 0.9);
+
     transform: translateY(-50%) scale(1.04);
 }
 
@@ -217,109 +408,49 @@ html {
     color: #11131d;
 }
 
-.nav-arrow.prev { left: 14px; }
-.nav-arrow.next { right: 14px; }
+.nav-arrow.prev {
+    left: 14px;
+}
+
+.nav-arrow.next {
+    right: 14px;
+}
+
+
+/* =====================================================
+   MODAL BODY
+===================================================== */
 
 .project-modal .modal-body {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(280px, 1fr);
+
     gap: 36px;
     padding: 40px;
+
     min-height: 60vh;
-    align-items: center;
+
+    align-items: start;
+
     background: #000000;
-}
 
-.modal-img {
-    width: 100%;
-    max-height: 66vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px 22px 20px 18px / 16px 18px 22px 20px;
-    overflow: hidden;
-    background: #000000;
-    border: none;
-    box-shadow: none;
-    position: relative;
-}
-
-.modal-img img {
-    max-width: 100%;
-    max-height: 66vh;
-    object-fit: contain;
-    display: block;
-    padding: 0;
-    position: relative;
-    z-index: 1;
-}
-
-.modal-info .badge {
-    background: rgba(255, 209, 102, 0.18);
-    color: #ffe7a3;
-    border: 1px solid rgba(255, 209, 102, 0.5);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    border-radius: 999px;
-    margin-bottom: 16px;
-    font-weight: 700;
-}
-
-.modal-info .modal-title {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-    text-align: left;
-    margin-bottom: 14px;
-    color: #ffffff;
-    letter-spacing: 0.02em;
-}
-
-.modal-desc {
-    color: #edf1ff;
-    font-weight: 400;
-    line-height: 1.75;
-    font-size: 1rem;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.modal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-}
-
-.modal-tags .tag {
-    background: rgba(255, 255, 255, 0.08);
-    color: #f3f6ff;
-    font-size: 0.8rem;
-    padding: 5px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    font-weight: 500;
-}
-
-/* =====================================================
-   ADDITIONAL ARTWORKS INSIDE ORIGINAL MODAL
-===================================================== */
-
-/* Allow scrolling when a project has multiple images */
-
-.project-modal .modal-body {
+    /* Allow scrolling for projects with multiple images */
     max-height: calc(100dvh - 110px);
     overflow-y: auto;
-    align-items: start;
 }
 
 
-/* Keep the original image area, allowing extra images */
+/* =====================================================
+   MODAL IMAGE CONTAINER
+===================================================== */
 
 .project-modal .modal-img {
+    width: 100%;
+
     max-height: none;
-    overflow: visible;
 
     display: flex;
     flex-direction: column;
@@ -328,10 +459,35 @@ html {
     justify-content: flex-start;
 
     gap: 28px;
+
+    border-radius: 18px 22px 20px 18px / 16px 18px 22px 20px;
+
+    overflow: visible;
+
+    background: #000000;
+
+    border: none;
+    box-shadow: none;
+
+    position: relative;
 }
 
 
-/* Main image keeps its original proportions */
+/* Main image */
+
+.modal-img img {
+    max-width: 100%;
+    max-height: 66vh;
+
+    object-fit: contain;
+
+    display: block;
+
+    padding: 0;
+
+    position: relative;
+    z-index: 1;
+}
 
 .project-modal .modal-img > #modalImg {
     max-width: 100%;
@@ -340,7 +496,87 @@ html {
 }
 
 
-/* Additional artwork */
+/* =====================================================
+   MODAL INFORMATION
+===================================================== */
+
+.modal-info .badge {
+    background: rgba(255, 209, 102, 0.18);
+    color: #ffe7a3;
+
+    border: 1px solid rgba(255, 209, 102, 0.5);
+
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    margin-bottom: 16px;
+
+    font-weight: 700;
+}
+
+.modal-info .modal-title {
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 400;
+
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+
+    text-align: left;
+
+    margin-bottom: 14px;
+
+    color: #ffffff;
+
+    letter-spacing: 0.02em;
+}
+
+.modal-desc {
+    color: #edf1ff;
+
+    font-weight: 400;
+    line-height: 1.75;
+    font-size: 1rem;
+
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =====================================================
+   MODAL TAGS
+===================================================== */
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+.modal-tags .tag {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f3f6ff;
+
+    font-size: 0.8rem;
+
+    padding: 5px 12px;
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   ADDITIONAL ARTWORKS
+===================================================== */
 
 .project-extra {
     width: 100%;
@@ -350,7 +586,6 @@ html {
 
     border-top: 1px solid rgba(255, 209, 102, 0.25);
 }
-
 
 .project-extra img {
     display: block;
@@ -364,24 +599,25 @@ html {
 }
 
 
-/* Individual artwork title */
+/* =====================================================
+   ADDITIONAL ARTWORK CAPTIONS
+===================================================== */
 
 .project-extra figcaption {
     padding-top: 16px;
+    text-align: left;
 }
 
 .project-extra figcaption h4 {
     color: #ffd166;
 
     font-family: "Montserrat", sans-serif;
+
     font-size: 1.1rem;
     font-weight: 500;
 
     margin-bottom: 8px;
 }
-
-
-/* Individual artwork description */
 
 .project-extra figcaption p {
     color: #edf1ff;
@@ -399,61 +635,36 @@ html {
 
 .main-artwork-caption {
     width: 100%;
+
     padding: 16px 4px 0;
+
     text-align: left;
 }
 
 .main-artwork-caption h4 {
     color: #ffd166;
+
     font-family: "Montserrat", sans-serif;
+
     font-size: 1.1rem;
     font-weight: 500;
+
     margin-bottom: 8px;
 }
 
 .main-artwork-caption p {
     color: #edf1ff;
+
     font-size: 0.9rem;
     line-height: 1.6;
+
     margin-bottom: 0;
 }
 
 
-/* Keep captions aligned with their images */
-
-.project-extra {
-    width: 100%;
-    margin: 0;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 209, 102, 0.25);
-}
-
-.project-extra figcaption {
-    padding-top: 16px;
-    text-align: left;
-}
-
-
-/* Allow the full project to scroll */
-
-.project-modal .modal-body {
-    max-height: calc(100dvh - 110px);
-    overflow-y: auto;
-    align-items: start;
-}
-
-.project-modal .modal-img {
-    max-height: none;
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-}
-
-
-
-/* Keep project information visible while scrolling */
+/* =====================================================
+   STICKY PROJECT INFORMATION
+===================================================== */
 
 @media (min-width: 768px) {
 
@@ -464,8 +675,13 @@ html {
 
 }
 
-/* ---------- Responsive ---------- */
+
+/* =====================================================
+   RESPONSIVE — TABLET & MOBILE
+===================================================== */
+
 @media (max-width: 767px) {
+
     .portfolio {
         height: 100dvh;
         overflow: hidden;
@@ -475,31 +691,46 @@ html {
     .works {
         flex-wrap: nowrap;
         flex: 1 1 auto;
+
         height: auto;
+
         gap: 0;
     }
 
     .work {
         flex: 1 1 0;
         min-height: 0;
-        opacity: 1;
-        transform: none;
-        animation: none;
     }
 
-    .work:nth-child(odd) { flex: 1 1 0; }
+    .work:nth-child(odd) {
+        flex: 1 1 0;
+    }
 
     .work:hover {
         flex: 1 1 0;
     }
-
+/*
     .caption {
         opacity: 1;
         transform: none;
     }
+*/
+    .caption,
+    .work:hover .caption,
+    .work:focus-visible .caption {
+        display: none;
+
+    }
+
 }
 
+
+/* =====================================================
+   RESPONSIVE — SMALL SCREENS
+===================================================== */
+
 @media (max-width: 600px) {
+
     .work {
         flex: 1 1 100%;
     }
@@ -510,16 +741,394 @@ html {
 
     .project-modal .modal-body {
         grid-template-columns: 1fr;
+
         gap: 20px;
+
         padding: 24px;
     }
+
+    .project-modal .modal-info {
+        position: static;
+    }
+
 }
 
-/* Reduce motion */
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
 @media (prefers-reduced-motion: reduce) {
+
     .work {
         animation: none;
         opacity: 1;
         transform: none;
     }
+
+    .img-wrap img,
+    .caption {
+        transition: none;
+    }
+
 }
+
+
+/* =====================================================
+   MODAL ARROWS — VISIBLE WITHOUT ICON LIBRARIES
+===================================================== */
+
+.nav-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffd166;
+}
+
+/* Hide the original icon if it is not rendering correctly */
+.nav-arrow i {
+    display: none;
+}
+
+/* Draw the arrows using CSS */
+.nav-arrow::before {
+    content: "";
+
+    display: block;
+
+    width: 11px;
+    height: 11px;
+
+    border-top: 3px solid currentColor;
+    border-right: 3px solid currentColor;
+
+    flex-shrink: 0;
+}
+
+/* Previous — left arrow */
+.nav-arrow.prev::before {
+    transform: rotate(-135deg);
+    margin-left: 5px;
+}
+
+/* Next — right arrow */
+.nav-arrow.next::before {
+    transform: rotate(45deg);
+    margin-right: 5px;
+}
+
+/* Hover */
+.nav-arrow:hover {
+    color: #11131d;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .nav-arrow::before {
+        width: 10px;
+        height: 10px;
+        border-width: 2.5px;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET / LARGE MOBILE — 601px to 991px
+===================================================== */
+
+@media (min-width: 601px) and (max-width: 991.98px) {
+
+    /* ---------------------------------------------
+       PORTFOLIO PAGE
+    --------------------------------------------- */
+
+    .portfolio {
+        width: 100%;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+
+    /* ---------------------------------------------
+       HEADING — BELOW NAVBAR
+    --------------------------------------------- */
+
+    .heading {
+        top: 105px;
+        left: 24px;
+        right: 24px;
+        padding: 8px 0;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    .animate-head {
+        font-size: clamp(1.3rem, 2.8vw, 1.65rem);
+        line-height: 1.4;
+    }
+
+
+    /* ---------------------------------------------
+       HORIZONTAL ARTWORK GALLERY
+    --------------------------------------------- */
+
+    .works {
+        position: absolute;
+
+        top: 165px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: auto;
+
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+
+        gap: 14px;
+        padding: 0 24px 24px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 24px;
+
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
+
+        scrollbar-width: none;
+    }
+
+    .works::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    /* ---------------------------------------------
+       ARTWORK CARDS
+    --------------------------------------------- */
+
+    .work,
+    .work:nth-child(odd),
+    .work:nth-child(even),
+    .work:hover,
+    .work:focus-visible {
+        flex: 0 0 42vw;
+
+        width: 42vw;
+        min-width: 0;
+        height: 100%;
+        min-height: 0;
+
+        border-radius: 12px;
+
+        scroll-snap-align: start;
+
+        /* No entrance animation on tablet */
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+
+    /* ---------------------------------------------
+       IMAGES
+    --------------------------------------------- */
+
+    .img-wrap,
+    .img-wrap img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .img-wrap img {
+        object-fit: cover;
+        object-position: center;
+    }
+
+
+    /* Hide captions in the gallery */
+    .caption,
+    .work:hover .caption,
+    .work:focus-visible .caption {
+        display: none;
+    }
+
+
+    /* ---------------------------------------------
+       MODAL
+    --------------------------------------------- */
+
+    #projectModal .modal-dialog {
+        width: calc(100% - 40px);
+        max-width: 760px;
+        margin: 20px auto;
+    }
+
+    .project-modal {
+        border-width: 3px;
+        border-radius: 14px;
+    }
+
+    .project-modal .modal-body {
+        display: grid;
+
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 26px;
+        padding: 65px 30px 30px;
+
+        min-height: 0;
+        max-height: calc(100dvh - 50px);
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        align-items: start;
+    }
+
+
+    /* ---------------------------------------------
+       MODAL IMAGES
+    --------------------------------------------- */
+
+    .project-modal .modal-img {
+        width: 100%;
+        min-width: 0;
+
+        max-height: none;
+
+        overflow: visible;
+    }
+
+    .project-modal .modal-img > #modalImg {
+        width: auto;
+        max-width: 100%;
+        max-height: 55dvh;
+
+        height: auto;
+        object-fit: contain;
+    }
+
+    .project-extra img {
+        width: 100%;
+        max-width: 100%;
+
+        height: auto;
+        max-height: none;
+    }
+
+
+    /* ---------------------------------------------
+       PROJECT INFORMATION
+    --------------------------------------------- */
+
+    .project-modal .modal-info {
+        position: static;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .modal-info .modal-title {
+        font-size: 1.7rem;
+        line-height: 1.3;
+    }
+
+    .modal-desc {
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+
+    /* ---------------------------------------------
+       NAVIGATION BUTTONS
+    --------------------------------------------- */
+
+    .nav-arrow {
+        width: 42px;
+        height: 42px;
+
+        top: 24px;
+        transform: none;
+
+        z-index: 6;
+    }
+
+    .nav-arrow.prev {
+        left: 20px;
+    }
+
+    .nav-arrow.next {
+        right: 72px;
+    }
+
+    .nav-arrow:hover {
+        transform: none;
+    }
+
+    .btn-close-white {
+        top: 14px;
+        right: 16px;
+        z-index: 10;
+    }
+
+}
+
+
+/* =====================================================
+   TOUCH DEVICES — PREVENT STICKY HOVER
+===================================================== */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .work:hover .img-wrap img {
+        transform: none;
+    }
+
+    .works:has(.work:hover) .work:not(:hover) {
+        opacity: 1;
+        filter: none;
+    }
+
+}
+
+/* =====================================================
+   TABLET — RESTORE ALTERNATING ENTRANCE ANIMATION
+===================================================== */
+
+@media (min-width: 601px) and (max-width: 991.98px) {
+
+    /* Odd artworks enter from the top */
+
+    .work:nth-child(odd) {
+        opacity: 0;
+        transform: translateY(-100%);
+
+        animation-name: fallFromTop;
+        animation-duration: 0.85s;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        animation-fill-mode: forwards;
+    }
+
+    /* Even artworks enter from the bottom */
+
+    .work:nth-child(even) {
+        opacity: 0;
+        transform: translateY(100%);
+
+        animation-name: riseFromBottom;
+        animation-duration: 0.85s;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        animation-fill-mode: forwards;
+    }
+
+}
+
