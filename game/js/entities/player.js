@@ -131,7 +131,11 @@ class Player extends Entity {
                 this.facing.y = 0;
             }
 
-            const moveSpeed = Input.Held(KEY.SHIFT) ? this.speed * 2 : this.speed;
+            const isSprinting = Input.Held(KEY.SHIFT) || Input.sprintHeld;
+
+            const moveSpeed = isSprinting
+                ? this.speed * 2
+                : this.speed;
             const dispX = (hDir * moveSpeed + this.kbX) * dt;
             const dispY = (vDir * moveSpeed + this.kbY) * dt;
             this._moveAxis(dispX, dispY, world.solids);
@@ -256,7 +260,7 @@ class Player extends Entity {
             // IDLE — standing still
             animationInterval = 0.20;
 
-        } else if (Input.Held(KEY.SHIFT)) {
+        } else if (Input.Held(KEY.SHIFT) || Input.sprintHeld) {
 
             // SPRINT
             animationInterval = 0.07;

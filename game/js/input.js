@@ -18,9 +18,11 @@ const GAME_BLOCKED_KEYS = [KEY.LEFT, KEY.RIGHT, KEY.UP, KEY.DOWN, KEY.SPACE];
 const Input = {
     mouse: { x: 0, y: 0, down: false, up: false, pressed: false },
 
-    _down: {},   // pressed this very frame (edge)
-    _held: {},   // currently holding the key
-    _up: {},     // released this frame (edge)
+    sprintHeld: false,
+
+    _down: {},
+    _held: {},
+    _up: {},
 
     // Fired once per key press.
     Pressed(keycode) {
@@ -92,6 +94,7 @@ function SetupTouchControls(canvas) {
     const knob = document.getElementById("touch-knob");
     const interact = document.getElementById("touch-interact");
     const shoot = document.getElementById("touch-shoot");
+    const sprint = document.getElementById("touch-sprint");
     let joystickPointer = null;
 
     const setAction = (keycode) => {
@@ -159,4 +162,36 @@ function SetupTouchControls(canvas) {
         Input.mouse.x = (touch.clientX - rect.left) * canvas.width / rect.width;
         Input.mouse.y = (touch.clientY - rect.top) * canvas.height / rect.height;
     }, { passive: true });
+
+    // -------------------------------------------------------
+    // MOBILE SPRINT — HOLD TO RUN
+    // -------------------------------------------------------
+
+    if (sprint) {
+
+        sprint.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+
+            Input.sprintHeld = true;
+
+            sprint.setPointerCapture(event.pointerId);
+            sprint.classList.add("is-sprinting");
+        });
+
+        const stopSprint = (event) => {
+            Input.sprintHeld = false;
+            sprint.classList.remove("is-sprinting");
+        };
+
+        sprint.addEventListener("pointerup", stopSprint);
+        sprint.addEventListener("pointercancel", stopSprint);
+        sprint.addEventListener("lostpointercapture", stopSprint);
+
+        window.addEventListener("blur", () => {
+            Input.sprintHeld = false;
+            sprint.classList.remove("is-sprinting");
+        });
+
+    }
+
 }
