@@ -7,7 +7,7 @@
     if (!wrap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const layers = Array.prototype.slice.call(wrap.querySelectorAll(".layer"));
-    const DEPTH = { "layer-far": 14, "layer-mid": 30, "layer-near": 46 };
+    const DEPTH = { "layer-far": 12, "layer-mid": 24, "layer-near": 38, "layer-front": 55 };
 
     const target = { x: 0, y: 0 };
     const current = { x: 0, y: 0 };

@@ -30,14 +30,18 @@
 }
 
 .layer-far {
-    background-image: url(../images/1.png);
+    background-image: url(../images/0.png);
 }
 
 .layer-mid {
-    background-image: url(../images/2.png);
+    background-image: url(../images/1.png);
 }
 
 .layer-near {
+    background-image: url(../images/2.png);
+}
+
+.layer-front {
     background-image: url(../images/3.png);
 }
 
