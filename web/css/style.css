@@ -86,6 +86,20 @@
     box-shadow: 0 12px 30px rgba(255, 209, 102, 0.4);
 }
 
+.music-player {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInAnimation 1.6s ease 1s forwards;
+}
+
+.music-player audio {
+    width: min(360px, 85vw);
+    height: 42px;
+    opacity: 0.85;
+}
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;
