@@ -1,6 +1,6 @@
 ﻿/* ---------------------------------------------------------------------------
    Shoganai — Game portfolio styles
-   Pixel-perfect scaling, retro HUD overlay, dialogue box and pause menu.
+   Fullscreen pixel-art game, HUD, dialogue, gallery and pause menu.
    --------------------------------------------------------------------------- */
 
 * {
@@ -16,170 +16,1079 @@
     --pixel: 'Press Start 2P', 'Courier New', monospace;
 }
 
+
+/* ==========================================================================
+   FULLSCREEN GAME
+   ========================================================================== */
+
 html,
 body {
+    width: 100%;
+    height: 100%;
     min-height: 100%;
 }
 
 body {
-    background: #0a0b12 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect width="16" height="16" fill="%230d0f18"/><rect width="8" height="8" fill="%230f1220"/><rect x="8" y="8" width="8" height="8" fill="%230f1220"/></svg>');
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #0a0b12;
+
+    width: 100vw;
     min-height: 100vh;
+    min-height: 100dvh;
+
+    overflow: hidden;
+
+    touch-action: none;
+}
+
+
+/* =====================================================
+   FULLSCREEN MAP WITHOUT SIDE BARS
+   Only the game area changes
+===================================================== */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }
 
-.game-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 30;
-    background: rgba(18, 20, 32, 0.88);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
-    min-height: 128px;
-    padding: 0.65rem 1rem 1.15rem;
-}
-
-.game-nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.game-brand {
-    background: url('../../web/images/logo2_web.png') no-repeat center center;
-    background-size: contain;
-    width: 170px;
-    height: 170px;
-    position: absolute;
-    top: 50%;
-    left: 18px;
-    transform: translateY(-50%);
-    display: inline-flex;
-    align-items: center;
-    opacity: 0.8;
-    transition: opacity 0.3s ease, transform 0.2s ease;
-}
-
-.game-brand:hover {
-    opacity: 1;
-    transform: translateY(calc(-50% - 1px));
-}
-
-@media (max-width: 767px) {
-    .game-brand {
-        margin-left: 0;
-    }
+body {
+    background: #0a0b12;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
 }
 
 #game-wrap {
     position: fixed;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    background: #0d0f18;
+    z-index: 1;
 }
 
-#mobile-controls {
-    display: none;
-}
+/* IMPORTANT:
+   This fills the whole screen with NO bars.
+   It preserves proportion and crops a little if needed.
+*/
+#myCanvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
 
-canvas {
     display: block;
+
+    width: max(100vw, calc(100dvh * 16 / 9));
+    height: max(100dvh, calc(100vw * 9 / 16));
+
+    transform: translate(-50%, -50%);
+
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-    box-shadow: 0 0 0 3px #1c2033, 0 18px 60px rgba(0, 0, 0, 0.6);
-    background: var(--dark);
+
+    background: #0d0f18;
+    border: none;
+    box-shadow: none;
+
+    z-index: 1;
+
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
+
+/*
+   IMPORTANT:
+
+   The internal game resolution remains 640 x 360.
+
+   CSS only scales the rendered canvas.
+
+   This behaves like background-size: cover:
+   - fills the whole screen
+   - preserves 16:9
+   - never stretches the artwork
+   - crops a little when the screen is not 16:9
+*/
 
 .hidden {
     display: none !important;
 }
 
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+
+.game-navbar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 30;
+
+    min-height: 104px;
+
+    padding: 8px 24px;
+
+    background: rgba(18, 20, 32, 0.88);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+
+.game-nav-inner {
+    width: 100%;
+    max-width: 1440px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    align-items: center;
+}
+
+
+/* Engineering logo */
+
+.game-engineering-link {
+    grid-column: 1;
+
+    justify-self: start;
+
+    position: static;
+
+    width: 180px;
+    max-width: 100%;
+    height: 88px;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0.9;
+
+    transform: none;
+
+    transition: opacity 0.3s ease;
+}
+
+
+.game-engineering-link img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+.game-engineering-link:hover {
+    opacity: 1;
+}
+
+
+/* Web logo */
+
+.game-navbar .game-brand {
+    grid-column: 3;
+
+    justify-self: end;
+
+    position: static;
+
+    width: 180px;
+    max-width: 100%;
+    height: 88px;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        url('../../web/images/logo2_web.png')
+        no-repeat
+        center center;
+
+    background-size: contain;
+
+    opacity: 0.9;
+
+    transform: none;
+
+    transition: opacity 0.3s ease;
+}
+
+
+.game-navbar .game-brand:hover {
+    opacity: 1;
+    transform: none;
+}
+
+
+.game-navbar a:focus-visible {
+    outline: 2px solid #ffd166;
+    outline-offset: 4px;
+}
+
+
+/* ==========================================================================
+   HUD
+   ========================================================================== */
+
+#hud {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    font-family: var(--pixel);
+
+    color: #ffffff;
+
+    z-index: 35;
+}
+
+
+/* Hearts */
+
+#hud-hearts {
+    position: fixed;
+
+    top: 40px;
+    left: 50%;
+    right: auto;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    white-space: nowrap;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    text-shadow:
+        0 2px 0
+        rgba(0, 0, 0, 0.7);
+}
+
+
+#hud-hearts .heart.filled {
+    color: #ff4d6d;
+}
+
+
+#hud-hearts .heart.empty {
+    color: rgba(255, 255, 255, 0.18);
+}
+
+
+/* Artwork counter */
+
+#hud-gems {
+    position: fixed;
+
+    top: 115px;
+    right: 20px;
+
+    font-size: 12px;
+
+    color: #4fd6c1;
+
+    text-shadow:
+        0 2px 0
+        rgba(0, 0, 0, 0.7);
+}
+
+
+#hud-gems .gems-total {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* Orbs */
+
+#hud-orbs {
+    position: fixed;
+
+    top: 139px;
+    right: 20px;
+
+    display: flex;
+
+    gap: 5px;
+}
+
+
+#hud-orbs .orb {
+    width: 10px;
+    height: 10px;
+
+    border: 2px solid #f2c14e;
+
+    border-radius: 50%;
+
+    background: #f2c14e;
+}
+
+
+#hud-orbs .orb.empty {
+    background: transparent;
+
+    opacity: 0.35;
+}
+
+
+/* Artwork button */
+
+#artwork-open {
+    position: fixed;
+
+    top: 163px;
+    right: 20px;
+
+    min-height: 36px;
+
+    pointer-events: auto;
+
+    border: 2px solid #f2c14e;
+
+    padding: 6px 8px;
+
+    background: #171825;
+
+    color: #f2c14e;
+
+    font-family: var(--pixel);
+
+    font-size: 8px;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   ARTWORK GALLERY
+   ========================================================================== */
+
+#artwork-gallery {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 110px 24px 24px;
+
+    background: rgba(8, 10, 18, 0.88);
+
+    pointer-events: auto;
+}
+
+
+#artwork-gallery.hidden {
+    display: none !important;
+}
+
+
+.artwork-panel {
+    position: relative;
+
+    width: min(960px, 100%);
+
+    max-height: 100%;
+
+    overflow: auto;
+
+    padding: 28px;
+
+    border: 3px solid #f2c14e;
+
+    background: #171825;
+
+    color: #ffffff;
+}
+
+
+.artwork-panel h2 {
+    margin: 0 42px 22px 0;
+
+    color: #f2c14e;
+
+    font-family: var(--pixel);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+#artwork-close {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    border: 2px solid #f2c14e;
+
+    padding: 7px 10px;
+
+    background: transparent;
+
+    color: #f2c14e;
+
+    font-family: var(--pixel);
+
+    cursor: pointer;
+}
+
+
+#artwork-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(120px, 1fr)
+        );
+
+    gap: 14px;
+}
+
+
+.artwork-card {
+    min-height: 132px;
+
+    border: 2px solid rgba(255, 255, 255, 0.18);
+
+    background: #0e111d;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+.artwork-card img,
+.artwork-lock {
+    display: block;
+
+    width: 100%;
+    height: 92px;
+
+    object-fit: contain;
+
+    background: #070910;
+}
+
+
+.artwork-card span {
+    display: block;
+
+    padding: 8px 5px;
+
+    font-family: var(--pixel);
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+.artwork-card.locked {
+    opacity: 0.42;
+}
+
+
+.artwork-lock {
+    display: grid;
+
+    place-items: center;
+
+    color: #f2c14e;
+
+    font-family: var(--pixel);
+
+    font-size: 22px;
+}
+
+
+#artwork-gallery p {
+    margin: 20px 0 0;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    font-family: var(--pixel);
+
+    font-size: 8px;
+}
+
+
+/* ==========================================================================
+   HINT
+   ========================================================================== */
+
+#hint {
+    position: fixed;
+
+    bottom: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 40;
+
+    font-family: var(--pixel);
+
+    font-size: 11px;
+
+    color: var(--gold);
+
+    background: rgba(10, 11, 20, 0.8);
+
+    border: 2px solid rgba(255, 209, 102, 0.35);
+
+    padding: 8px 14px;
+
+    border-radius: 4px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    animation:
+        blinkHint
+        1.4s
+        infinite;
+}
+
+
+@keyframes blinkHint {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+}
+
+
+/* ==========================================================================
+   DIALOGUE BOX
+   ========================================================================== */
+
+#dialogue-box {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 6;
+
+    background: var(--panel);
+
+    border-top: 4px solid var(--gold);
+
+    padding:
+        14px
+        18px
+        18px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 -10px 30px
+        rgba(0, 0, 0, 0.4);
+
+    animation:
+        slideUp
+        0.18s
+        ease;
+}
+
+
+#dialogue-name {
+    font-family: var(--pixel);
+
+    font-size: 12px;
+
+    color: var(--gold);
+
+    margin-bottom: 10px;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+#dialogue-text {
+    font-family: var(--pixel);
+
+    font-size: 12px;
+
+    line-height: 1.9;
+
+    color: #ffffff;
+
+    min-height: 46px;
+}
+
+
+#dialogue-next {
+    display: block;
+
+    text-align: right;
+
+    font-family: var(--pixel);
+
+    font-size: 10px;
+
+    color: rgba(255, 255, 255, 0.6);
+
+    margin-top: 8px;
+
+    animation:
+        blinkHint
+        1.2s
+        infinite;
+}
+
+
+@keyframes slideUp {
+
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================================================
+   PAUSE MENU
+   ========================================================================== */
+
+#pause-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    background: rgba(7, 8, 15, 0.88);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-family: var(--pixel);
+
+    color: #ffffff;
+
+    padding: 24px;
+}
+
+
+.pause-title {
+    font-size: 22px;
+
+    color: var(--gold);
+
+    margin-bottom: 22px;
+
+    text-shadow:
+        0 4px 0
+        rgba(0, 0, 0, 0.5);
+}
+
+
+.controls {
+    list-style: none;
+
+    margin-bottom: 26px;
+}
+
+
+.controls li {
+    font-size: 12px;
+
+    margin-bottom: 12px;
+
+    color: #cfd3e6;
+
+    text-transform: uppercase;
+}
+
+
+.controls li span {
+    display: inline-block;
+
+    min-width: 130px;
+
+    color: var(--gold);
+
+    text-align: left;
+}
+
+
+.pause-actions {
+    display: flex;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    margin-bottom: 22px;
+}
+
+
+.pixel-btn {
+    font-family: var(--pixel);
+
+    font-size: 12px;
+
+    color: #14161f;
+
+    background: var(--gold);
+
+    border: none;
+
+    padding: 12px 18px;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.pixel-btn:hover {
+    transform: translateY(-3px);
+
+    background: #ffe296;
+}
+
+
+.pause-note {
+    font-size: 10px;
+
+    line-height: 1.9;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    max-width: 460px;
+}
+
+
+/* ==========================================================================
+   MOBILE CONTROLS
+   ========================================================================== */
+
+#mobile-controls {
+    display: none;
+}
+
+
 @media (max-width: 767px) {
+
     body {
         touch-action: none;
     }
 
+
+    /* ----------------------------------------------------------------------
+       NAVBAR
+       ---------------------------------------------------------------------- */
+
     .game-navbar {
-        min-height: 82px;
-        padding: 0.35rem 0.7rem;
+        min-height: 80px;
+
+        padding: 6px 10px;
     }
 
-    .game-brand {
-        width: 58px;
-        height: 58px;
-        left: 12px;
+
+    .game-nav-inner {
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 1fr);
+
+        gap: 8px;
     }
+
+
+    .game-engineering-link,
+    .game-navbar .game-brand {
+        width: 110px;
+
+        height: 68px;
+    }
+
+
+    .game-navbar .game-brand {
+        grid-column: 3;
+    }
+
+
+    /* ----------------------------------------------------------------------
+       HUD
+       ---------------------------------------------------------------------- */
+
+    #hud-hearts {
+        top: 33px;
+
+        font-size: 15px;
+
+        gap: 3px;
+    }
+
+
+    #hud-gems {
+        top: 92px;
+
+        right: 12px;
+
+        font-size: 10px;
+    }
+
+
+    #hud-orbs {
+        top: 114px;
+
+        right: 12px;
+    }
+
+
+    #artwork-open {
+        top: 137px;
+
+        right: 12px;
+    }
+
+
+    /* ----------------------------------------------------------------------
+       TOUCH CONTROLS
+       ---------------------------------------------------------------------- */
 
     #mobile-controls {
         position: fixed;
-        inset: auto 0 18px;
+
+        inset:
+            auto
+            0
+            max(
+                18px,
+                env(safe-area-inset-bottom)
+            );
+
         z-index: 60;
+
         display: flex;
+
         align-items: flex-end;
+
         justify-content: space-between;
-        padding: 0 20px;
+
+        padding:
+            0
+            20px;
+
         pointer-events: none;
     }
+
 
     #touch-joystick {
         position: relative;
+
         width: 118px;
+
         height: 118px;
-        border: 3px solid rgba(255, 209, 102, 0.7);
+
+        border:
+            3px solid
+            rgba(255, 209, 102, 0.7);
+
         border-radius: 50%;
-        background: rgba(13, 15, 24, 0.62);
+
+        background:
+            rgba(13, 15, 24, 0.62);
+
         pointer-events: auto;
+
         touch-action: none;
     }
+
 
     #touch-knob {
         position: absolute;
+
         top: 50%;
         left: 50%;
+
         width: 46px;
+
         height: 46px;
-        border: 3px solid #ffd166;
+
+        border:
+            3px solid
+            #ffd166;
+
         border-radius: 50%;
-        background: rgba(255, 209, 102, 0.42);
-        transform: translate(-50%, -50%);
+
+        background:
+            rgba(255, 209, 102, 0.42);
+
+        transform:
+            translate(-50%, -50%);
+
         pointer-events: none;
     }
 
-    /* =====================================================
-    MOBILE SPRINT BUTTON
-    ===================================================== */
 
-    .touch-sprint {
-        width: 58px;
-        height: 58px;
+    /* ----------------------------------------------------------------------
+       MOBILE ACTIONS
+       ---------------------------------------------------------------------- */
 
-        border: 2px solid #ffd166;
+    .mobile-actions {
+        display: flex;
+
+        align-items: flex-end;
+
+        gap: 12px;
+
+        pointer-events: auto;
+    }
+
+
+    .mobile-actions button {
+        width: 64px;
+
+        height: 64px;
+
+        border:
+            3px solid
+            #ffd166;
+
         border-radius: 50%;
 
-        background: rgba(23, 24, 37, 0.85);
-        color: #ffd166;
+        background:
+            rgba(13, 15, 24, 0.82);
 
-        font-family: "Montserrat", sans-serif;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
+        color:
+            #ffd166;
+
+        font-family:
+            var(--pixel);
+
+        font-size: 10px;
+
+        touch-action: none;
+
+        user-select: none;
+
+        -webkit-user-select: none;
+    }
+
+
+    /* Sprint */
+
+    .touch-sprint {
+        width: 58px !important;
+
+        height: 58px !important;
+
+        border:
+            2px solid
+            #ffd166 !important;
+
+        border-radius: 50%;
+
+        background:
+            rgba(23, 24, 37, 0.85);
+
+        color:
+            #ffd166;
+
+        font-family:
+            "Montserrat",
+            sans-serif !important;
+
+        font-size:
+            0.75rem !important;
+
+        font-weight:
+            700;
+
+        letter-spacing:
+            0.05em;
 
         display: flex;
+
         align-items: center;
+
         justify-content: center;
 
         touch-action: none;
+
         user-select: none;
+
         -webkit-user-select: none;
 
         cursor: pointer;
@@ -189,394 +1098,133 @@ canvas {
             transform 0.15s ease;
     }
 
+
     .touch-sprint.is-sprinting {
-        background: #ffd166;
-        color: #171825;
-        transform: scale(0.94);
+        background:
+            #ffd166;
+
+        color:
+            #171825;
+
+        transform:
+            scale(0.94);
     }
 
-    .mobile-actions {
-        display: flex;
-        align-items: flex-end;
-        gap: 12px;
-        pointer-events: auto;
-    }
 
-    .mobile-actions button {
-        width: 64px;
-        height: 64px;
-        border: 3px solid #ffd166;
-        border-radius: 50%;
-        background: rgba(13, 15, 24, 0.82);
-        color: #ffd166;
-        font-family: var(--pixel);
-        font-size: 10px;
-        touch-action: none;
-    }
+    /* Orb button */
 
     .mobile-actions #touch-shoot {
         width: 78px;
+
         height: 78px;
-        border-color: #6db8ff;
-        color: #9ed8ff;
+
+        border-color:
+            #6db8ff;
+
+        color:
+            #9ed8ff;
     }
 
-    #hud-hearts {
-        top: 20px;
-        right: 16px;
-        font-size: 16px;
-    }
 
-    #hud-gems {
-        top: 48px;
-        right: 16px;
-        font-size: 10px;
-    }
+    /* ----------------------------------------------------------------------
+       DIALOGUE
+       ---------------------------------------------------------------------- */
 
-    #hud-orbs {
-        top: 68px;
-        right: 16px;
-    }
-
-    #artwork-open {
-        top: 94px;
-        right: 16px;
-    }
-}
-
-/* ---------------------------------------------------------------------------
-   HUD
-   --------------------------------------------------------------------------- */
-#hud {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    font-family: var(--pixel);
-    color: #ffffff;
-    z-index: 35;
-}
-
-#hud-hearts {
-    position: absolute;
-    top: 34px;
-    left: auto;
-    right: 24px;
-    font-size: 22px;
-    line-height: 1;
-    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
-}
-
-#hud-hearts .heart.filled {
-    color: #ff4d6d;
-}
-
-#hud-hearts .heart.empty {
-    color: rgba(255, 255, 255, 0.18);
-}
-
-#hud-gems {
-    position: absolute;
-    top: 82px;
-    right: 24px;
-    font-size: 16px;
-    color: #4fd6c1;
-    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
-}
-
-#hud-gems .gems-total {
-    color: rgba(255, 255, 255, 0.45);
-}
-
-#hud-orbs {
-    position: absolute;
-    top: 108px;
-    right: 24px;
-    display: flex;
-    gap: 5px;
-}
-
-#hud-orbs .orb {
-    width: 10px;
-    height: 10px;
-    border: 2px solid #f2c14e;
-    border-radius: 50%;
-    background: #f2c14e;
-}
-
-#hud-orbs .orb.empty {
-    background: transparent;
-    opacity: 0.35;
-}
-
-#artwork-open {
-    position: absolute;
-    top: 136px;
-    right: 24px;
-    pointer-events: auto;
-    border: 2px solid #f2c14e;
-    padding: 6px 8px;
-    background: #171825;
-    color: #f2c14e;
-    font-family: var(--pixel);
-    font-size: 8px;
-    cursor: pointer;
-}
-
-#artwork-gallery {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 110px 24px 24px;
-    background: rgba(8, 10, 18, 0.88);
-    pointer-events: auto;
-}
-
-#artwork-gallery.hidden {
-    display: none !important;
-}
-
-.artwork-panel {
-    position: relative;
-    width: min(960px, 100%);
-    max-height: 100%;
-    overflow: auto;
-    padding: 28px;
-    border: 3px solid #f2c14e;
-    background: #171825;
-    color: #ffffff;
-}
-
-.artwork-panel h2 {
-    margin: 0 42px 22px 0;
-    color: #f2c14e;
-    font-family: var(--pixel);
-    font-size: 15px;
-    line-height: 1.7;
-}
-
-#artwork-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    border: 2px solid #f2c14e;
-    padding: 7px 10px;
-    background: transparent;
-    color: #f2c14e;
-    font-family: var(--pixel);
-    cursor: pointer;
-}
-
-#artwork-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 14px;
-}
-
-.artwork-card {
-    min-height: 132px;
-    border: 2px solid rgba(255, 255, 255, 0.18);
-    background: #0e111d;
-    text-align: center;
-    overflow: hidden;
-}
-
-.artwork-card img,
-.artwork-lock {
-    display: block;
-    width: 100%;
-    height: 92px;
-    object-fit: contain;
-    background: #070910;
-}
-
-.artwork-card span {
-    display: block;
-    padding: 8px 5px;
-    font-family: var(--pixel);
-    font-size: 7px;
-    line-height: 1.5;
-}
-
-.artwork-card.locked {
-    opacity: 0.42;
-}
-
-.artwork-lock {
-    display: grid;
-    place-items: center;
-    color: #f2c14e;
-    font-family: var(--pixel);
-    font-size: 22px;
-}
-
-#artwork-gallery p {
-    margin: 20px 0 0;
-    color: rgba(255, 255, 255, 0.55);
-    font-family: var(--pixel);
-    font-size: 8px;
-}
-
-#hint {
-    position: absolute;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--pixel);
-    font-size: 11px;
-    color: var(--gold);
-    background: rgba(10, 11, 20, 0.8);
-    border: 2px solid rgba(255, 209, 102, 0.35);
-    padding: 8px 14px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    animation: blinkHint 1.4s infinite;
-}
-
-@keyframes blinkHint {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.45; }
-}
-
-/* ---------------------------------------------------------------------------
-   Dialogue box
-   --------------------------------------------------------------------------- */
-#dialogue-box {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 6;
-    background: var(--panel);
-    border-top: 4px solid var(--gold);
-    padding: 14px 18px 18px;
-    cursor: pointer;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
-    animation: slideUp 0.18s ease;
-}
-
-#dialogue-name {
-    font-family: var(--pixel);
-    font-size: 12px;
-    color: var(--gold);
-    margin-bottom: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-#dialogue-text {
-    font-family: var(--pixel);
-    font-size: 12px;
-    line-height: 1.9;
-    color: #ffffff;
-    min-height: 46px;
-}
-
-#dialogue-next {
-    display: block;
-    text-align: right;
-    font-family: var(--pixel);
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 8px;
-    animation: blinkHint 1.2s infinite;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* ---------------------------------------------------------------------------
-   Pause / menu overlay
-   --------------------------------------------------------------------------- */
-#pause-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    background: rgba(7, 8, 15, 0.88);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: var(--pixel);
-    color: #ffffff;
-    padding: 24px;
-}
-
-.pause-title {
-    font-size: 22px;
-    color: var(--gold);
-    margin-bottom: 22px;
-    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
-}
-
-.controls {
-    list-style: none;
-    margin-bottom: 26px;
-}
-
-.controls li {
-    font-size: 12px;
-    margin-bottom: 12px;
-    color: #cfd3e6;
-    text-transform: uppercase;
-}
-
-.controls li span {
-    display: inline-block;
-    min-width: 130px;
-    color: var(--gold);
-    text-align: left;
-}
-
-.pause-actions {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 22px;
-}
-
-.pixel-btn {
-    font-family: var(--pixel);
-    font-size: 12px;
-    color: #14161f;
-    background: var(--gold);
-    border: none;
-    padding: 12px 18px;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-block;
-    transition: transform 0.15s ease, background 0.15s ease;
-}
-
-.pixel-btn:hover {
-    transform: translateY(-3px);
-    background: #ffe296;
-}
-
-.pause-note {
-    font-size: 10px;
-    line-height: 1.9;
-    color: rgba(255, 255, 255, 0.55);
-    max-width: 460px;
-}
-
-@media (max-width: 700px) {
-    #hud-gems {
-        font-size: 13px;
-    }
     #dialogue-text {
         font-size: 10px;
+
         line-height: 1.8;
     }
+
+
+    /* ----------------------------------------------------------------------
+       PAUSE MENU
+       ---------------------------------------------------------------------- */
+
     .controls li span {
         min-width: 100px;
     }
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+   ========================================================================== */
+
+@media (max-width: 360px) {
+
+    .game-engineering-link,
+    .game-navbar .game-brand {
+        width: 86px;
+    }
+
+
+    #hud-hearts {
+        font-size: 13px;
+
+        gap: 2px;
+    }
+
+
+    #mobile-controls {
+        padding:
+            0
+            10px;
+    }
+
+
+    #touch-joystick {
+        width: 100px;
+
+        height: 100px;
+    }
+
+
+    .mobile-actions {
+        gap: 7px;
+    }
+
+
+    .mobile-actions button {
+        width: 54px;
+
+        height: 54px;
+    }
+
+
+    .touch-sprint {
+        width: 50px !important;
+
+        height: 50px !important;
+
+        font-size: 0.65rem !important;
+    }
+
+
+    .mobile-actions #touch-shoot {
+        width: 64px;
+
+        height: 64px;
+    }
+
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
 }

@@ -1,116 +1,405 @@
-/* ---------- Contact page ---------- */
+/* =====================================================
+   SHOGANAI — CONTACT PAGE
+===================================================== */
+
+
+/* =====================================================
+   PAGE
+===================================================== */
 
 .contactbgimage {
-    height: 100vh;
-    background: linear-gradient(160deg, #1b1d29 0%, #262a3d 60%, #1b1d29 100%);
-    padding: 108px 24px 110px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    width:
+        100%;
+
+    min-height:
+        100dvh;
+
+    height:
+        100dvh;
+
+
+    background:
+        linear-gradient(
+            160deg,
+            #1b1d29 0%,
+            #262a3d 60%,
+            #1b1d29 100%
+        );
+
+
+    padding:
+        108px
+        24px
+        110px;
+
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    overflow:
+        hidden;
 }
 
-/* ---------- Typing title ---------- */
+
+/* =====================================================
+   TYPING TITLE
+===================================================== */
+
 .contactext {
-    text-align: center;
-    color: #ffffff;
-    border-right: 5px solid #ffd166;
-    white-space: nowrap;
-    overflow: hidden;
-    font-family: Consolas, "Courier New", monospace;
-    font-size: clamp(1.3rem, 3.6vw, 2rem);
-    animation: typist 5s steps(18) infinite, blink 1s infinite;
-    margin-bottom: 26px;
-    max-width: 100%;
+    text-align:
+        center;
+
+
+    color:
+        #ffffff;
+
+
+    border-right:
+        5px solid
+        #ffd166;
+
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+
+    font-size:
+        clamp(
+            1.3rem,
+            3.6vw,
+            2rem
+        );
+
+
+    animation:
+        typist 5s steps(18) infinite,
+        blink 1s infinite;
+
+
+    margin-bottom:
+        26px;
+
+
+    max-width:
+        100%;
 }
+
+
+/* =====================================================
+   TYPING ANIMATIONS
+===================================================== */
 
 @keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: #ffd166; }
+
+    from,
+    to {
+        border-color:
+            transparent;
+    }
+
+
+    50% {
+        border-color:
+            #ffd166;
+    }
+
 }
+
 
 @keyframes typist {
-    0% { width: 0ch; }
-    45% { width: 18ch; }
-    80% { width: 18ch; }
-    90% { width: 0ch; }
-    100% { width: 0ch; }
+
+    0% {
+        width:
+            0ch;
+    }
+
+
+    45% {
+        width:
+            18ch;
+    }
+
+
+    80% {
+        width:
+            18ch;
+    }
+
+
+    90% {
+        width:
+            0ch;
+    }
+
+
+    100% {
+        width:
+            0ch;
+    }
+
 }
 
-/* ---------- Form ---------- */
+
+/* =====================================================
+   FORM
+===================================================== */
+
 .container2 {
-    width: 100%;
-    max-width: 540px;
-    opacity: 0;
-    animation: fadeIn 0.8s 0.3s forwards;
-    color: #ffffff;
+    width:
+        100%;
+
+    max-width:
+        540px;
+
+
+    opacity:
+        0;
+
+
+    animation:
+        fadeIn
+        0.8s
+        0.3s
+        forwards;
+
+
+    color:
+        #ffffff;
 }
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
 
 .form-control {
-    background: rgba(255, 255, 255, 0.07) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff !important;
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        ) !important;
+
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.2
+        );
+
+
+    color:
+        #ffffff !important;
+
+
+    border-radius:
+        10px;
+
+
+    padding:
+        0.75rem
+        1rem;
+
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.5
+        );
 }
+
 
 .form-control:focus {
-    background: rgba(255, 255, 255, 0.12) !important;
-    border-color: #ffd166;
-    color: #ffffff !important;
-    box-shadow: 0 0 0 0.2rem rgba(255, 209, 102, 0.25);
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        ) !important;
+
+
+    border-color:
+        #ffd166;
+
+
+    color:
+        #ffffff !important;
+
+
+    box-shadow:
+        0 0 0
+        0.2rem
+        rgba(
+            255,
+            209,
+            102,
+            0.25
+        );
 }
+
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
 
 .btn-send {
-    width: 100%;
-    padding: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: #ffd166;
-    border: none;
-    color: #1b1d29;
-    border-radius: 10px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width:
+        100%;
+
+
+    padding:
+        0.75rem;
+
+
+    font-weight:
+        600;
+
+
+    letter-spacing:
+        0.08em;
+
+
+    text-transform:
+        uppercase;
+
+
+    background:
+        #ffd166;
+
+
+    border:
+        none;
+
+
+    color:
+        #1b1d29;
+
+
+    border-radius:
+        10px;
+
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .btn-send:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(255, 209, 102, 0.35);
-    color: #1b1d29;
+    transform:
+        translateY(-2px);
+
+
+    box-shadow:
+        0 14px 30px
+        rgba(
+            255,
+            209,
+            102,
+            0.35
+        );
+
+
+    color:
+        #1b1d29;
 }
+
+
+/* =====================================================
+   FADE IN
+===================================================== */
 
 @keyframes fadeIn {
+
     from {
-        opacity: 0;
-        transform: translateY(30px);
+        opacity:
+            0;
+
+        transform:
+            translateY(30px);
     }
+
+
     to {
-        opacity: 1;
-        transform: translateY(0);
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
     }
+
 }
+
+
+/* =====================================================
+   TABLET / MOBILE
+===================================================== */
 
 @media (max-width: 767px) {
+
     .contactbgimage {
-        height: auto;
-        min-height: 100vh;
-        padding-bottom: 110px;
+        height:
+            auto;
+
+        min-height:
+            100dvh;
+
+        padding-bottom:
+            110px;
     }
+
 }
 
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
 @media (max-width: 576px) {
+
     .contactbgimage {
-        padding-top: 110px;
+        padding-top:
+            110px;
     }
 
+
     .contactext {
-        border-right-width: 4px;
+        border-right-width:
+            4px;
     }
+
 }

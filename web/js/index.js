@@ -7,15 +7,18 @@
     if (!wrap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const layers = Array.prototype.slice.call(wrap.querySelectorAll(".layer"));
-    const DEPTH = { "layer-far": 12, "layer-mid": 24, "layer-near": 38, "layer-front": 55 };
+    const DEPTH = { "layer-far": 38, "layer-mid": 24, "layer-near": 12, "layer-front": 5 };
 
     const target = { x: 0, y: 0 };
     const current = { x: 0, y: 0 };
 
-    window.addEventListener("mousemove", function (e) {
+    const onMove = function (e) {
         target.x = (e.clientX / window.innerWidth - 0.5) * 2;
         target.y = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
+    };
+    window.addEventListener("mousemove", onMove);
+    let frame;
+    window.pageCleanup = () => { cancelAnimationFrame(frame); window.removeEventListener("mousemove", onMove); };
 
     function loop() {
         current.x += (target.x - current.x) * 0.06;
@@ -32,7 +35,7 @@
             }
         });
 
-        requestAnimationFrame(loop);
+        frame = requestAnimationFrame(loop);
     }
     loop();
 })();

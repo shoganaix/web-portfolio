@@ -1,0 +1,31 @@
+/* Three reserved columns prevent the experience links from covering the menu. */
+.navbar.navbarScroll { min-height: 104px; padding: 8px 24px; }
+.navbarScroll > .experience-navigation { display: grid; grid-template-columns: minmax(120px, 1fr) auto minmax(120px, 1fr); align-items: center; gap: 22px; width: 100%; max-width: 1440px; margin: auto; }
+.navbarScroll .experience-link { display: flex; align-items: center; width: 180px; max-width: 100%; height: 88px; padding: 0; margin: 0; position: static; transform: none; background: none; opacity: .9; transition: opacity .2s, transform .2s; }
+.navbarScroll .experience-link img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.navbarScroll .experience-link:hover { opacity: 1; transform: translateY(-2px); }
+.navbarScroll .engineering-link { justify-self: start; }
+.navbarScroll .engineering-link::after { display: none; }
+.navbarScroll .game-switch { justify-self: end; }
+.navbarScroll .navbar-collapse { grid-column: 2; grid-row: 1; justify-content: center; padding: 0; width: auto; }
+.navbarScroll .navbar-nav { margin: 0 !important; width: auto; gap: 8px; align-items: center; }
+.navbarScroll .navbar-nav .nav-link { padding: 12px 14px; font-size: 14px; }
+.navbarScroll .navbar-toggler { grid-column: 2; grid-row: 1; justify-self: center; margin: 0; min-width: 44px; min-height: 44px; }
+.navbarScroll a:focus-visible { outline: 2px solid #ffd166; outline-offset: 4px; border-radius: 4px; }
+@media(max-width:991.98px) {
+  .navbar.navbarScroll { min-height: 80px; padding: 6px 16px; }
+  .navbarScroll > .experience-navigation { grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr); gap: 12px; }
+  .navbarScroll .experience-link { width: 145px; height: 68px; }
+  .navbarScroll .navbar-collapse { grid-column: 1 / -1; grid-row: 2; width: 100%; text-align: center; }
+  .navbarScroll .navbar-collapse:not(.show):not(.collapsing) { display: none; }
+  .navbarScroll .navbar-nav { flex-direction: row; justify-content: center; flex-wrap: wrap; padding: 5px 0 12px; gap: 4px; }
+  .navbarScroll .nav-item { width: auto; }
+  .navbarScroll .navbar-nav .nav-link { text-align: center; padding: 10px 12px; font-size: 13px; }
+}
+@media(max-width:380px) {
+  .navbar.navbarScroll { padding-inline: 10px; }
+  .navbarScroll > .experience-navigation { gap: 8px; }
+  .navbarScroll .experience-link { height: 60px; }
+  .navbarScroll .navbar-nav .nav-link { padding-inline: 9px; }
+}
+@media(prefers-reduced-motion:reduce) { .navbarScroll .experience-link { transition: none; } }

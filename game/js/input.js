@@ -59,6 +59,7 @@ function PreventGameKeys(e) {
 }
 
 function SetupKeyboardEvents() {
+    window.addEventListener("blur", () => { Input._held = {}; Input._down = {}; Input._up = {}; Input.sprintHeld = false; });
     document.addEventListener("keydown", function (e) {
         PreventGameKeys(e);
         if (!e.repeat) {
@@ -112,7 +113,7 @@ function SetupTouchControls(canvas) {
     };
 
     const updateJoystick = (event) => {
-        const touch = event.touches[0];
+        const touch = Array.from(event.touches).find(t => t.identifier === joystickPointer);
         if (!touch) return;
         const rect = joystick.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -124,9 +125,8 @@ function SetupTouchControls(canvas) {
         const angle = Math.atan2(dy, dx);
         const knobX = Math.cos(angle) * distance;
         const knobY = Math.sin(angle) * distance;
-        knob.style.transform = `translate(calc(-50% + ${knobX}px), calc(-50% + ${knobY}px))`;
-
         clearDirections();
+        knob.style.transform = `translate(calc(-50% + ${knobX}px), calc(-50% + ${knobY}px))`;
         if (Math.abs(dx) > 12) Input._held[dx > 0 ? KEY.RIGHT : KEY.LEFT] = true;
         if (Math.abs(dy) > 12) Input._held[dy > 0 ? KEY.DOWN : KEY.UP] = true;
     };
@@ -140,7 +140,9 @@ function SetupTouchControls(canvas) {
         if (joystickPointer !== null) updateJoystick(event);
         event.preventDefault();
     }, { passive: false });
+    joystick.addEventListener("touchcancel", () => { joystickPointer = null; clearDirections(); });
     joystick.addEventListener("touchend", (event) => {
+        if (Array.from(event.touches).some(t => t.identifier === joystickPointer)) return;
         joystickPointer = null;
         clearDirections();
         event.preventDefault();

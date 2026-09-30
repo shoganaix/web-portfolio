@@ -28,6 +28,7 @@ class NPC extends Entity {
     }
 
     update(dt, player) {
+        if (Dialogue.isOpen() || GameState.paused) return;
         this.time += dt;
 
         if (this.path.length > 0) {
@@ -51,7 +52,7 @@ class NPC extends Entity {
     interact() {
         const onClose = this.dialogueId === "sage"
             ? () => {
-                if (GameState.gems >= GameState.requiredGems) {
+                if (!GameState.sageSpoken && GameState.gems >= GameState.requiredGems) {
                     GameState.gems -= GameState.requiredGems;
                     GameState.sageSpoken = true;
                 }

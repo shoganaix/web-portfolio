@@ -641,7 +641,7 @@
     // KEYBOARD NAVIGATION
     // =====================================================
 
-    document.addEventListener("keydown", function (e) {
+    const handleKeys = function (e) {
 
         if (!modalEl.classList.contains("show")) return;
 
@@ -676,6 +676,7 @@
 
         }
 
-    });
-
+    };
+    document.addEventListener("keydown", handleKeys);
+    window.pageCleanup = () => { document.removeEventListener("keydown", handleKeys); if (bootstrapModal) bootstrapModal.dispose(); };
 })();

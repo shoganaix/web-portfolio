@@ -1,0 +1,282 @@
+#music-player {
+    left: 50%;
+    right: auto;
+
+    bottom:
+        max(
+            16px,
+            env(safe-area-inset-bottom)
+        );
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(
+            960px,
+            calc(100% - 40px)
+        );
+
+    padding:
+        12px
+        18px;
+
+    gap:
+        16px;
+
+    border-radius:
+        16px;
+
+    background:
+        #151c2af2;
+
+    border:
+        1px solid
+        #b9c7ec30;
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    box-shadow:
+        0 6px 30px
+        #0005;
+}
+
+
+/* =====================================================
+   TRACK INFORMATION
+===================================================== */
+
+#music-player .music-label {
+    min-width:
+        0;
+
+    width:
+        150px;
+
+    flex-shrink:
+        0;
+
+    display:
+        grid;
+
+    gap:
+        4px;
+}
+
+
+#music-player .music-label span {
+    font-size:
+        9px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1.5px;
+
+    color:
+        #b2adc9;
+}
+
+
+#music-player .music-label strong {
+    font:
+        500
+        11px
+        Montserrat,
+        sans-serif;
+
+    color:
+        #f0eaf7;
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+#music-player audio {
+    flex:
+        1;
+
+    width:
+        0;
+
+    min-width:
+        160px;
+
+    height:
+        38px;
+}
+
+
+/* =====================================================
+   PREVIOUS / NEXT BUTTONS
+===================================================== */
+
+.track-buttons {
+    display:
+        flex;
+
+    gap:
+        4px;
+}
+
+
+.track-buttons button {
+    width:
+        36px;
+
+    height:
+        38px;
+
+    border:
+        1px solid
+        #ffffff25;
+
+    border-radius:
+        8px;
+
+    background:
+        #ffffff08;
+
+    color:
+        #eee4ff;
+
+    font-size:
+        12px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .2s ease,
+        opacity .2s ease;
+}
+
+
+.track-buttons button:disabled {
+    opacity:
+        .3;
+
+    cursor:
+        default;
+}
+
+
+.track-buttons button:not(:disabled):hover {
+    background:
+        #b697ec25;
+}
+
+
+.track-buttons button:focus-visible {
+    outline:
+        2px solid
+        #ffd166;
+
+    outline-offset:
+        2px;
+}
+
+
+/* =====================================================
+   HOME PLAYER
+===================================================== */
+
+#music-player.home-mode {
+    width:
+        min(
+            680px,
+            calc(100% - 30px)
+        );
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    #music-player,
+    #music-player.home-mode {
+        width:
+            calc(100% - 24px);
+
+        padding:
+            10px
+            12px;
+
+        gap:
+            8px;
+
+
+        display:
+            grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto;
+    }
+
+
+    #music-player .music-label {
+        width:
+            auto;
+    }
+
+
+    /*
+       Audio gets its own complete row.
+    */
+
+    #music-player audio {
+        grid-column:
+            1 / -1;
+
+        grid-row:
+            2;
+
+        width:
+            100%;
+
+        min-width:
+            0;
+    }
+
+
+    /*
+       Previous / next stay on the right of the title.
+    */
+
+    .track-buttons {
+        grid-column:
+            2;
+
+        grid-row:
+            1;
+
+        align-self:
+            center;
+    }
+
+
+    #home-player-slot {
+        height:
+            112px;
+    }
+
+}

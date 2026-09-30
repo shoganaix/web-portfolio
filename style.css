@@ -1,129 +1,3544 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
+/* =====================================================
+   SHOGANAI — LANDING PAGE
+===================================================== */
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    color-scheme:
+        dark;
+
+    --ivory:
+        #fff4d6;
+
+    --gold:
+        #efd080;
+
+    --serif:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    --sans:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    --pixel:
+        "Pixelify Sans",
+        monospace;
+
 }
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing:
+        border-box;
+}
+
 
 html,
 body {
-    min-height: 100%;
+    margin:
+        0;
+
+    min-height:
+        100%;
 }
+
 
 body {
-    background: #171825 url('web/images/bg.png') no-repeat center center / cover fixed;
-    color: #eef0ff;
+
+    color:
+        var(--ivory);
+
+    font-family:
+        var(--sans);
+
+    background:
+        #0b101b;
+
 }
 
-/* ---------- Experience selector ---------- */
-.selection {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
+
+a {
+
+    color:
+        inherit;
+
+    text-decoration:
+        none;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
 }
 
-.selection .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.75rem;
-    max-width: 1200px;
-    width: 100%;
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.choice-page {
+
+    position:
+        relative;
+
+    min-height:
+        100svh;
+
+    isolation:
+        isolate;
+
+    overflow:
+        hidden;
+
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    padding:
+        36px
+        6vw
+        30px;
+
 }
 
-.nav-link {
-    text-decoration: none;
-    display: block;
-    flex: 1 1 320px;
-    max-width: 560px;
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.choice-heading {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    max-width:
+        1240px;
+
+
+    text-align:
+        center;
+
+
+    margin-bottom:
+        45px;
+
+
+    text-shadow:
+        0 3px 22px
+        #0005;
+
 }
 
-.column {
-    position: relative;
-    width: 100%;
-    min-height: 380px;
-    border-radius: 16px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1.5rem 2rem 2rem;
-    overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+
+/* =====================================================
+   CREATOR
+===================================================== */
+
+.creator {
+
+    font-size:
+        9px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        3px;
+
+
+    color:
+        #efdeb3;
+
+
+    margin:
+        0
+        0
+        15px;
+
 }
 
-.column::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(12, 14, 26, 0.45);
-    transition: background 0.35s ease;
-    pointer-events: none;
+
+.creator span {
+
+    display:
+        inline-block;
+
+
+    padding-inline:
+        12px;
+
+
+    color:
+        #e6b65c;
+
 }
 
-.column:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.65);
-    border-color: rgba(255, 255, 255, 0.35);
+
+/* =====================================================
+   MAIN TITLE
+===================================================== */
+
+h1 {
+
+    font:
+        500
+        clamp(
+            48px,
+            6.3vw,
+            100px
+        )
+        / 1.03
+        var(--serif);
+
+
+    letter-spacing:
+        -2.6px;
+
+
+    margin:
+        0;
+
 }
 
-.column:hover::before {
-    background: rgba(12, 14, 26, 0.25);
+
+h1 em {
+
+    font-weight:
+        500;
+
+
+    color:
+        #f8d984;
+
 }
 
-/* Web card */
-.row > .nav-link:nth-child(1) .column {
-    background-image: url('web/images/bg1_0.png');
+
+/* =====================================================
+   TITLE FLOURISH
+===================================================== */
+
+.title-flourish {
+
+    display:
+        block;
+
+
+    width:
+        min(
+            630px,
+            67%
+        );
+
+
+    height:
+        25px;
+
+
+    margin:
+        -1px
+        auto
+        5px;
+
+
+    color:
+        #e8bc62;
+
+
+    filter:
+        drop-shadow(
+            0 2px 3px
+            #15201c
+        );
+
 }
 
-.row > .nav-link:nth-child(1) .column:hover {
-    background-image: url('web/images/bg1_1.gif');
+
+/* =====================================================
+   HEADING STARS
+===================================================== */
+
+.heading-star {
+
+    position:
+        absolute;
+
+
+    color:
+        #f8dc8d;
+
+
+    text-shadow:
+        0 0 15px
+        #e2b34666;
+
 }
 
-/* Game card */
-.row > .nav-link:nth-child(2) .column {
-    background-image: url('web/images/bg2_0.gif');
+
+.star-left {
+
+    left:
+        3%;
+
+    top:
+        37%;
+
+
+    font-size:
+        32px;
+
+
+    transform:
+        rotate(-12deg);
+
 }
 
-.row > .nav-link:nth-child(2) .column:hover {
-    background-image: url('web/images/bg2_1.gif');
+
+.star-right {
+
+    right:
+        1%;
+
+    top:
+        43%;
+
+
+    font-size:
+        25px;
+
 }
 
-.title,
-.subtitle {
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.75);
+
+/* =====================================================
+   EXPERIENCES GRID
+===================================================== */
+
+.experiences {
+
+    width:
+        100%;
+
+    max-width:
+        1350px;
+
+
+    display:
+        grid;
+
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+
+    gap:
+        clamp(
+            25px,
+            3vw,
+            48px
+        );
+
+
+    align-items:
+        center;
+
+
+    padding:
+        12px
+        0
+        22px;
+
 }
 
-.title {
-    font-size: 2.6rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: #ffffff;
+
+/* =====================================================
+   GENERIC EXPERIENCE CARD
+===================================================== */
+
+.experience {
+
+    position:
+        relative;
+
+
+    display:
+        block;
+
+
+    min-width:
+        0;
+
+
+    filter:
+        drop-shadow(
+            0 17px 16px
+            #06110ed9
+        );
+
+
+    transition:
+        transform .35s ease,
+        filter .35s ease;
+
 }
 
-.subtitle {
-    font-size: 1.05rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    color: #f3d07c;
-    opacity: 0.95;
+
+.card-frame {
+
+    position:
+        relative;
+
+
+    padding:
+        10px;
+
 }
 
-@media screen and (max-width: 900px) {
-    .column {
-        min-height: 300px;
+
+.card-art {
+
+    position:
+        relative;
+
+
+    overflow:
+        hidden;
+
+
+    aspect-ratio:
+        1.27;
+
+
+    background:
+        #17352c;
+
+}
+
+
+.card-art > img {
+
+    display:
+        block;
+
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+
+    object-fit:
+        cover;
+
+
+    transition:
+        transform
+        .7s
+        cubic-bezier(
+            .2,
+            .65,
+            .3,
+            1
+        ),
+
+        filter
+        .4s;
+
+}
+
+
+.card-art::after {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    pointer-events:
+        none;
+
+
+    background:
+        linear-gradient(
+            180deg,
+            #06121420,
+            transparent 45%,
+            #08151380
+        );
+
+}
+
+
+/* =====================================================
+   IMAGE LABEL
+===================================================== */
+
+.art-label {
+
+    position:
+        absolute;
+
+
+    bottom:
+        13px;
+
+    left:
+        15px;
+
+
+    z-index:
+        1;
+
+
+    color:
+        #fff1ca;
+
+
+    font:
+        500
+        7px
+        var(--sans);
+
+
+    letter-spacing:
+        2px;
+
+
+    text-shadow:
+        0 1px 4px
+        #000;
+
+}
+
+
+/* =====================================================
+   CARD CAPTION
+===================================================== */
+
+.card-caption {
+
+    min-height:
+        120px;
+
+
+    display:
+        flex;
+
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+
+    gap:
+        8px;
+
+
+    padding:
+        16px
+        13px
+        14px;
+
+}
+
+
+.caption-copy {
+
+    flex:
+        1;
+
+
+    min-width:
+        0;
+
+}
+
+
+.chapter {
+
+    display:
+        block;
+
+
+    font-size:
+        6px;
+
+
+    font-weight:
+        600;
+
+
+    letter-spacing:
+        2.5px;
+
+
+    opacity:
+        .72;
+
+
+    margin-bottom:
+        2px;
+
+}
+
+
+h2 {
+
+    font:
+        600
+        clamp(
+            34px,
+            3.6vw,
+            57px
+        )
+        / 1.03
+        var(--serif);
+
+
+    letter-spacing:
+        -1.6px;
+
+
+    margin:
+        0
+        0
+        9px;
+
+}
+
+
+.card-caption p {
+
+    margin:
+        0;
+
+
+    padding-top:
+        9px;
+
+
+    border-top:
+        1px solid
+        currentColor;
+
+
+    font-size:
+        clamp(
+            6px,
+            .59vw,
+            9px
+        );
+
+
+    font-weight:
+        500;
+
+
+    letter-spacing:
+        1.9px;
+
+
+    line-height:
+        1.6;
+
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.card-arrow {
+
+    flex-shrink:
+        0;
+
+
+    width:
+        clamp(
+            38px,
+            4vw,
+            59px
+        );
+
+
+    height:
+        clamp(
+            38px,
+            4vw,
+            59px
+        );
+
+
+    display:
+        grid;
+
+
+    place-items:
+        center;
+
+
+    border:
+        1px solid
+        currentColor;
+
+
+    border-radius:
+        50%;
+
+
+    font:
+        400
+        35px
+        / 1
+        Georgia,
+        serif;
+
+
+    margin-left:
+        7px;
+
+
+    transition:
+        transform .3s ease,
+        background .3s ease;
+
+}
+
+
+/* =====================================================
+   PORTFOLIO CARD
+===================================================== */
+
+.portfolio-card {
+
+    color:
+        #462713;
+
+
+    transform:
+        rotate(-3deg)
+        translateY(4px);
+
+}
+
+
+.portfolio-card
+.card-frame {
+
+    background:
+
+        radial-gradient(
+            ellipse at 10% 5%,
+            #bc8e4166,
+            transparent 55%
+        ),
+
+        radial-gradient(
+            ellipse at 100% 100%,
+            #bc8e4140,
+            transparent 45%
+        ),
+
+        repeating-linear-gradient(
+            27deg,
+            #bd98640b 0 1px,
+            transparent 1px 4px
+        ),
+
+        #f4e4bc;
+
+
+    border:
+        1px solid
+        #d7bc83;
+
+
+    outline:
+        1px solid
+        #f8e8c266;
+
+
+    outline-offset:
+        3px;
+
+}
+
+
+.portfolio-card
+.card-art {
+
+    border:
+        1px solid
+        #a1804677;
+
+}
+
+
+.portfolio-card
+.card-caption {
+
+    padding-left:
+        17px;
+
+}
+
+
+.portfolio-card
+.card-arrow {
+
+    border:
+        3px double
+        #b6753f;
+
+
+    color:
+        #8b4f24;
+
+
+    outline:
+        1px dashed
+        #b57f4d;
+
+
+    outline-offset:
+        4px;
+
+
+    transform:
+        rotate(-8deg);
+
+}
+
+
+/* =====================================================
+   PORTFOLIO TAPE
+===================================================== */
+
+.tape {
+
+    position:
+        absolute;
+
+
+    width:
+        99px;
+
+
+    height:
+        25px;
+
+
+    top:
+        -10px;
+
+    left:
+        41%;
+
+
+    background:
+        #d4bc8ac2;
+
+
+    z-index:
+        2;
+
+
+    transform:
+        rotate(5deg);
+
+
+    clip-path:
+        polygon(
+            0 5%,
+            8% 0,
+            12% 7%,
+            18% 0,
+            80% 7%,
+            100% 0,
+            97% 100%,
+            89% 91%,
+            7% 100%,
+            0 91%
+        );
+
+
+    box-shadow:
+        0 2px 3px
+        #0002;
+
+}
+
+
+/* =====================================================
+   POSTCARD
+===================================================== */
+
+.postcard {
+
+    position:
+        absolute;
+
+
+    left:
+        -22px;
+
+    top:
+        28px;
+
+
+    width:
+        69px;
+
+    height:
+        95px;
+
+
+    padding:
+        5px
+        5px
+        15px;
+
+
+    background:
+        #ede0bd;
+
+
+    border:
+        1px solid
+        #c6b28c;
+
+
+    box-shadow:
+        2px 3px 8px
+        #0006;
+
+
+    transform:
+        rotate(-11deg);
+
+
+    z-index:
+        2;
+
+}
+
+
+.postcard img {
+
+    display:
+        block;
+
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+
+    object-fit:
+        cover;
+
+}
+
+
+/* =====================================================
+   GENERIC SPARKLE
+===================================================== */
+
+.card-sparkle {
+
+    position:
+        absolute;
+
+
+    right:
+        -16px;
+
+    bottom:
+        105px;
+
+
+    color:
+        #ffe4a1;
+
+
+    font-size:
+        35px;
+
+
+    text-shadow:
+        0 0 12px
+        #e9b05faa;
+
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =====================================================
+   GAME CARD
+===================================================== */
+
+.game-card {
+
+    color:
+        #c9dea0;
+
+
+    /*
+       Keeping Game more upright so the three cards
+       don't all have the same physical-paper feeling.
+    */
+
+    transform:
+        rotate(.4deg)
+        translateY(-2px);
+
+}
+
+
+.game-card
+.card-frame {
+
+    padding:
+        12px;
+
+
+    border:
+        4px solid
+        #8fac74;
+
+
+    outline:
+        none;
+
+
+    background:
+        #10221e;
+
+
+    box-shadow:
+
+        inset
+        0 0 0 4px
+        #304f35,
+
+        0 0 0 4px
+        #0b1513;
+
+
+    clip-path:
+        polygon(
+            0 12px,
+            12px 12px,
+            12px 0,
+
+            calc(100% - 12px) 0,
+            calc(100% - 12px) 12px,
+
+            100% 12px,
+
+            100% calc(100% - 12px),
+
+            calc(100% - 12px)
+            calc(100% - 12px),
+
+            calc(100% - 12px)
+            100%,
+
+            12px 100%,
+
+            12px calc(100% - 12px),
+
+            0 calc(100% - 12px)
+        );
+
+}
+
+
+.game-card
+.card-art {
+
+    border:
+        3px solid
+        #466947;
+
+
+    box-shadow:
+        0 3px
+        #0b1713;
+
+}
+
+
+.game-card
+.card-art::after {
+
+    background:
+
+        repeating-linear-gradient(
+            transparent 0 3px,
+            #07130e17 3px 4px
+        ),
+
+        linear-gradient(
+            transparent 60%,
+            #08151399
+        );
+
+}
+
+
+.game-card
+.card-caption {
+
+    padding-inline:
+        10px;
+
+
+    background:
+        linear-gradient(
+            120deg,
+            #15261e,
+            #111d19
+        );
+
+}
+
+
+/* =====================================================
+   GAME — NEW FONT
+===================================================== */
+
+.game-card h2 {
+
+    font-family:
+        var(--pixel);
+
+
+    font-size:
+        clamp(
+            31px,
+            3.45vw,
+            49px
+        );
+
+
+    font-weight:
+        600;
+
+
+    line-height:
+        1;
+
+
+    letter-spacing:
+        -.8px;
+
+
+    color:
+        #d8efac;
+
+
+    text-shadow:
+        2px 3px 0
+        #486344,
+
+        0 0 12px
+        #8fac7440;
+
+
+    margin:
+        2px
+        0
+        10px;
+
+}
+
+
+.game-card
+.chapter {
+
+    font-family:
+        var(--pixel);
+
+
+    font-size:
+        7px;
+
+
+    font-weight:
+        600;
+
+
+    letter-spacing:
+        1.7px;
+
+}
+
+
+.game-card
+.card-caption p {
+
+    font-family:
+        var(--pixel);
+
+
+    font-size:
+        clamp(
+            7px,
+            .62vw,
+            9px
+        );
+
+
+    font-weight:
+        500;
+
+
+    letter-spacing:
+        .9px;
+
+
+    line-height:
+        1.45;
+
+}
+
+
+.game-card
+.art-label {
+
+    font-family:
+        var(--pixel);
+
+
+    font-size:
+        8px;
+
+
+    font-weight:
+        500;
+
+
+    letter-spacing:
+        1.2px;
+
+}
+
+
+/* =====================================================
+   GAME ARROW
+===================================================== */
+
+.game-card
+.card-arrow {
+
+    width:
+        43px;
+
+    height:
+        43px;
+
+
+    border-radius:
+        1px;
+
+
+    border:
+        3px solid
+        #9bb678;
+
+
+    outline:
+        2px solid
+        #4a6540;
+
+
+    outline-offset:
+        3px;
+
+
+    box-shadow:
+
+        4px 0
+        #9bb67855,
+
+        -4px 0
+        #9bb67855,
+
+        0 4px
+        #9bb67855,
+
+        0 -4px
+        #9bb67855;
+
+
+    color:
+        #d4e9a9;
+
+
+    font-size:
+        0;
+
+}
+
+
+.game-card
+.card-arrow::after {
+
+    content:
+        "";
+
+
+    width:
+        22px;
+
+
+    height:
+        20px;
+
+
+    background:
+        #d4e9a9;
+
+
+    clip-path:
+        polygon(
+            0 40%,
+            60% 40%,
+            60% 0,
+            80% 0,
+            80% 20%,
+            100% 20%,
+            100% 80%,
+            80% 80%,
+            80% 100%,
+            60% 100%,
+            60% 60%,
+            0 60%
+        );
+
+}
+
+
+/* =====================================================
+   PIXEL CORNERS
+===================================================== */
+
+.pixel-corner {
+
+    position:
+        absolute;
+
+
+    width:
+        27px;
+
+    height:
+        27px;
+
+
+    border-top:
+        4px solid
+        #e0cf8c;
+
+
+    border-left:
+        4px solid
+        #e0cf8c;
+
+
+    pointer-events:
+        none;
+
+}
+
+
+.pixel-corner::after {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    top:
+        4px;
+
+    left:
+        4px;
+
+
+    width:
+        10px;
+
+    height:
+        10px;
+
+
+    border-top:
+        2px solid
+        #d0af72;
+
+
+    border-left:
+        2px solid
+        #d0af72;
+
+}
+
+
+.corner-tl {
+
+    top:
+        3px;
+
+    left:
+        3px;
+
+}
+
+
+.corner-tr {
+
+    top:
+        3px;
+
+    right:
+        3px;
+
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+.corner-bl {
+
+    bottom:
+        3px;
+
+    left:
+        3px;
+
+
+    transform:
+        rotate(-90deg);
+
+}
+
+
+.corner-br {
+
+    bottom:
+        3px;
+
+    right:
+        3px;
+
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+/* =====================================================
+   GAME DECORATIVE SPRIGS
+===================================================== */
+
+.game-card
+.leaf-sprig {
+
+    display:
+        none;
+
+}
+
+
+/* =====================================================
+   ENGINEERING CARD
+===================================================== */
+
+.engineering-card {
+
+    color:
+        #a9d4ec;
+
+
+    /*
+       Slight rotation opposite Portfolio.
+       Portfolio = -3deg
+       Engineering = +2.2deg
+    */
+
+    transform:
+        rotate(2.2deg)
+        translateY(5px);
+
+}
+
+
+.engineering-card
+.card-frame {
+
+    position:
+        relative;
+
+
+    padding:
+        12px;
+
+
+    border:
+        1px solid
+        #6a99b0;
+
+
+    outline:
+        none;
+
+
+    background:
+        linear-gradient(
+            135deg,
+            #273747,
+            #101a2d 45%,
+            #283045
+        );
+
+
+    clip-path:
+        polygon(
+            0 0,
+
+            calc(100% - 23px) 0,
+
+            100% 23px,
+
+            100% 100%,
+
+            23px 100%,
+
+            0 calc(100% - 23px)
+        );
+
+
+    box-shadow:
+        inset
+        0 0 0 5px
+        #080f1f;
+
+}
+
+
+/* subtle top technical light */
+
+.engineering-card
+.card-frame::before {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    top:
+        0;
+
+    left:
+        22px;
+
+
+    height:
+        3px;
+
+
+    width:
+        30%;
+
+
+    background:
+        #9be8ee;
+
+
+    box-shadow:
+        0 0 13px
+        #7bd4ee88;
+
+
+    z-index:
+        2;
+
+}
+
+
+/* =====================================================
+   ENGINEERING IMAGE
+===================================================== */
+
+.engineering-card
+.card-art {
+
+    background:
+        #111627;
+
+
+    border:
+        1px solid
+        #7abdc34d;
+
+}
+
+
+/* scan effect */
+
+.engineering-card
+.card-art::before {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    inset:
+        -40% 0 auto;
+
+
+    height:
+        35%;
+
+
+    z-index:
+        2;
+
+
+    pointer-events:
+        none;
+
+
+    background:
+        linear-gradient(
+            transparent,
+            #b6f4ff0b,
+            #b6f4ff38
+        );
+
+
+    border-bottom:
+        1px solid
+        #b6f4ff77;
+
+
+    animation:
+        panel-scan
+        9s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* =====================================================
+   ENGINEERING CAPTION
+===================================================== */
+
+.engineering-card
+.card-caption {
+
+    background:
+
+        repeating-linear-gradient(
+            90deg,
+            #97c9d605 0 1px,
+            transparent 1px 18px
+        ),
+
+        #101b2d;
+
+
+    padding-inline:
+        9px;
+
+}
+
+
+.engineering-card h2 {
+
+    font:
+        500
+        clamp(
+            21px,
+            2.3vw,
+            35px
+        )
+        / 1.25
+        var(--sans);
+
+
+    letter-spacing:
+        -1px;
+
+
+    color:
+        #d8eff6;
+
+
+    margin-block:
+        7px
+        12px;
+
+}
+
+
+.engineering-card
+.chapter {
+
+    color:
+        #8cdde2;
+
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.engineering-card
+.card-caption p {
+
+    color:
+        #a0bed4;
+
+
+    font-family:
+        monospace;
+
+
+    font-size:
+        8px;
+
+
+    letter-spacing:
+        .8px;
+
+}
+
+
+/* =====================================================
+   ENGINEERING ARROW
+===================================================== */
+
+.engineering-card
+.card-arrow {
+
+    border-radius:
+        8px;
+
+
+    border-color:
+        #87d1dc;
+
+
+    outline:
+        none;
+
+
+    color:
+        #abeef2;
+
+
+    background:
+        #72d3e20a;
+
+}
+
+
+/* =====================================================
+   ORBIT EMBLEM
+===================================================== */
+
+.orbit-emblem {
+
+    position:
+        absolute;
+
+
+    width:
+        45px;
+
+    height:
+        45px;
+
+
+    top:
+        9px;
+
+    right:
+        9px;
+
+
+    z-index:
+        1;
+
+
+    fill:
+        none;
+
+
+    stroke:
+        #fff2cc;
+
+
+    stroke-width:
+        .9;
+
+
+    filter:
+        drop-shadow(
+            0 1px 4px
+            #1b142f
+        );
+
+}
+
+
+/* Hide old Engineering decorations */
+
+.engineering-card
+.engineering-pin,
+
+.engineering-card
+.card-sparkle {
+
+    display:
+        none;
+
+}
+
+
+/* =====================================================
+   ENGINEERING SCAN
+===================================================== */
+
+@keyframes panel-scan {
+
+    0%,
+    20% {
+
+        transform:
+            translateY(0);
+
+        opacity:
+            0;
+
     }
 
-    .title {
-        font-size: 2rem;
+
+    25% {
+
+        opacity:
+            .8;
+
     }
+
+
+    75% {
+
+        transform:
+            translateY(430%);
+
+        opacity:
+            .5;
+
+    }
+
+
+    80%,
+    100% {
+
+        transform:
+            translateY(430%);
+
+        opacity:
+            0;
+
+    }
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.choice-footer {
+
+    display:
+        flex;
+
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    gap:
+        18px;
+
+
+    margin-top:
+        34px;
+
+
+    text-align:
+        center;
+
+
+    color:
+        #f4e7bd;
+
+
+    text-shadow:
+        0 2px 8px
+        #102014;
+
+}
+
+
+.choice-footer p {
+
+    margin:
+        0;
+
+
+    font:
+        italic
+        18px
+        var(--serif);
+
+
+    letter-spacing:
+        .5px;
+
+}
+
+
+.footer-line {
+
+    width:
+        45px;
+
+
+    height:
+        1px;
+
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #dbc082
+        );
+
+}
+
+
+.footer-line:last-child {
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+/* =====================================================
+   FOCUS
+===================================================== */
+
+.experience:focus-visible {
+
+    outline:
+        3px solid
+        #ffe8a0;
+
+
+    outline-offset:
+        12px;
+
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+@media (hover: hover) {
+
+
+    .portfolio-card:hover {
+
+        transform:
+            rotate(-1deg)
+            translateY(-12px);
+
+
+        filter:
+            drop-shadow(
+                0 25px 20px
+                #06110ee6
+            );
+
+
+        z-index:
+            3;
+
+    }
+
+
+    .game-card:hover {
+
+        transform:
+            rotate(0deg)
+            translateY(-12px);
+
+
+        filter:
+            drop-shadow(
+                0 25px 20px
+                #06110ee6
+            );
+
+
+        z-index:
+            3;
+
+    }
+
+
+    .engineering-card:hover {
+
+        transform:
+            rotate(.7deg)
+            translateY(-12px);
+
+
+        filter:
+            drop-shadow(
+                0 20px 20px
+                #589bcb35
+            );
+
+
+        z-index:
+            3;
+
+    }
+
+
+    .experience:hover
+    .card-art > img {
+
+        transform:
+            scale(1.045);
+
+
+        filter:
+            saturate(1.08);
+
+    }
+
+
+    .experience:hover
+    .card-arrow {
+
+        transform:
+            translateX(3px);
+
+
+        background:
+            #d9bf7f15;
+
+    }
+
+}
+
+
+/* =====================================================
+   FIREFLIES
+===================================================== */
+
+.fireflies {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    pointer-events:
+        none;
+
+
+    z-index:
+        -1;
+
+}
+
+
+.fireflies i {
+
+    position:
+        absolute;
+
+
+    width:
+        3px;
+
+    height:
+        3px;
+
+
+    background:
+        #b2d5ff;
+
+
+    border-radius:
+        50%;
+
+
+    box-shadow:
+        0 0 8px
+        #99baf988;
+
+
+    left:
+        6%;
+
+    top:
+        70%;
+
+
+    animation:
+        drift
+        4s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+.fireflies i:nth-child(2) {
+
+    left:
+        28%;
+
+    top:
+        28%;
+
+    animation-delay:
+        -3s;
+
+}
+
+
+.fireflies i:nth-child(3) {
+
+    left:
+        90%;
+
+    top:
+        68%;
+
+    animation-delay:
+        -4s;
+
+}
+
+
+.fireflies i:nth-child(4) {
+
+    left:
+        62%;
+
+    top:
+        82%;
+
+    animation-delay:
+        -1s;
+
+}
+
+
+.fireflies i:nth-child(5) {
+
+    left:
+        80%;
+
+    top:
+        20%;
+
+    animation-delay:
+        -5s;
+
+}
+
+
+.fireflies i:nth-child(6) {
+
+    left:
+        16%;
+
+    top:
+        90%;
+
+    animation-delay:
+        -2s;
+
+}
+
+
+.fireflies i:nth-child(7) {
+
+    left:
+        47%;
+
+    top:
+        15%;
+
+    animation-delay:
+        -6s;
+
+}
+
+
+.fireflies i:nth-child(8) {
+
+    left:
+        97%;
+
+    top:
+        47%;
+
+    animation-delay:
+        -4s;
+
+}
+
+
+@keyframes drift {
+
+    from {
+
+        opacity:
+            .25;
+
+
+        transform:
+            translate(
+                0,
+                0
+            );
+
+    }
+
+
+    to {
+
+        opacity:
+            .9;
+
+
+        transform:
+            translate(
+                9px,
+                -22px
+            );
+
+    }
+
+}
+
+
+/* =====================================================
+   TECH BACKDROP
+===================================================== */
+
+.tech-backdrop {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    z-index:
+        -2;
+
+
+    overflow:
+        hidden;
+
+
+    background:
+
+        radial-gradient(
+            ellipse at 18% 25%,
+            #32687924,
+            transparent 55%
+        ),
+
+        radial-gradient(
+            ellipse at 85% 65%,
+            #66429a22,
+            transparent 55%
+        ),
+
+        #0b101b;
+
+}
+
+
+.tech-backdrop::before {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    inset:
+        -64px;
+
+
+    background-image:
+
+        linear-gradient(
+            #88bddb12 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            #88bddb12 1px,
+            transparent 1px
+        );
+
+
+    background-size:
+        64px
+        64px;
+
+
+    transform:
+        perspective(900px)
+        rotateX(18deg)
+        scale(1.15);
+
+
+    mask-image:
+        linear-gradient(
+            transparent,
+            #000 20%,
+            #000 75%,
+            transparent
+        );
+
+
+    -webkit-mask-image:
+        linear-gradient(
+            transparent,
+            #000 20%,
+            #000 75%,
+            transparent
+        );
+
+
+    animation:
+        grid-drift
+        24s
+        linear
+        infinite;
+
+}
+
+
+.tech-backdrop::after {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 30%,
+            #0b101baa
+        );
+
+}
+
+
+@keyframes grid-drift {
+
+    from {
+
+        translate:
+            0 0;
+
+    }
+
+
+    to {
+
+        translate:
+            0 64px;
+
+    }
+
+}
+
+
+/* =====================================================
+   AMBIENT ORBITS
+===================================================== */
+
+.ambient-orbit {
+
+    position:
+        absolute;
+
+
+    width:
+        640px;
+
+    height:
+        640px;
+
+
+    border:
+        1px solid
+        #88c4ea18;
+
+
+    border-radius:
+        50%;
+
+
+    box-shadow:
+        0 0 70px
+        #659de508;
+
+
+    animation:
+        orbit-turn
+        70s
+        linear
+        infinite;
+
+}
+
+
+.ambient-orbit::before {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    inset:
+        38px;
+
+
+    border:
+        1px dashed
+        #b2a4ec17;
+
+
+    border-radius:
+        50%;
+
+}
+
+
+.ambient-orbit::after {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    top:
+        50%;
+
+    left:
+        -3px;
+
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+
+    background:
+        #9cc6eb;
+
+
+    border-radius:
+        50%;
+
+
+    box-shadow:
+        0 0 15px
+        #9dcfff;
+
+}
+
+
+.orbit-one {
+
+    top:
+        -320px;
+
+    right:
+        -170px;
+
+}
+
+
+.orbit-two {
+
+    bottom:
+        -370px;
+
+    left:
+        -230px;
+
+
+    width:
+        780px;
+
+    height:
+        780px;
+
+
+    animation-direction:
+        reverse;
+
+
+    animation-duration:
+        95s;
+
+}
+
+
+@keyframes orbit-turn {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   GRID SIGNALS
+===================================================== */
+
+.grid-signals {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+}
+
+
+.grid-signals i {
+
+    position:
+        absolute;
+
+
+    left:
+        -180px;
+
+    top:
+        17%;
+
+
+    height:
+        1px;
+
+
+    width:
+        160px;
+
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #9adcf080
+        );
+
+
+    animation:
+        signal-travel
+        16s
+        linear
+        infinite;
+
+}
+
+
+.grid-signals i::after {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    right:
+        0;
+
+    top:
+        -2px;
+
+
+    width:
+        4px;
+
+    height:
+        4px;
+
+
+    background:
+        #a8dbed;
+
+
+    box-shadow:
+        0 0 10px
+        #8ad8fa;
+
+}
+
+
+.grid-signals i:nth-child(2) {
+
+    top:
+        35%;
+
+
+    animation-delay:
+        -7s;
+
+
+    animation-duration:
+        23s;
+
+}
+
+
+.grid-signals i:nth-child(3) {
+
+    top:
+        76%;
+
+
+    animation-delay:
+        -3s;
+
+
+    animation-duration:
+        19s;
+
+}
+
+
+.grid-signals i:nth-child(4) {
+
+    top:
+        91%;
+
+
+    animation-delay:
+        -11s;
+
+}
+
+
+.grid-signals i:nth-child(5) {
+
+    top:
+        7%;
+
+
+    animation-delay:
+        -4s;
+
+
+    animation-duration:
+        28s;
+
+}
+
+
+.grid-signals i:nth-child(6) {
+
+    top:
+        58%;
+
+
+    animation-delay:
+        -15s;
+
+
+    animation-duration:
+        31s;
+
+}
+
+
+@keyframes signal-travel {
+
+    0% {
+
+        transform:
+            translateX(0);
+
+
+        opacity:
+            0;
+
+    }
+
+
+    8%,
+    85% {
+
+        opacity:
+            .65;
+
+    }
+
+
+    100% {
+
+        transform:
+            translateX(
+                calc(
+                    100vw + 360px
+                )
+            );
+
+
+        opacity:
+            0;
+
+    }
+
+}
+
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media (min-width: 1600px) {
+
+    .choice-heading {
+
+        margin-bottom:
+            66px;
+
+    }
+
+
+    .experiences {
+
+        max-width:
+            1460px;
+
+    }
+
+
+    .card-caption {
+
+        min-height:
+            136px;
+
+    }
+
+
+    .choice-footer {
+
+        margin-top:
+            45px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MEDIUM DESKTOP / TABLET LANDSCAPE
+===================================================== */
+
+@media
+(max-width: 1100px)
+and
+(min-width: 801px) {
+
+
+    .choice-page {
+
+        padding-inline:
+            4vw;
+
+    }
+
+
+    .experiences {
+
+        gap:
+            24px;
+
+    }
+
+
+    .card-frame {
+
+        padding:
+            7px;
+
+    }
+
+
+    .game-card
+    .card-frame,
+
+    .engineering-card
+    .card-frame {
+
+        padding:
+            9px;
+
+    }
+
+
+    .card-caption {
+
+        padding-inline:
+            7px;
+
+
+        min-height:
+            105px;
+
+    }
+
+
+    .card-arrow {
+
+        width:
+            31px;
+
+        height:
+            31px;
+
+
+        font-size:
+            27px;
+
+
+        margin-left:
+            2px;
+
+    }
+
+
+    .game-card
+    .card-arrow {
+
+        width:
+            31px;
+
+        height:
+            31px;
+
+    }
+
+
+    .game-card h2 {
+
+        font-size:
+            clamp(
+                27px,
+                3vw,
+                38px
+            );
+
+    }
+
+
+    .engineering-card h2 {
+
+        font-size:
+            31px;
+
+    }
+
+
+    .chapter {
+
+        font-size:
+            5px;
+
+
+        letter-spacing:
+            2px;
+
+    }
+
+
+    .card-caption p {
+
+        letter-spacing:
+            .7px;
+
+    }
+
+
+    .portfolio-card
+    .card-caption {
+
+        padding-left:
+            8px;
+
+    }
+
+
+    .postcard {
+
+        width:
+            53px;
+
+        height:
+            74px;
+
+
+        left:
+            -15px;
+
+    }
+
+
+    .art-label {
+
+        font-size:
+            6px;
+
+
+        letter-spacing:
+            1px;
+
+
+        left:
+            10px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE / TABLET PORTRAIT
+===================================================== */
+
+@media (max-width: 800px) {
+
+
+    .choice-page {
+
+        padding:
+            37px
+            30px
+            32px;
+
+
+        justify-content:
+            flex-start;
+
+    }
+
+
+    .choice-heading {
+
+        margin-bottom:
+            28px;
+
+    }
+
+
+    .creator {
+
+        font-size:
+            7px;
+
+
+        letter-spacing:
+            2px;
+
+
+        margin-bottom:
+            18px;
+
+    }
+
+
+    .creator span {
+
+        padding-inline:
+            6px;
+
+    }
+
+
+    h1 {
+
+        font-size:
+            clamp(
+                48px,
+                8vw,
+                72px
+            );
+
+
+        letter-spacing:
+            -1.4px;
+
+    }
+
+
+    h1 em {
+
+        display:
+            block;
+
+    }
+
+
+    .title-flourish {
+
+        width:
+            80%;
+
+
+        margin-top:
+            1px;
+
+
+        height:
+            18px;
+
+    }
+
+
+    .star-left {
+
+        top:
+            26%;
+
+        left:
+            0;
+
+
+        font-size:
+            21px;
+
+    }
+
+
+    .star-right {
+
+        top:
+            44%;
+
+        right:
+            0;
+
+
+        font-size:
+            18px;
+
+    }
+
+
+    .experiences {
+
+        grid-template-columns:
+            1fr;
+
+
+        max-width:
+            440px;
+
+
+        gap:
+            44px;
+
+
+        padding-top:
+            12px;
+
+    }
+
+
+    .portfolio-card {
+
+        transform:
+            rotate(-2deg);
+
+    }
+
+
+    .game-card {
+
+        transform:
+            rotate(.5deg);
+
+    }
+
+
+    .engineering-card {
+
+        transform:
+            rotate(1.7deg);
+
+    }
+
+
+    .card-art {
+
+        aspect-ratio:
+            1.52;
+
+    }
+
+
+    .card-caption {
+
+        min-height:
+            116px;
+
+
+        padding-inline:
+            14px;
+
+    }
+
+
+    h2 {
+
+        font-size:
+            48px;
+
+    }
+
+
+    .game-card h2 {
+
+        font-size:
+            clamp(
+                36px,
+                10vw,
+                47px
+            );
+
+    }
+
+
+    .engineering-card h2 {
+
+        font-size:
+            42px;
+
+    }
+
+
+    .card-caption p {
+
+        font-size:
+            7px;
+
+
+        letter-spacing:
+            1.5px;
+
+    }
+
+
+    .game-card
+    .card-caption p {
+
+        font-size:
+            8px;
+
+
+        letter-spacing:
+            1px;
+
+    }
+
+
+    .engineering-card
+    .card-caption p {
+
+        letter-spacing:
+            .7px;
+
+    }
+
+
+    .chapter {
+
+        font-size:
+            6px;
+
+    }
+
+
+    .card-arrow {
+
+        width:
+            46px;
+
+        height:
+            46px;
+
+
+        font-size:
+            32px;
+
+    }
+
+
+    .game-card
+    .card-arrow {
+
+        width:
+            40px;
+
+        height:
+            40px;
+
+    }
+
+
+    .postcard {
+
+        left:
+            -13px;
+
+        top:
+            20px;
+
+
+        width:
+            57px;
+
+        height:
+            78px;
+
+    }
+
+
+    .card-sparkle {
+
+        right:
+            -14px;
+
+    }
+
+
+    .choice-footer {
+
+        margin-top:
+            13px;
+
+
+        gap:
+            10px;
+
+    }
+
+
+    .choice-footer p {
+
+        max-width:
+            260px;
+
+
+        font-size:
+            16px;
+
+
+        line-height:
+            1.4;
+
+    }
+
+
+    .footer-line {
+
+        width:
+            22px;
+
+    }
+
+
+    .ambient-orbit {
+
+        width:
+            420px;
+
+        height:
+            420px;
+
+    }
+
+
+    .orbit-two {
+
+        bottom:
+            -200px;
+
+    }
+
+
+    .grid-signals
+    i:nth-child(n+4) {
+
+        display:
+            none;
+
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 370px) {
+
+
+    .choice-page {
+
+        padding-inline:
+            22px;
+
+    }
+
+
+    .card-frame {
+
+        padding:
+            8px;
+
+    }
+
+
+    .card-caption {
+
+        padding-inline:
+            8px;
+
+    }
+
+
+    h2 {
+
+        font-size:
+            43px;
+
+    }
+
+
+    .game-card h2 {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .engineering-card h2 {
+
+        font-size:
+            35px;
+
+    }
+
+
+    .card-arrow {
+
+        width:
+            34px;
+
+        height:
+            34px;
+
+
+        font-size:
+            28px;
+
+    }
+
+
+    .game-card
+    .card-arrow {
+
+        width:
+            34px;
+
+        height:
+            34px;
+
+    }
+
+
+    .card-caption p {
+
+        font-size:
+            6px;
+
+
+        letter-spacing:
+            1px;
+
+    }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation:
+            none !important;
+
+
+        transition:
+            none !important;
+
+    }
+
+
+    .engineering-card
+    .card-art::before,
+
+    .grid-signals {
+
+        display:
+            none;
+
+    }
+
 }

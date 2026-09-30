@@ -26,7 +26,7 @@ class Scene {
     }
 
     Start() {
-        this.bg = LoadImage("img/Background.png");
+        this.bg = WorldArt.create(CFG.WORLD_W, CFG.WORLD_H);
         this.camera = new Camera(CFG.VIEW_W, CFG.VIEW_H);
 
         this.player = new Player(this);
@@ -48,7 +48,7 @@ class Scene {
             { x: 3050, y: 470 },
             { x: 3050, y: 820 },
         ]));
-        this.npcs.push(new NPC(2100, 1450, "Prisoner", "prisoner", Placeholders.Guide()));
+        this.npcs.push(new NPC(2100, 1450, "Prisoner", "prisoner", Placeholders.Prisoner()));
 
         this.enemies.push(new Enemy(2500, 500, [{ x: 2380, y: 440 }, { x: 2700, y: 620 }], "#c94f6d"));
         this.enemies.push(new Enemy(320, 520, [{ x: 240, y: 450 }, { x: 520, y: 650 }], "#9b59b6"));
@@ -253,23 +253,6 @@ class Scene {
     }
 
     _drawGrassBackground(ctx) {
-        const tile = 32;
-        ctx.fillStyle = "#9a9a5f";
-        ctx.fillRect(0, 0, CFG.WORLD_W, CFG.WORLD_H);
-
-        for (let y = 0; y < CFG.WORLD_H; y += tile) {
-            for (let x = 0; x < CFG.WORLD_W; x += tile) {
-                const seed = (((x / tile) * 73856093) ^ ((y / tile) * 19349663)) >>> 0;
-                if (seed % 5 === 0) {
-                    ctx.fillStyle = "#777849";
-                    ctx.fillRect(x + 7, y + 9, 3, 3);
-                    ctx.fillRect(x + 11, y + 6, 2, 5);
-                } else if (seed % 7 === 0) {
-                    ctx.fillStyle = "#b2a56b";
-                    ctx.fillRect(x + 20, y + 18, 3, 3);
-                    ctx.fillRect(x + 24, y + 15, 2, 5);
-                }
-            }
-        }
+        ctx.drawImage(this.bg, 0, 0, CFG.WORLD_W, CFG.WORLD_H);
     }
 }

@@ -1,31 +1,9 @@
-(function() {
+(() => {
     "use strict";
-    const select = (el, all = false) => {
-      el = el.trim()
-      if (all)
-      {
-        return [...document.querySelectorAll(el)]
-      } else
-      {
-        return document.querySelector(el)
-      }
-    }
-
-    /**
-     * Skills reveal
-     */
-    let skillsEl = select('.skills');
-    if (skillsEl && typeof Waypoint !== 'undefined') {
-      new Waypoint({
-        element: skillsEl,
-        offset: '75%',
-        handler: function() {
-          let groups = select('.skill-group', true);
-          groups.forEach((el, i) => {
-            el.style.transitionDelay = (i * 0.08) + 's';
-            el.classList.add('visible');
-          });
-        }
-      })
-    }
-  })()
+    if (!("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } });
+    }, { threshold: .1 });
+    document.querySelectorAll(".skill-group").forEach(group => observer.observe(group));
+    window.pageCleanup = () => observer.disconnect();
+})();

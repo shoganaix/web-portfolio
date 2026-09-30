@@ -1,31 +1,580 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Shoganai — Choose your experience</title>
-	<meta name="description" content="Shoganai's portfolio. Choose your experience: classic web or interactive game." />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="style.css">
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b101b"
+    >
+
+    <title>
+        Shoganai — Choose Your Experience
+    </title>
+
+    <meta
+        name="description"
+        content="Three worlds, one creator. Explore María Soriano's art portfolio, play her interactive adventure, or discover engineering, robotics and space systems."
+    >
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@400;500;600&family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
+
 <body>
-	<section class="selection">
-		<div class="row">
-			<a class="nav-link" href="web/index.html" aria-label="Go to the web experience">
-				<div class="column column-web">
-					<h2 class="title">Web</h2>
-					<p class="subtitle">Standard Webpage</p>
-				</div>
-			</a>
-			<a class="nav-link" href="game/index.html" aria-label="Go to the game experience">
-				<div class="column column-game">
-					<h2 class="title">Game</h2>
-					<p class="subtitle">An interactive game-like experience</p>
-				</div>
-			</a>
-		</div>
-	</section>
+
+
+    <main class="choice-page">
+
+
+        <!-- =================================================
+             TECH BACKGROUND
+        ================================================== -->
+
+        <div
+            class="tech-backdrop"
+            aria-hidden="true"
+        >
+
+            <div class="ambient-orbit orbit-one"></div>
+
+            <div class="ambient-orbit orbit-two"></div>
+
+
+            <div class="grid-signals">
+
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FIREFLIES
+        ================================================== -->
+
+        <div
+            class="fireflies"
+            aria-hidden="true"
+        >
+
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+
+        </div>
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="choice-heading">
+
+
+            <p class="creator">
+
+                <span>✧</span>
+
+                SHOGANAI
+
+                <span>✧</span>
+
+            </p>
+
+
+            <h1>
+
+                Choose Your
+
+                <em>
+                    Experience
+                </em>
+
+            </h1>
+
+
+            <svg
+                class="title-flourish"
+                viewBox="0 0 760 32"
+                aria-hidden="true"
+            >
+
+                <path
+                    d="M8 27C176 1 530-2 748 24C506 5 196 8 8 27Z"
+                    fill="currentColor"
+                />
+
+                <path
+                    d="M50 27C225 9 492 7 700 26"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                />
+
+            </svg>
+
+
+            <span
+                class="heading-star star-left"
+                aria-hidden="true"
+            >
+                ✧
+            </span>
+
+
+            <span
+                class="heading-star star-right"
+                aria-hidden="true"
+            >
+                ✦
+            </span>
+
+
+        </header>
+
+
+        <!-- =================================================
+             EXPERIENCES
+        ================================================== -->
+
+        <nav
+            class="experiences"
+            aria-label="Choose your experience"
+        >
+
+
+            <!-- =============================================
+                 PORTFOLIO
+            ============================================== -->
+
+            <a
+                class="experience portfolio-card"
+                href="web/index.html"
+                aria-labelledby="portfolio-title"
+                aria-describedby="portfolio-description"
+            >
+
+
+                <span
+                    class="tape"
+                    aria-hidden="true"
+                ></span>
+
+
+                <div class="card-frame">
+
+
+                    <div class="card-art">
+
+                        <img
+                            src="assets/landing/portfolio.png"
+                            width="960"
+                            height="540"
+                            alt=""
+                            fetchpriority="high"
+                            decoding="async"
+                        >
+
+                        <span
+                            class="art-label"
+                            aria-hidden="true"
+                        >
+                            THE CREATIVE WORLD
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-caption">
+
+
+                        <div class="caption-copy">
+
+                            <span class="chapter">
+                                01 / CREATE
+                            </span>
+
+                            <h2 id="portfolio-title">
+                                Portfolio
+                            </h2>
+
+                            <p id="portfolio-description">
+                                Art · Development · Ideas
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="card-arrow"
+                            aria-hidden="true"
+                        >
+                            →
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <span
+                    class="postcard"
+                    aria-hidden="true"
+                >
+
+                    <img
+                        src="assets/landing/logo.png"
+                        alt=""
+                        width="80"
+                        height="80"
+                    >
+
+                </span>
+
+
+                <span
+                    class="card-sparkle"
+                    aria-hidden="true"
+                >
+                    ✧
+                </span>
+
+
+            </a>
+
+
+            <!-- =============================================
+                 GAME
+            ============================================== -->
+
+            <a
+                class="experience game-card"
+                href="game/index.html"
+                aria-labelledby="game-title"
+                aria-describedby="game-description"
+            >
+
+
+                <div class="card-frame">
+
+
+                    <div class="card-art">
+
+                        <img
+                            src="assets/landing/game.png"
+                            width="960"
+                            height="640"
+                            alt=""
+                            decoding="async"
+                        >
+
+                        <span
+                            class="art-label"
+                            aria-hidden="true"
+                        >
+                            A LITTLE MAGIC AWAITS
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-caption">
+
+
+                        <div class="caption-copy">
+
+                            <span class="chapter">
+                                02 / PLAY
+                            </span>
+
+                            <h2 id="game-title">
+                                Game
+                            </h2>
+
+                            <p id="game-description">
+                                An interactive adventure
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="card-arrow"
+                            aria-hidden="true"
+                        >
+                            →
+                        </span>
+
+
+                    </div>
+
+
+                    <i
+                        class="pixel-corner corner-tl"
+                        aria-hidden="true"
+                    ></i>
+
+                    <i
+                        class="pixel-corner corner-tr"
+                        aria-hidden="true"
+                    ></i>
+
+                    <i
+                        class="pixel-corner corner-bl"
+                        aria-hidden="true"
+                    ></i>
+
+                    <i
+                        class="pixel-corner corner-br"
+                        aria-hidden="true"
+                    ></i>
+
+
+                </div>
+
+
+                <span
+                    class="leaf-sprig sprig-top"
+                    aria-hidden="true"
+                >
+
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+
+                </span>
+
+
+                <span
+                    class="leaf-sprig sprig-bottom"
+                    aria-hidden="true"
+                >
+
+                    <i></i>
+                    <i></i>
+                    <i></i>
+
+                </span>
+
+
+                <span
+                    class="card-sparkle"
+                    aria-hidden="true"
+                >
+                    ✦
+                </span>
+
+
+            </a>
+
+
+            <!-- =============================================
+                 ENGINEERING
+            ============================================== -->
+
+            <a
+                class="experience engineering-card"
+                href="engineering/index.html"
+                aria-labelledby="engineering-title"
+                aria-describedby="engineering-description"
+            >
+
+
+                <div class="card-frame">
+
+
+                    <div class="card-art">
+
+
+                        <img
+                            src="assets/landing/engineering.png"
+                            width="960"
+                            height="640"
+                            alt=""
+                            decoding="async"
+                        >
+
+
+                        <span
+                            class="art-label"
+                            aria-hidden="true"
+                        >
+                            A CURIOSITY WITHOUT LIMITS
+                        </span>
+
+
+                        <svg
+                            class="orbit-emblem"
+                            viewBox="0 0 60 60"
+                            aria-hidden="true"
+                        >
+
+                            <circle
+                                cx="30"
+                                cy="30"
+                                r="14"
+                            />
+
+                            <ellipse
+                                cx="30"
+                                cy="30"
+                                rx="27"
+                                ry="9"
+                                transform="rotate(-35 30 30)"
+                            />
+
+                            <circle
+                                cx="49"
+                                cy="15"
+                                r="3"
+                            />
+
+                        </svg>
+
+
+                    </div>
+
+
+                    <div class="card-caption">
+
+
+                        <div class="caption-copy">
+
+                            <span class="chapter">
+                                03 / EXPLORE
+                            </span>
+
+                            <h2 id="engineering-title">
+                                Engineering
+                            </h2>
+
+                            <p id="engineering-description">
+                                Robotics · Simulation · Space
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="card-arrow"
+                            aria-hidden="true"
+                        >
+                            →
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <span
+                    class="engineering-pin"
+                    aria-hidden="true"
+                >
+                    ✧
+                </span>
+
+
+                <span
+                    class="card-sparkle"
+                    aria-hidden="true"
+                >
+                    ✦
+                </span>
+
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="choice-footer">
+
+
+            <span
+                class="footer-line"
+                aria-hidden="true"
+            ></span>
+
+
+            <p>
+                A little art. A little science. A lot of curiosity.
+            </p>
+
+
+            <span
+                class="footer-line"
+                aria-hidden="true"
+            ></span>
+
+
+        </footer>
+
+
+    </main>
+
+
 </body>
+
 </html>

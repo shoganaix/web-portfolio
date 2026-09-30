@@ -685,7 +685,6 @@ html {
     .portfolio {
         height: 100dvh;
         overflow: hidden;
-        padding: 0;
     }
 
     .works {

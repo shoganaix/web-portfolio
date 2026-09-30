@@ -793,14 +793,33 @@ body {
         margin-bottom: 7px;
     }
 
-
-    /* Portrait */
-
     .picme {
         width: 100%;
-        max-width: 340px;
+        max-width: 460px;
 
-        margin: 8px auto 0;
+        margin: 0 auto;
+
+        min-width: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: transparent;
+
+        border: none;
+        border-radius: 0;
+
+        box-shadow: none;
+
+        opacity: 0;
+
+        animation:
+            fadeInRight
+            2.5s
+            0.8s
+            forwards;
     }
 
     .about-artwork {

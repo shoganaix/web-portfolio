@@ -60,6 +60,7 @@ const Dialogue = {
         this.textEl.textContent = "";
         this._charIndex = 0;
         this._typing = true;
+        this._typeTimer = 0;
         this.nextEl.textContent = "";
     },
 
@@ -70,6 +71,7 @@ const Dialogue = {
             // Skip the typewriter and reveal the whole line.
             this._charIndex = this._lines[this._index].text.length;
             this._typing = false;
+            this.textEl.textContent = this._lines[this._index].text;
             return;
         }
 
@@ -99,7 +101,6 @@ const Dialogue = {
         // Swallow the opening frame's input (see _ignoreAdvance).
         const ignoreInput = this._ignoreAdvance;
         this._ignoreAdvance = false;
-        const wasTyping = this._typing;
 
         if (this._typing) {
             this._typeTimer += dt;
@@ -119,7 +120,7 @@ const Dialogue = {
         }
 
         // Ignore advance keys while the typewriter is still revealing text.
-        if (!wasTyping && !ignoreInput && (Input.Pressed(KEY.E) || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.ENTER))) {
+        if (!ignoreInput && (Input.Pressed(KEY.E) || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.ENTER))) {
             this.advance();
         }
     },

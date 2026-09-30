@@ -1,217 +1,828 @@
-/* Shared layout: navbar, footer, social icons + fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* =====================================================
+   SHOGANAI — SHARED THEME
+   Navbar, footer, music player, fonts and global layout
+===================================================== */
+
+@import url(
+    'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'
+);
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 :root {
     --dark: #171825;
     --dark-2: #1d1e22;
+
     --accent: #ffd166;
+
     --text: #eef0ff;
 }
+
+
+/* =====================================================
+   RESET
+===================================================== */
 
 * {
     margin: 0;
     padding: 0;
+
     box-sizing: border-box;
 }
 
+
+html {
+    min-height: 100%;
+}
+
+
 body {
-    font-family: "Montserrat", sans-serif;
-    color: var(--text);
-    height: 100vh;
-    overflow: hidden;
-    overscroll-behavior: none;
-    background-color: var(--dark);
-    margin: 0;
-}
-
-/* ---------- Navbar ---------- */
-.navbarScroll {
-    background-color: rgba(18, 20, 32, 0.88);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
-    min-height: 128px;
-    padding-top: 0.65rem;
-    padding-bottom: 1.15rem;
-}
-
-.navbar-brand {
-    background: url('../images/logo2_game.png') no-repeat center center;
-    background-size: contain;
-    width: 170px;
-    height: 170px;
-    position: absolute;
-    top: 50%;
-    left: 18px;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    opacity: 0.35;
-    transition: opacity 0.3s ease;
-}
-
-.navbar-brand:hover {
-    opacity: 0.9;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 300;
-    letter-spacing: 0.06em;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    opacity: 0.95;
-    transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-    opacity: 0.55;
-}
-
-.navbar-dark .navbar-nav .nav-link.active {
-    color: var(--accent);
-    opacity: 1;
-}
-
-/* ---------- Footer ---------- */
-#footer {
-    display: none;
-}
-
-.social-icons {
-    font-size: 34px;
-    cursor: pointer;
-}
-
-.social-icons a {
-    color: #ffffff;
-    margin: 0 12px;
-    display: inline-block;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.social-icons a:hover {
-    color: var(--accent);
-    transform: translateY(-3px);
-}
-
-/* ---------- Page sections ---------- */
-.page-section {
     min-height: 100vh;
-    padding: 110px 24px 60px;
-    display: flex;
-    align-items: center;
+    height: auto;
+
+    margin: 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    overscroll-behavior: auto;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    color:
+        var(--text);
+
+    background-color:
+        var(--dark);
+}
+
+
+#page-content {
+    outline: none;
 }
 
 
 /* =====================================================
-   RESPONSIVE NAVBAR — TABLET & MOBILE
-   Bootstrap hamburger breakpoint: 992px
+   NAVBAR
+===================================================== */
+
+.navbarScroll {
+    background-color:
+        rgba(18, 20, 32, 0.88);
+
+    backdrop-filter:
+        blur(5px);
+
+    -webkit-backdrop-filter:
+        blur(5px);
+
+    box-shadow:
+        0 2px 18px
+        rgba(0, 0, 0, 0.35);
+
+    min-height:
+        128px;
+
+    padding-top:
+        0.65rem;
+
+    padding-bottom:
+        1.15rem;
+}
+
+
+/* Container used as reference for logo + Engineering */
+
+.navbarScroll .container {
+    position: relative;
+}
+
+
+/* =====================================================
+   GAME LOGO
+   ORIGINAL SETTINGS — NOT MODIFIED
+===================================================== */
+
+.navbar-brand {
+    background:
+        url('../images/logo2_game.png')
+        no-repeat
+        center center;
+
+    background-size:
+        contain;
+
+    width:
+        170px;
+
+    height:
+        170px;
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    left:
+        18px;
+
+    transform:
+        translateY(-50%);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    opacity:
+        0.35;
+
+    transition:
+        opacity
+        0.3s ease;
+}
+
+
+.navbar-brand:hover {
+    opacity:
+        0.9;
+}
+
+
+/* =====================================================
+   ENGINEERING
+   MIRRORED OPPOSITE THE LOGO
+===================================================== */
+
+.engineering-link {
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    right:
+        18px;
+
+    transform:
+        translateY(-50%);
+
+    z-index:
+        20;
+
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    text-decoration:
+        none;
+
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        400;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.16em;
+
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.78
+        );
+
+
+    transition:
+        color 0.25s ease,
+        opacity 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+
+.engineering-link::after {
+    content: "";
+
+    position:
+        absolute;
+
+    left:
+        8%;
+
+    right:
+        8%;
+
+    bottom:
+        -8px;
+
+    height:
+        1px;
+
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--accent),
+            transparent
+        );
+
+
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        center;
+
+
+    transition:
+        transform
+        0.3s ease;
+}
+
+
+.engineering-link:hover {
+    color:
+        var(--accent);
+
+    opacity:
+        1;
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            255,
+            209,
+            102,
+            0.35
+        );
+}
+
+
+.engineering-link:hover::after {
+    transform:
+        scaleX(1);
+}
+
+
+/* =====================================================
+   NORMAL NAVIGATION LINKS
+===================================================== */
+
+.navbar-dark
+.navbar-nav
+.nav-link {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.85
+        );
+
+    font-weight:
+        300;
+
+    letter-spacing:
+        0.06em;
+
+    padding-left:
+        1rem;
+
+    padding-right:
+        1rem;
+
+    opacity:
+        0.95;
+
+    transition:
+        opacity 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.navbar-dark
+.navbar-nav
+.nav-link:hover {
+    opacity:
+        0.55;
+}
+
+
+.navbar-dark
+.navbar-nav
+.nav-link.active {
+    color:
+        var(--accent);
+
+    opacity:
+        1;
+}
+
+
+/*
+   Leave space for Engineering on desktop so
+   Contact can never overlap with it.
+*/
+
+@media (min-width: 992px) {
+
+    .navbarScroll
+    .navbar-collapse {
+        padding-right:
+            130px;
+    }
+
+}
+
+
+/* =====================================================
+   MUSIC PLAYER
+===================================================== */
+
+#music-player {
+    position:
+        fixed;
+
+    right:
+        20px;
+
+    bottom:
+        18px;
+
+    z-index:
+        1040;
+
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+
+    padding:
+        9px
+        14px;
+
+
+    border:
+        1px solid
+        #ffffff25;
+
+    border-radius:
+        30px;
+
+
+    background:
+        #161d28ed;
+
+
+    box-shadow:
+        0 6px 25px
+        #0003;
+
+
+    color:
+        #e1e6dd;
+}
+
+
+#music-player span {
+    font:
+        11px
+        Montserrat,
+        sans-serif;
+
+    letter-spacing:
+        1px;
+}
+
+
+#music-player audio {
+    width:
+        min(
+            290px,
+            65vw
+        );
+
+    height:
+        34px;
+}
+
+
+/* Player when inserted into Home hero */
+
+#music-player.home-mode {
+    position:
+        absolute;
+
+    right:
+        auto;
+
+    bottom:
+        auto;
+
+    transform:
+        translateX(-50%);
+}
+
+
+#home-player-slot {
+    margin-top:
+        24px;
+
+    height:
+        60px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+#footer {
+    display:
+        none;
+}
+
+
+.social-icons {
+    font-size:
+        34px;
+
+    cursor:
+        pointer;
+}
+
+
+.social-icons a {
+    color:
+        #ffffff;
+
+    margin:
+        0 12px;
+
+    display:
+        inline-block;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.social-icons a:hover {
+    color:
+        var(--accent);
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =====================================================
+   GENERIC PAGE SECTION
+===================================================== */
+
+.page-section {
+    min-height:
+        100vh;
+
+    padding:
+        110px
+        24px
+        60px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+}
+
+
+/* =====================================================
+   TABLET / MOBILE NAVBAR
+   Bootstrap breakpoint = 992px
 ===================================================== */
 
 @media (max-width: 991.98px) {
 
-    body {
-        height: auto;
-        overflow: visible;
-        overscroll-behavior: auto;
-    }
-
-    /* Navbar */
     .navbarScroll {
-        min-height: 80px;
-        padding: 8px 0;
+        min-height:
+            80px;
+
+        padding:
+            8px 0;
     }
 
-    /* Container: logo left, hamburger right */
-    .navbarScroll .container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        min-height: 64px;
+
+    .navbarScroll
+    .container {
+        position:
+            relative;
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            space-between;
+
+        flex-wrap:
+            wrap;
+
+        min-height:
+            64px;
     }
 
-    /* Logo */
+
+    /* ---------------------------------------------
+       ORIGINAL MOBILE LOGO SETTINGS
+    --------------------------------------------- */
+
     .navbar-brand {
-        position: relative;
+        position:
+            relative;
 
-        width: 72px;
-        height: 72px;
+        width:
+            72px;
 
-        top: auto;
-        left: auto;
-        transform: none;
+        height:
+            72px;
 
-        margin: 0;
-        padding: 0;
+        top:
+            auto;
 
-        flex-shrink: 0;
+        left:
+            auto;
+
+        transform:
+            none;
+
+        margin:
+            0;
+
+        padding:
+            0;
+
+        flex-shrink:
+            0;
     }
 
-    /* Hamburger button */
-    .navbarScroll .navbar-toggler {
-        position: relative;
 
-        top: auto;
-        right: auto;
-        transform: none;
+    /* ---------------------------------------------
+       ENGINEERING
+       Right side, before hamburger
+    --------------------------------------------- */
 
-        margin: 0 0 0 auto;
+    .engineering-link {
+        position:
+            absolute;
 
-        flex-shrink: 0;
+        top:
+            50%;
 
-        z-index: 10;
+        right:
+            62px;
+
+        transform:
+            translateY(-50%);
+
+        font-size:
+            0.62rem;
+
+        letter-spacing:
+            0.1em;
+
+        white-space:
+            nowrap;
     }
 
-    /* Dropdown menu */
-    .navbarScroll .navbar-collapse {
-        flex-basis: 100%;
-        width: 100%;
-        text-align: right;
+
+    /* ---------------------------------------------
+       HAMBURGER
+    --------------------------------------------- */
+
+    .navbarScroll
+    .navbar-toggler {
+        position:
+            relative;
+
+        top:
+            auto;
+
+        right:
+            auto;
+
+        transform:
+            none;
+
+        margin:
+            0 0 0 auto;
+
+        flex-shrink:
+            0;
+
+        z-index:
+            30;
     }
 
-    /* Align links to the right */
-    .navbarScroll .navbar-nav {
-        width: max-content;
-        margin-left: auto !important;
 
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+    /* ---------------------------------------------
+       COLLAPSED MENU
+    --------------------------------------------- */
 
-        padding: 12px 0;
+    .navbarScroll
+    .navbar-collapse {
+        flex-basis:
+            100%;
+
+        width:
+            100%;
+
+        padding-right:
+            0;
+
+        text-align:
+            right;
     }
 
-    .navbarScroll .nav-item {
-        width: 100%;
+
+    .navbarScroll
+    .navbar-nav {
+        width:
+            max-content;
+
+        margin-left:
+            auto !important;
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-end;
+
+        padding:
+            12px 0;
     }
 
-    .navbarScroll .nav-link {
-        text-align: right;
-        padding: 10px 0;
+
+    .navbarScroll
+    .nav-item {
+        width:
+            100%;
     }
 
-    /* Other page sections */
+
+    .navbarScroll
+    .nav-link {
+        text-align:
+            right;
+
+        padding:
+            10px 0;
+    }
+
+
     .page-section {
-        padding: 96px 18px 60px;
+        padding:
+            96px
+            18px
+            60px;
     }
+
 }
 
 
 /* =====================================================
-   SMALL MOBILE SCREENS
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    #music-player {
+        right:
+            8px;
+
+        bottom:
+            8px;
+
+        padding:
+            7px
+            10px;
+
+        gap:
+            8px;
+    }
+
+
+    #music-player span {
+        font-size:
+            9px;
+    }
+
+
+    .engineering-link {
+        right:
+            58px;
+
+        font-size:
+            0.55rem;
+
+        letter-spacing:
+            0.07em;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
 ===================================================== */
 
 @media (max-width: 480px) {
 
     .navbarScroll {
-        min-height: 70px;
+        min-height:
+            70px;
     }
 
+
     .navbar-brand {
-        width: 60px;
-        height: 60px;
+        width:
+            60px;
+
+        height:
+            60px;
+    }
+
+
+    .engineering-link {
+        right:
+            56px;
+
+        font-size:
+            0.5rem;
+
+        letter-spacing:
+            0.05em;
+    }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition:
+            none !important;
     }
 
 }
