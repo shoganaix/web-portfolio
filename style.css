@@ -3542,3 +3542,88 @@ and
     }
 
 }
+/* Refined heading and distinct frame details. */
+.choice-heading { margin-bottom: clamp(45px, 6vw, 80px); }
+.choice-heading .creator { color: #9baabc; font: 500 10px/1.5 var(--sans); letter-spacing: .36em; margin: 0 0 22px; }
+.choice-heading h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(35px, 4.5vw, 66px); line-height: 1.17; letter-spacing: -.055em; color: #eff3f8; margin: 0; text-shadow: none; }
+.heading-accent { color: #b0c8e5; }
+.engineering-card { transform: rotate(2.5deg) translateY(5px); }
+.engineering-card .card-frame { border-color: #6d9caf; box-shadow: inset 0 0 0 4px #0c1726, inset 0 0 22px #86dbe514; }
+.circuit-trim { position: absolute; top: -17px; left: 0; width: 100%; height: 90px; color: #81bcc9; pointer-events: none; opacity: .9; filter: drop-shadow(0 0 4px #69d6ef30); }
+.engineering-card .orbit-emblem { stroke: #b1e7ef; }
+@media(hover:hover) { .engineering-card:hover { transform: rotate(.5deg) translateY(-10px); } }
+@media(max-width:800px) {
+    .choice-heading h1 { max-width: 560px; margin-inline: auto; font-size: clamp(35px,7vw,52px); }
+    .heading-accent { display: block; }
+    .engineering-card { transform: rotate(1.7deg); }
+    .circuit-trim { top: -14px; height: 75px; }
+    .game-card .leaf-sprig { width: 145px; }
+    .game-card .sprig-top { right: 4px; }
+}
+/* Game ? a pixel-cut cartridge with a recessed screen and a quiet label panel. */
+.game-card .card-frame {
+    padding: 14px 10px 10px;
+    border: 0;
+    outline: none;
+    background: #263e35;
+    box-shadow: inset 0 3px #9caf8e, inset 3px 0 #617d65,
+                inset -3px 0 #13271e, inset 0 -5px #10231c;
+    clip-path: polygon(0 8px, 8px 8px, 8px 0, calc(100% - 8px) 0,
+        calc(100% - 8px) 8px, 100% 8px, 100% calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+        8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px));
+}
+.game-card .card-art {
+    border: 3px solid #10241c;
+    box-shadow: 0 2px #6f886a;
+}
+.game-card .card-caption {
+    position: relative;
+    margin-top: 12px;
+    padding: 18px 16px;
+    background: #101f19;
+    border: 0;
+    box-shadow: inset 0 1px #526a52;
+}
+.game-card h2 {
+    color: #f1f5e8; font-size: clamp(38px, 3.5vw, 52px);
+    font-weight: 500; letter-spacing: 0; text-shadow: none;
+}
+.game-card .chapter { color: #afc49f; opacity: 1; font-size: 10px; }
+.game-card .card-caption p { color: #c9d4c5; font: 400 10px/1.6 var(--sans); letter-spacing: .04em; }
+.game-card .card-arrow {
+    flex: 0 0 48px; width: 48px; height: 48px;
+    display: grid; place-items: center;
+    color: #e3efcd; background: #304b37;
+    border: 0; border-radius: 0; outline: none;
+    box-shadow: inset 0 3px #859e68, inset 3px 0 #658354,
+                inset -3px 0 #203724, inset 0 -4px #152b1e;
+    clip-path: polygon(4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px,
+        100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px),
+        calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+        0 calc(100% - 4px), 0 4px, 4px 4px);
+}
+.game-card .card-arrow::after { content: none; }
+.game-card .card-arrow svg { width: 24px; height: 24px; transition: transform 160ms steps(2, end); }
+.game-card:is(:hover, :focus-visible) .card-arrow { background: #3e5b40; }
+.game-card:is(:hover, :focus-visible) .card-arrow svg { transform: translateX(2px); }
+.game-card .leaf-sprig {
+    display: block; position: absolute; z-index: 3;
+    width: 220px; height: 90px; border: 0; border-radius: 0;
+    background: url('assets/landing/ivy-sprig.svg') center / contain no-repeat;
+    image-rendering: auto; filter: drop-shadow(0 2px 2px #08170f80); pointer-events: none;
+}
+.game-card .sprig-top { top: -33px; right: -9px; left: auto; bottom: auto; transform: none; }
+.game-card .sprig-bottom { bottom: -52px; left: -9px; top: auto; right: auto; transform: rotate(180deg); }
+.game-card .art-label, .engineering-card .art-label {
+    color: #e4f2ef; background: #0a1927ed; padding: 7px 9px; left: 10px; bottom: 10px;
+    max-width: calc(100% - 20px); font: 500 9px/1.5 var(--sans); letter-spacing: .08em; text-shadow: none;
+}
+.engineering-card .card-art { background: #081521; }
+.engineering-card .card-art img { object-fit: contain; filter: none; }
+.engineering-card .orbit-emblem { display: none; }
+@media (max-width: 600px) {
+    .game-card .leaf-sprig { width: 176px; height: 72px; }
+    .game-card .sprig-top { top: -26px; right: -7px; }
+    .game-card .sprig-bottom { bottom: -42px; left: -7px; }
+}

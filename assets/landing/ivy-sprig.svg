@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 90">
+  <defs>
+    <linearGradient id="leaf" x2=".8" y2="1">
+      <stop stop-color="#b4c88b"/><stop offset=".5" stop-color="#8ca966"/><stop offset="1" stop-color="#506e43"/>
+    </linearGradient>
+    <g id="bud">
+      <path d="M0 0C-5-15 3-25 19-28C22-12 16-2 0 0Z" fill="url(#leaf)"/>
+      <path d="M0 0Q7-12 16-24" fill="none" stroke="#c1ce94" stroke-opacity=".55" stroke-width="1"/>
+    </g>
+  </defs>
+  <path d="M8 47C50 27 106 28 151 35S199 48 209 73" fill="none" stroke="#304b34" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M8 46C50 26 106 27 151 34S199 47 209 72" fill="none" stroke="#81935b" stroke-width="1.5" stroke-linecap="round"/>
+  <use href="#bud" transform="translate(27 39) rotate(-47) scale(.8)"/>
+  <use href="#bud" transform="translate(48 33) rotate(24)"/>
+  <use href="#bud" transform="translate(69 31) rotate(-139) scale(.88)"/>
+  <use href="#bud" transform="translate(85 30) rotate(-10) scale(1.08)"/>
+  <use href="#bud" transform="translate(111 30) rotate(-145) scale(.95)"/>
+  <use href="#bud" transform="translate(130 32) rotate(12) scale(.9)"/>
+  <use href="#bud" transform="translate(153 36) rotate(-133) scale(.85)"/>
+  <use href="#bud" transform="translate(174 42) rotate(26) scale(.85)"/>
+  <use href="#bud" transform="translate(194 52) rotate(-119) scale(.73)"/>
+  <use href="#bud" transform="translate(207 68) rotate(47) scale(.68)"/>
+</svg>

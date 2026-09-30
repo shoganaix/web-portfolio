@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640">
+  <defs>
+    <radialGradient id="bg"><stop stop-color="#173746"/><stop offset="1" stop-color="#081521"/></radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#689daa" stroke-opacity=".12"/></pattern>
+    <pattern id="cells" width="36" height="36" patternUnits="userSpaceOnUse"><rect width="36" height="36" fill="#123344"/><rect x="3" y="3" width="30" height="30" fill="#194354" stroke="#73b8c9" stroke-width=".8"/></pattern>
+  </defs>
+  <path fill="url(#bg)" d="M0 0H960V640H0z"/><path fill="url(#grid)" d="M0 0H960V640H0z"/>
+  <g fill="none" stroke="#497580" stroke-width="1.5">
+    <ellipse cx="480" cy="325" rx="365" ry="195" transform="rotate(-18 480 325)" stroke-dasharray="7 10"/>
+    <path d="M60 320H900M480 60V580" stroke-opacity=".35"/>
+    <path d="M35 80V35H80M880 35H925V80M35 560V605H80M880 605H925V560"/>
+  </g>
+  <g stroke="#9ad8df" stroke-width="2" stroke-linejoin="round">
+    <path d="M380 291L168 178L80 237L292 351Z" fill="url(#cells)"/>
+    <path d="M593 294L783 396L873 335L683 233Z" fill="url(#cells)"/>
+    <path d="M358 218L480 146L610 220L488 294Z" fill="#244753"/>
+    <path d="M358 218L488 294V485L358 407Z" fill="#153340"/>
+    <path d="M488 294L610 220V408L488 485Z" fill="#0b2635"/>
+    <path d="M370 240L475 302V462L370 399ZM501 304L597 247V399L501 457" fill="none"/>
+    <path d="M380 225L480 167L587 226L488 282Z" fill="#102d3a"/>
+    <path d="M393 261V393L457 430V299Z" fill="url(#cells)"/>
+    <path d="M519 311L578 277V381L519 416Z" fill="url(#cells)"/>
+    <circle cx="482" cy="222" r="23" fill="#315a64"/>
+    <path d="M482 222V94M475 100H489M420 185L373 109M550 186L599 111" fill="none"/>
+    <path d="M358 218L488 294L610 220M488 294V485" fill="none" stroke="#e0f4ee" stroke-width="4"/>
+  </g>
+  <g fill="none" stroke="#78acba" stroke-width="1.5">
+    <path d="M615 217L688 145H822M611 408L674 480H824M355 407L274 464H138"/>
+    <circle cx="615" cy="217" r="4"/><circle cx="611" cy="408" r="4"/><circle cx="355" cy="407" r="4"/>
+  </g>
+  <g fill="#a2c6d0" font-family="monospace" font-size="15" letter-spacing="2">
+    <text x="55" y="70">CUBESAT / CONCEPT STUDY</text>
+    <text x="701" y="135">STRUCTURE</text><text x="690" y="504">BODY FRAME</text><text x="138" y="489">SOLAR ARRAY</text>
+    <text x="55" y="583" font-size="12">ISOMETRIC VIEW · NOT TO SCALE</text>
+  </g>
+</svg>
