@@ -96,6 +96,7 @@ function SetupTouchControls(canvas) {
     const interact = document.getElementById("touch-interact");
     const shoot = document.getElementById("touch-shoot");
     const sprint = document.getElementById("touch-sprint");
+    const pulse = document.getElementById("touch-pulse");
     let joystickPointer = null;
 
     const setAction = (keycode) => {
@@ -156,6 +157,11 @@ function SetupTouchControls(canvas) {
         setAction(KEY.SPACE);
         event.preventDefault();
     }, { passive: false });
+    pulse.addEventListener("pointerdown", (event) => {
+        if (pulse.disabled) return;
+        setAction(KEY.F);
+        event.preventDefault();
+    });
 
     canvas.addEventListener("touchstart", (event) => {
         const touch = event.touches[0];

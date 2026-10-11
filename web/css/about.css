@@ -63,7 +63,7 @@ body {
 
     background-size:
         cover,
-        cover,
+        contain,
         240% 240%;
 
     background-position:
@@ -84,16 +84,16 @@ body {
 }
 
 
-/* Original floating background effect */
+/* Keep the landscape fully framed; only the ambient gradient drifts. */
 
 @keyframes aboutFlow {
 
     0%, 100% {
-        background-position: 0% 0%;
+        background-position: center, center bottom, 0% 0%;
     }
 
     50% {
-        background-position: 100% 100%;
+        background-position: center, center bottom, 100% 100%;
     }
 
 }
@@ -717,7 +717,7 @@ body {
 
         background-size:
             cover,
-            cover,
+            contain,
             240% 240%;
 
         background-repeat:
@@ -883,14 +883,14 @@ body {
     0%, 100% {
         background-position:
             center,
-            48% bottom,
+            center bottom,
             47% 47%;
     }
 
     50% {
         background-position:
             center,
-            52% bottom,
+            center bottom,
             53% 53%;
     }
 

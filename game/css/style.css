@@ -846,7 +846,7 @@ body {
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: 767px), (pointer: coarse) {
 
     body {
         touch-action: none;
@@ -1228,3 +1228,43 @@ body {
     }
 
 }
+#hud-pulse { position: fixed; top: 210px; right: 20px; color: #a4d7ff; font-size: 9px; line-height: 1.6; text-shadow: 2px 2px #173047; }
+@media (max-width: 767px), (pointer: coarse) {
+    .mobile-actions {
+        display: grid;
+        grid-template-areas: "interact sprint" "pulse shoot";
+        grid-template-columns: repeat(2, 78px);
+        gap: 10px;
+        justify-items: center;
+        align-items: center;
+        pointer-events: none;
+    }
+    .mobile-actions button { pointer-events: auto; }
+    #touch-interact { grid-area: interact; }
+    #touch-sprint { grid-area: sprint; }
+    #touch-shoot { grid-area: shoot; }
+    .mobile-actions #touch-pulse {
+        grid-area: pulse; position: relative; width: 72px; height: 72px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+        border: 2px solid #b8a7ef; border-radius: 50%; color: #eee7ff;
+        background: radial-gradient(circle, #30234b 62%, transparent 64%),
+            conic-gradient(from -90deg, #c6b5ff var(--pulse-charge, 100%), #44375b 0);
+        box-shadow: 0 3px 0 #171224, inset 0 0 12px #baa2f51a;
+        font-size: 8px;
+    }
+    .pulse-icon {
+        width: 18px; height: 18px; border: 1px solid currentColor; border-radius: 50%;
+        background: radial-gradient(circle, #eee7ff 0 3px, transparent 4px);
+        box-shadow: 0 0 0 3px #c6b5ff33;
+    }
+    .pulse-state { font-size: 6px; color: #c6b5ff; }
+    .mobile-actions #touch-pulse:disabled { color: #b1a7c5; border-color: #76638f; }
+    .mobile-actions #touch-pulse:active:not(:disabled) { transform: scale(.94); }
+    .mobile-actions #touch-pulse:focus-visible { outline: 2px solid #eee7ff; outline-offset: 3px; }
+}
+@media (max-width: 600px) {
+    .mobile-actions { grid-template-columns: repeat(2, 64px); gap: 8px; }
+    .mobile-actions #touch-shoot { width: 64px; height: 64px; }
+    .mobile-actions #touch-pulse { width: 64px; height: 64px; }
+}
+@media (max-width: 600px) { #hud-pulse { top: 195px; right: 14px; font-size: 8px; } }

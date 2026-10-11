@@ -42,6 +42,8 @@ class Scene {
         this.interactables.push(new Interactable(1400, 1300, "sign"));
         this.interactables.push(new Interactable(513, 1287, "portal"));
         this.interactables.push(new Interactable(2450, 820, "enemyPortal"));
+        this.interactables.push(new Interactable(1730, 1110, "bench"));
+        this.interactables.forEach(item => { item.scene = this; });
 
         this.npcs.push(new NPC(1550, 1400, "Guide", "guide", Placeholders.Guide()));
         this.npcs.push(new NPC(3050, 620, "Sage", "sage", Placeholders.Sage(), [
@@ -56,7 +58,8 @@ class Scene {
         this.enemies.push(new Enemy(2100, 1310, [{ x: 2040, y: 1280 }, { x: 2160, y: 1340 }], "#9b59b6"));
         this.enemies.push(new Enemy(2240, 1450, [{ x: 2220, y: 1510 }, { x: 2270, y: 1390 }], "#c94f6d"));
 
-        // Five gems hidden around the valley (plus drops from enemies).
+        // One polaroid near the starting point, plus five around the valley.
+        this.gems.push(new Gem(1370, 1160, "#4fd6c1", this.nextArtworkIndex++));
         this.gems.push(new Gem(1300, 920, "#4fd6c1", this.nextArtworkIndex++));
         this.gems.push(new Gem(1800, 1520, "#8bd24f", this.nextArtworkIndex++));
         this.gems.push(new Gem(2200, 720, "#4fa8d6", this.nextArtworkIndex++));
@@ -68,7 +71,34 @@ class Scene {
     }
 
     spawnGem(x, y) {
-        this.gems.push(new Gem(x, y, "#8bd24f", this.nextArtworkIndex++));
+        const position = this._findFreePosition(x, y, 22 * CFG.SPRITE_SCALE, 18 * CFG.SPRITE_SCALE, 32);
+        if (!position) return;
+        this.gems.push(new Gem(position.x, position.y, "#8bd24f", this.nextArtworkIndex++));
+    }
+
+    _findFreePosition(x, y, width, height, clearance = 16) {
+        const candidate = (px, py) => {
+            px = Clamp(px, clearance, CFG.WORLD_W - width - clearance);
+            py = Clamp(py, clearance, CFG.WORLD_H - height - clearance);
+            const bounds = MakeRect(px - clearance, py - clearance,
+                width + clearance * 2, height + clearance * 2);
+            return this.solids.some(solid => IsColliding(bounds, solid.rect()))
+                ? null : { x: px, y: py };
+        };
+        const origin = candidate(x, y);
+        if (origin) return origin;
+
+        // Search outwards so drops stay close to the defeated enemy.
+        const maxRadius = Math.hypot(CFG.WORLD_W, CFG.WORLD_H);
+        for (let radius = 32; radius <= maxRadius; radius += 32) {
+            const steps = Math.ceil(Math.PI * 2 * radius / 32);
+            for (let step = 0; step < steps; step++) {
+                const angle = step / steps * Math.PI * 2;
+                const position = candidate(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
+                if (position) return position;
+            }
+        }
+        return null;
     }
 
     spawnProjectile(x, y, targetX, targetY, spreadAngle) {
@@ -128,9 +158,21 @@ class Scene {
 
         this.camera.update(dt);
         Dialogue.update(dt);
+        this._checkCollectionComplete();
 
         HUD.update(this.projectiles.length);
         this._updateHint();
+    }
+
+    _checkCollectionComplete() {
+        if (GameState.collectionComplete || !this.waveComplete || Dialogue.isOpen() ||
+            GameState.paused || GameState.hearts <= 0 ||
+            !ARTWORKS.every((_, index) => GameState.artworks.includes(index))) return;
+        GameState.collectionComplete = true;
+        GameState.maxHearts += 1;
+        GameState.hearts = GameState.maxHearts;
+        this.player.resting = null;
+        Dialogue.start("collectionComplete", GameState, () => HUD.toggleGallery(true));
     }
 
     _updateHint() {
@@ -150,9 +192,13 @@ class Scene {
             if (it.type === "chest") hint = GameState.chestOpened ? "E — Chest (empty)" : "E — Open chest";
             else if (it.type === "rewardChest") hint = GameState.rewardChestOpened ? "E — Chest (empty)" : "E — Claim reward chest";
             else if (it.type === "sign") hint = "E — Read sign";
-            else if (it.type === "portal") {
+            else if (it.type === "bench") {
+                hint = this.player.resting === it
+                    ? "Resting: +1 heart / 1.5s. Move or E to leave."
+                    : "E — Rest and recover health";
+            } else if (it.type === "portal") {
                 hint = GameState.sageSpoken
-                    ? (it.confirmPortal ? "E — Step through the tower" : "E — Touch the tower")
+                    ? (GameState.pulseUnlocked ? "F — Arcane pulse" : "E — Unlock arcane pulse")
                     : "E — Examine the tower";
             } else if (it.type === "enemyPortal") {
                 hint = GameState.endlessEnemies ? "Enemy portal active" : "E — Awaken the enemy portal";
@@ -167,7 +213,7 @@ class Scene {
                     break;
                 }
             }
-            if (close) hint = "SPACE — Attack!";
+            if (close) hint = "SPACE — Attack! Projectiles follow your mouse.";
         }
 
         HUD.showHint(hint);
@@ -193,8 +239,13 @@ class Scene {
 
         const angle = Math.random() * Math.PI * 2;
         const distance = 420;
-        const x = Clamp(this.player.x + Math.cos(angle) * distance, 80, CFG.WORLD_W - 120);
-        const y = Clamp(this.player.y + Math.sin(angle) * distance, 80, CFG.WORLD_H - 100);
+        const position = this._findFreePosition(
+            this.player.x + Math.cos(angle) * distance,
+            this.player.y + Math.sin(angle) * distance,
+            26 * CFG.SPRITE_SCALE, 20 * CFG.SPRITE_SCALE
+        );
+        if (!position) return;
+        const { x, y } = position;
         const enemy = new Enemy(x, y, [
             { x: Clamp(x - 140, 60, CFG.WORLD_W - 100), y: Clamp(y - 100, 60, CFG.WORLD_H - 80) },
             { x: Clamp(x + 140, 60, CFG.WORLD_W - 100), y: Clamp(y + 100, 60, CFG.WORLD_H - 80) },
@@ -216,6 +267,7 @@ class Scene {
             "rewardChest"
         );
         this.interactables.push(rewardChest);
+        rewardChest.scene = this;
         this.solids.push(rewardChest);
         Dialogue.start("waveComplete", GameState);
     }

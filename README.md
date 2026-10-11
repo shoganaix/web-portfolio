@@ -115,3 +115,11 @@ entity → interactable → tree → gem → npc → enemy → player → scene 
 ## Credits
 
 Original concept and art by Maria Soriano (a.k.a. Shoganai).
+
+## Game progression and controls
+
+- WASD/arrows move, SHIFT sprints, SPACE casts up to three returning orbs. Aim with the mouse or touch the canvas.
+- E interacts. The enlarged bench has a solid base; E starts resting, restoring one heart every 1.5 seconds. Movement, attacks, damage or E stop resting. Health does not regenerate while walking.
+- Collect five artworks and speak to the Sage, then interact with the west tower to unlock an arcane pulse: F or the mobile PULSE button. It deals two damage with knockback inside a 260-world-pixel radius and has a five-second cooldown.
+- The east tower starts a fifteen-enemy trial. Both chests drop collectible artworks, making the full 26-piece collection attainable.
+- Finishing the trial and collecting every artwork grants the Curator's Halo, one extra maximum heart, full healing, a closing dialogue and the completed gallery. The reward triggers once per run.

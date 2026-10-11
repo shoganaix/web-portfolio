@@ -23,6 +23,7 @@
 		<div id="hud-hearts" aria-label="Health"></div>
 		<div id="hud-gems" aria-label="Unlocked artworks"></div>
 		<div id="hud-orbs" aria-label="Orbs"></div>
+        <div id="hud-pulse" class="hidden" aria-live="polite"></div>
 		<button id="artwork-open" type="button">ART</button>
 		<div id="hint" class="hidden"></div>
 	</div>
@@ -52,7 +53,9 @@
 			<ul class="controls">
 				<li><span>WASD / Arrows</span> move</li>
 				<li><span>E</span> interact</li>
-				<li><span>SPACE</span> attack</li>
+                <li><span>SPACE</span> attack — projectiles follow your mouse cursor</li>
+                <li><span>F</span> arcane pulse (unlock at the west tower)</li>
+                <li><span>E at bench</span> rest and recover health</li>
 				<li><span>ESC</span> pause</li>
 			</ul>
 			<div class="pause-actions">
@@ -61,7 +64,7 @@
 				<button id="btn-restart" class="pixel-btn" onclick="window.location.reload()">Restart</button>
 			</div>
 			<p class="pause-note">
-				Your quest: collect five artworks and visit the Tower of Creation to open this portfolio's website.
+                Collect five artworks, speak to the Sage and unlock the west tower's pulse. Defeat the east tower's wave and collect every artwork to restore the valley.
 			</p>
 		</div>
 	</div>
@@ -74,6 +77,11 @@
 			<button id="touch-interact" type="button">E</button>
 			<button id="touch-sprint" class="touch-sprint" type="button" aria-label="Hold to sprint">RUN</button>
 			<button id="touch-shoot" type="button">ORB</button>
+            <button id="touch-pulse" class="hidden" type="button" aria-label="Arcane pulse">
+                <span class="pulse-icon" aria-hidden="true"></span>
+                <span class="pulse-label">PULSE</span>
+                <span class="pulse-state">READY</span>
+            </button>
 		</div>
 	</div>
 

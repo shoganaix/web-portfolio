@@ -112,13 +112,17 @@ class Enemy extends Entity {
     }
 
     draw(ctx) {
+        const authored = GameArt.ready(GameArt.enemy);
+        const image = authored ? GameArt.enemy : this.sprite;
+        const height = authored ? this.w * image.naturalHeight / image.naturalWidth : this.h;
+        const offsetY = this.h - height;
         ctx.save();
         if (this.dir < 0) {
             ctx.translate(this.x + this.w, this.y);
             ctx.scale(-1, 1);
-            ctx.drawImage(this.sprite, 0, 0, this.w, this.h);
+            ctx.drawImage(image, 0, offsetY, this.w, height);
         } else {
-            ctx.drawImage(this.sprite, this.x, this.y, this.w, this.h);
+            ctx.drawImage(image, this.x, this.y + offsetY, this.w, height);
         }
         ctx.restore();
 

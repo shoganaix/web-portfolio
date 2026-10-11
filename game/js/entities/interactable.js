@@ -10,6 +10,9 @@ class Interactable extends Entity {
         let w, h, collW, collH;
 
         switch (type) {
+            case "bench":
+                w = 72 * S; h = 53 * S; collW = w; collH = h;
+                break;
             case "chest":
                 w = 34 * S; h = 29 * S; collW = 34 * S; collH = 14 * S;
                 break;
@@ -35,14 +38,17 @@ class Interactable extends Entity {
         this.type = type;
         this.used = false;
         this.near = false;
-        this.confirmPortal = false;
 
         // Chest opening animation state (5 frames, see img/openchestsheet.png).
         this.opening = false;
         this.openTimer = 0;
         this.openFrame = 0;
 
-        if (type === "chest" || type === "rewardChest") {
+        if (type === "bench") {
+            this.img = GameArt.bench;
+            this.imgSelected = this.img;
+            this.imgOpenSheet = null;
+        } else if (type === "chest" || type === "rewardChest") {
             this.img = LoadImage("img/Cofre.png");
             this.imgSelected = LoadImage("img/CofreSeleccion.png");
             this.imgOpenSheet = LoadImage("img/openchestsheet.png");
@@ -78,11 +84,6 @@ class Interactable extends Entity {
         const wasNear = this.near;
         this.near = IsInTrigger(player.rect(), this.rect());
 
-        // Leaving the tower cancels the confirm state.
-        if (!this.near) {
-            this.confirmPortal = false;
-        }
-
         // Chest opening animation: play frames, then show the message below.
         if (this.opening) {
             const FRAME_TIME = 0.12;
@@ -95,17 +96,19 @@ class Interactable extends Entity {
             }
         }
 
-        // Confirmed portal: pressing E while still near the tower goes to web.
-        if (this.type === "portal" && this.near && this.confirmPortal && !Dialogue.isOpen() && Input.Pressed(KEY.E)) {
-            window.location.href = "../web/index.html";
-            return;
-        }
-
         return wasNear !== this.near;
     }
 
     interact() {
         switch (this.type) {
+            case "bench":
+                if (this.scene) {
+                    const player = this.scene.player;
+                    player.resting = player.resting === this ? null : this;
+                    player.healTimer = 0;
+                    player.kbX = player.kbY = 0;
+                }
+                break;
             case "chest":
             case "rewardChest":
                 if (this.opening) break;
@@ -115,7 +118,7 @@ class Interactable extends Entity {
                 } else {
                     if (this.type === "rewardChest") GameState.rewardChestOpened = true;
                     else GameState.chestOpened = true;
-                    GameState.gems += 1;
+                    if (this.scene) this.scene.spawnGem(this.x + this.w + 20, this.y + this.h);
                     this.opening = true;
                     this.openTimer = 0;
                     this.openFrame = 0;
@@ -131,16 +134,17 @@ class Interactable extends Entity {
                     Dialogue.start("portalLocked", GameState);
                     break;
                 }
-                if (this.confirmPortal) {
-                    window.location.href = "../web/index.html";
-                } else {
-                    Dialogue.start("portal", GameState, () => {
-                        this.confirmPortal = true;
-                    });
-                }
+                if (!GameState.pulseUnlocked) {
+                    GameState.pulseUnlocked = true;
+                    Dialogue.start("portal", GameState);
+                } else Dialogue.start("pulseReady", GameState);
                 break;
 
             case "enemyPortal":
+                if (this.scene && this.scene.waveComplete) {
+                    Dialogue.start("trialComplete", GameState);
+                    break;
+                }
                 if (!GameState.endlessEnemies) {
                     GameState.endlessEnemies = true;
                     Dialogue.start("enemyPortal", GameState);
@@ -150,7 +154,11 @@ class Interactable extends Entity {
     }
 
     draw(ctx) {
-        if (!this.img) return;
+        if (!this.img || !this.img.complete || !this.img.naturalWidth) return;
+        if (this.type === "bench") {
+            ctx.fillStyle = "#263e3540";
+            ctx.fillRect(this.x + 12, this.y + this.h - 12, this.w - 24, 16);
+        }
 
         const isChest = this.type === "chest" || this.type === "rewardChest";
         const chestOpened = this.type === "rewardChest" ? GameState.rewardChestOpened : GameState.chestOpened;

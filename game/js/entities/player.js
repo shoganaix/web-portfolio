@@ -36,6 +36,9 @@ class Player extends Entity {
         // instantly re-open the same prop.
         this.interactCd = 0;
         this.healTimer = 0;
+        this.resting = null;
+        this.pulseCd = 0;
+        this.pulseEffect = 0;
 
         this.animTimer = 0;
         this.animFrame = 0;
@@ -49,6 +52,8 @@ class Player extends Entity {
     }
 
     reset() {
+        this.resting = null;
+        this.healTimer = 0;
         this.x = this.spawnX;
         this.y = this.spawnY;
         this.kbX = 0;
@@ -61,6 +66,8 @@ class Player extends Entity {
         if (GameState.invuln > 0 || Dialogue.isOpen() || GameState.hearts <= 0) return;
 
         GameState.hearts = Math.max(0, GameState.hearts - dmg);
+        this.resting = null;
+        this.healTimer = 0;
         GameState.invuln = CFG.PLAYER_IFRAMES;
 
         const dx = this.x - srcX;
@@ -80,15 +87,8 @@ class Player extends Entity {
         this.attackCd = Math.max(0, this.attackCd - dt);
         this.interactCd = Math.max(0, this.interactCd - dt);
         GameState.invuln = Math.max(0, GameState.invuln - dt);
-        if (GameState.hearts > 0 && GameState.hearts < GameState.maxHearts) {
-            this.healTimer += dt;
-            if (this.healTimer >= CFG.HEALTH_REGEN_INTERVAL) {
-                GameState.hearts = Math.min(GameState.maxHearts, GameState.hearts + 1);
-                this.healTimer = 0;
-            }
-        } else {
-            this.healTimer = 0;
-        }
+        this.pulseCd = Math.max(0, this.pulseCd - dt);
+        this.pulseEffect = Math.max(0, this.pulseEffect - dt);
         this.kbX *= Math.pow(0.0001, dt);
         this.kbY *= Math.pow(0.0001, dt);
 
@@ -114,6 +114,25 @@ class Player extends Entity {
         if (Input.Held(KEY.W) || Input.Held(KEY.UP)) vDir -= 1;
 
         this.moving = (hDir !== 0 || vDir !== 0);
+        if (this.resting) {
+            if (this.moving || Input.Pressed(KEY.SPACE) || Input.Pressed(KEY.F) ||
+                !IsInTrigger(this.rect(), this.resting.rect())) {
+                this.resting = null;
+                this.healTimer = 0;
+            } else {
+                this.healTimer += dt;
+                if (this.healTimer >= CFG.BENCH_HEAL_INTERVAL) {
+                    GameState.hearts = Math.min(GameState.maxHearts, GameState.hearts + 1);
+                    this.healTimer = 0;
+                }
+                if (Input.Pressed(KEY.E) && this.interactCd <= 0) {
+                    this.resting = null;
+                    this.healTimer = 0;
+                    this.interactCd = 0.35;
+                }
+                return;
+            }
+        }
 
         if (this.moving) {
             const len = Math.sqrt(hDir * hDir + vDir * vDir) || 1;
@@ -147,6 +166,10 @@ class Player extends Entity {
         if (Input.Pressed(KEY.E) && this.interactCd <= 0) {
             this._tryInteract(world);
         }
+        if (Dialogue.isOpen() || this.resting) return;
+        if (Input.Pressed(KEY.F) && GameState.pulseUnlocked && this.pulseCd <= 0) {
+            this._pulse(world);
+        }
 
         // ----- 3. Attack -----
         if (Input.Pressed(KEY.SPACE) && !GameState.paused && world.projectiles.length < 3) {
@@ -157,6 +180,17 @@ class Player extends Entity {
             const spreadAngles = [-0.12, 0, 0.12];
             const spreadAngle = spreadAngles[world.projectiles.length];
             world.spawnProjectile(startX, startY, targetX, targetY, spreadAngle);
+        }
+    }
+
+    _pulse(world) {
+        this.pulseCd = CFG.PULSE_COOLDOWN;
+        this.pulseEffect = 0.5;
+        const x = this.x + this.w / 2, y = this.y + this.h / 2;
+        for (const enemy of world.enemies) {
+            if (!enemy.dead && DistSq(x, y, enemy.x + enemy.w / 2, enemy.y + enemy.h / 2) <= CFG.PULSE_RADIUS ** 2) {
+                enemy.takeHit(2, x, y);
+            }
         }
     }
 
@@ -176,7 +210,7 @@ class Player extends Entity {
         for (let i = 0; i < solids.length; i++) {
             const r = solids[i].rect();
             if (IsColliding(this.rect(), r)) {
-                if (dispY > 0) this.y = r.y - this.h + this.collH;
+                if (dispY > 0) this.y = r.y - this.h;
                 else if (dispY < 0) this.y = r.y + r.height - this.h + this.collH;
             }
         }
@@ -231,6 +265,19 @@ class Player extends Entity {
     }
 
     draw(ctx) {
+        if (this.pulseEffect > 0 || GameState.collectionComplete || this.resting) {
+            ctx.save();
+            const progress = 1 - this.pulseEffect / 0.5;
+            ctx.strokeStyle = this.resting ? "#a5e8b2" : GameState.collectionComplete ? "#e9cb79" : "#94d8ff";
+            ctx.lineWidth = 4;
+            ctx.globalAlpha = this.pulseEffect > 0 ? 1 - progress : 0.6;
+            ctx.beginPath();
+            ctx.ellipse(this.x + this.w / 2, this.pulseEffect > 0 ? this.y + this.h / 2 : this.y + this.h - 12,
+                this.pulseEffect > 0 ? CFG.PULSE_RADIUS * progress : 65,
+                this.pulseEffect > 0 ? CFG.PULSE_RADIUS * progress : 20, 0, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+        }
         // Blink while invulnerable
         if (GameState.invuln > 0 && Math.floor(GameState.invuln * 12) % 2 === 0) {
             return;

@@ -61,6 +61,23 @@
     Placeholders.Bubbling = () => bubbleCanvas || (bubbleCanvas = bubble());
 })();
 
+// Shared authored atlas; keep pickup identities and gameplay hitboxes unchanged.
+const GameArt = {
+    terrain: LoadImage("img/path.png"),
+    bench: LoadImage("img/banco.png"),
+    enemy: LoadImage("img/enemy.png"),
+    polaroids: LoadImage("img/assets2.png"),
+    frames: [[50,513,201,243], [268,504,230,268], [517,501,220,271], [742,504,237,268], [998,498,224,282]],
+    ready(image) { return image.complete && image.naturalWidth > 0; },
+    drawPolaroid(ctx, index, x, y, width, bottom) {
+        if (!this.ready(this.polaroids)) return false;
+        const [sx, sy, sw, sh] = this.frames[index % this.frames.length];
+        const height = width * sh / sw;
+        ctx.drawImage(this.polaroids, sx, sy, sw, sh, x, y + bottom - height, width, height);
+        return true;
+    }
+};
+
 const WorldArt = {
     create(width, height) {
         // Render once at authored pixel resolution, then scale with nearest-neighbor.
@@ -101,6 +118,34 @@ const WorldArt = {
             ctx.fillStyle="#536e50";ctx.fillRect(x,y,1,4);ctx.fillRect(x+2,y+2,1,2);
             if(i%3===0){ctx.fillStyle=i%2?"#e3c17b":"#c6b3a4";ctx.fillRect(x-1,y,3,2);}
         }
+        // Paint supplied tiles after loading, into the same background canvas.
+        // Keep the authored route and sanctuary positions intact.
+        const applyTerrain = () => {
+            if (!GameArt.ready(GameArt.terrain)) return;
+            const tile = document.createElement("canvas");
+            tile.width = tile.height = 48;
+            const tileCtx = tile.getContext("2d");
+            tileCtx.imageSmoothingEnabled = false;
+            tileCtx.drawImage(GameArt.terrain, 350, 45, 170, 180, 0, 0, 48, 48);
+            ctx.fillStyle = ctx.createPattern(tile, "repeat");
+            ctx.fillRect(0, 0, c.width, c.height);
+            path("#65753e", 39);
+            const dirt = document.createElement("canvas");
+            dirt.width = dirt.height = 48;
+            const dirtCtx = dirt.getContext("2d");
+            dirtCtx.imageSmoothingEnabled = false;
+            dirtCtx.drawImage(GameArt.terrain, 55, 45, 170, 180, 0, 0, 48, 48);
+            path(ctx.createPattern(dirt, "repeat"), 31);
+            // Restore the existing stone apron over the new grass.
+            for (let row = 0; row < 5; row++) for (let col = 0; col < 7; col++) {
+                const x = 153 + col * 18 + (row % 2) * 3, y = 580 + row * 9;
+                ctx.fillStyle = "#535f58"; ctx.fillRect(x, y, 17, 8);
+                ctx.fillStyle = (row + col) % 2 ? "#a3a58a" : "#90977f"; ctx.fillRect(x, y, 16, 6);
+                ctx.fillStyle = "#c5bc98"; ctx.fillRect(x + 1, y, 14, 1);
+            }
+        };
+        if (GameArt.ready(GameArt.terrain)) applyTerrain();
+        else GameArt.terrain.addEventListener("load", applyTerrain, { once: true });
         return c;
     }
 };

@@ -14,7 +14,7 @@
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const tau = Math.PI * 2;
   const rad = Math.PI / 180;
-  const state = { mode: 'orbit', yaw: -.3, pitch: -.18, phase: .65, tilt: 35, paused: reducedMotion.matches };
+  const state = { mode: 'orbit', yaw: -.3, pitch: -.18, phase: .65, tilt: -32, paused: reducedMotion.matches };
   let width = 1, height = 1, radius = 1, cx = 0, cy = 0;
   let frame = 0, last = 0, elapsed = 0, visible = true, dragging = false, pointerX = 0, pointerY = 0;
   let background;
@@ -250,8 +250,15 @@
     modes.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
     range.labels[0].firstChild.textContent = state.mode === 'orbit' ? 'INCLINATION ' : 'BODY TILT ';
     lab.querySelector('.scene-label').innerHTML = state.mode === 'orbit'
-      ? '<span class="crosshair">+</span> LOW EARTH ORBIT <span class="scene-label-sub">A small satellite. A bigger perspective.</span>'
+      ? '<span class="crosshair">+</span> LOW EARTH ORBIT <span class="scene-label-sub">Explore orbital geometry and inclination.</span>'
       : '<span class="crosshair">+</span> CUBESAT / BODY FRAME <span class="scene-label-sub">Explore the orientation of a 3U platform.</span>';
+    const orbit = state.mode === 'orbit';
+    document.getElementById('preview-title').textContent = orbit ? 'Orbital propagation' : 'Attitude dynamics & control';
+    document.getElementById('preview-description').textContent = orbit
+      ? 'Change the inclination to explore orbital geometry. The Python project implements orbital propagation alongside attitude dynamics.'
+      : 'Rotate the 3U platform and inspect its body axes. The Python project models rigid-body dynamics and quaternion-based PD control.';
+    document.getElementById('preview-key').textContent = orbit ? 'Model' : 'Control approach';
+    document.getElementById('preview-value').textContent = orbit ? 'Orbital motion' : 'Quaternion PD';
     render();
   }));
   document.getElementById('reset-scene').addEventListener('click', () => {

@@ -30,6 +30,9 @@ class Gem extends Entity {
         this.time += 0.05;
         const bob = Math.sin(this.time * 3) * 3 * CFG.SPRITE_SCALE;
         const drawY = this.y + bob;
+        ctx.fillStyle = "#233a3540";
+        ctx.fillRect(this.x + 6, this.y + this.h + 5, this.w - 12, 6);
+        if (GameArt.drawPolaroid(ctx, this.artworkIndex, this.x, drawY, this.w, this.h)) return;
         ctx.fillStyle = "#172033";
         ctx.fillRect(this.x - 3, drawY - 3, this.w + 6, this.h + 6);
         if (this.artwork.complete && this.artwork.naturalWidth > 0) {

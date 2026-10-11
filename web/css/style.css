@@ -1,118 +1,373 @@
-/* ---------- Home page ---------- */
+/* =====================================================
+   SHOGANAI — HOME PAGE
+===================================================== */
+
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .bgimage {
-    height: 100vh;
-    background-color: #1d1e22;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        100dvh;
+
+    min-height:
+        720px;
+
+
+    overflow:
+        hidden;
+
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    background-color:
+        #1d1e22;
 }
 
-/* Mouse parallax: three image layers moving at different depths */
+
+/* =====================================================
+   PARALLAX
+===================================================== */
+
 .parallax {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    overflow:
+        hidden;
+
+    pointer-events:
+        none;
 }
 
-/* Each layer is slightly larger than the container so the parallax
-   translation never exposes an empty edge. Far stays back, near comes up. */
-.layer {
-    position: absolute;
-    inset: -70px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    will-change: transform;
+
+/* subtle cinematic overlay */
+
+.parallax::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        10;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #08182355,
+            transparent 80%
+        );
+
+    pointer-events:
+        none;
 }
+
+
+/* =====================================================
+   PARALLAX LAYERS
+===================================================== */
+
+.layer {
+    position:
+        absolute;
+
+    inset:
+        -70px;
+
+    background-repeat:
+        no-repeat;
+
+    background-position:
+        center center;
+
+    background-size:
+        cover;
+
+    will-change:
+        transform;
+}
+
+
+/*
+   Keeping your CURRENT image order.
+*/
 
 .layer-far {
-    background-image: url(../images/0.png);
+    background-image:
+        url(../images/0.png);
 }
+
 
 .layer-mid {
-    background-image: url(../images/1.png);
+    background-image:
+        url(../images/1.png);
 }
+
 
 .layer-near {
-    background-image: url(../images/2.png);
+    background-image:
+        url(../images/2.png);
 }
+
 
 .layer-front {
-    background-image: url(../images/3.png);
+    background-image:
+        url(../images/3.png);
 }
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
 
 .hero-text {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #ffffff;
+    position:
+        relative;
+
+    z-index:
+        20;
+
+    text-align:
+        center;
+
+    color:
+        #ffffff;
+
+    padding-inline:
+        20px;
+
+    text-shadow:
+        0 2px 18px
+        #000a;
 }
+
+
+/* =====================================================
+   TITLE
+===================================================== */
 
 .hero_title {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 300;
-    font-size: clamp(3rem, 8vw, 6rem);
-    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
-    animation: fadeInAnimation 1.6s ease forwards;
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-weight:
+        300;
+
+    font-size:
+        clamp(
+            3rem,
+            8vw,
+            6rem
+        );
+
+    text-shadow:
+        0 6px 24px
+        rgba(
+            0,
+            0,
+            0,
+            0.6
+        );
+
+    animation:
+        fadeInAnimation
+        1.6s ease
+        forwards;
 }
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
 
 .hero_desc {
-    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
-    font-weight: 300;
-    opacity: 0;
-    animation: fadeInAnimation 1.6s ease 0.35s forwards;
+    font-size:
+        clamp(
+            1.1rem,
+            2.5vw,
+            1.7rem
+        );
+
+    font-weight:
+        300;
+
+    opacity:
+        0;
+
+    animation:
+        fadeInAnimation
+        1.6s ease
+        0.35s
+        forwards;
 }
+
+
+/* =====================================================
+   CTA
+===================================================== */
 
 .hero-btn {
-    margin-top: 2rem;
-    padding: 0.8rem 2rem;
-    border-radius: 999px;
-    background: #ffd166;
-    color: #1d1e22;
-    font-weight: 600;
-    border: none;
-    opacity: 0;
-    animation: fadeInAnimation 1.6s ease 0.7s forwards;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top:
+        2rem;
+
+    padding:
+        0.8rem
+        2rem;
+
+    border-radius:
+        999px;
+
+    background:
+        #ffd166;
+
+    color:
+        #1d1e22;
+
+    font-weight:
+        600;
+
+    border:
+        none;
+
+    opacity:
+        0;
+
+    animation:
+        fadeInAnimation
+        1.6s ease
+        0.7s
+        forwards;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .hero-btn:hover {
-    color: #1d1e22;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(255, 209, 102, 0.4);
+    color:
+        #1d1e22;
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(
+            255,
+            209,
+            102,
+            0.4
+        );
 }
+
+
+/* =====================================================
+   OLD NATIVE MUSIC PLAYER
+   Only applies if one is still present in Home HTML.
+===================================================== */
 
 .music-player {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeInAnimation 1.6s ease 1s forwards;
+    margin-top:
+        1.5rem;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    opacity:
+        0;
+
+    animation:
+        fadeInAnimation
+        1.6s ease
+        1s
+        forwards;
 }
+
 
 .music-player audio {
-    width: min(360px, 85vw);
-    height: 42px;
-    opacity: 0.85;
+    width:
+        min(
+            360px,
+            85vw
+        );
+
+    height:
+        42px;
+
+    opacity:
+        0.85;
 }
+
+
+/* =====================================================
+   ENTRANCE ANIMATION
+===================================================== */
 
 @keyframes fadeInAnimation {
+
     0% {
-        opacity: 0;
-        transform: translateY(24px);
+        opacity:
+            0;
+
+        transform:
+            translateY(24px);
     }
+
+
     100% {
-        opacity: 1;
-        transform: translateY(0);
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
     }
+
 }
 
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media (max-width: 630px) {
-    .hero_title {
-        font-size: 2.6rem;
+
+    .bgimage {
+        min-height:
+            640px;
     }
+
+
+    .hero_title {
+        font-size:
+            2.6rem;
+    }
+
 }

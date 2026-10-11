@@ -48,6 +48,17 @@ const HUD = {
             orbs += `<span class="orb ${i < availableOrbs ? "" : "empty"}"></span>`;
         }
         this.orbsEl.innerHTML = orbs;
+        const pulse = document.getElementById("hud-pulse");
+        const touchPulse = document.getElementById("touch-pulse");
+        const cooldown = Game.scene && Game.scene.player ? Game.scene.player.pulseCd : 0;
+        pulse.classList.toggle("hidden", !GameState.pulseUnlocked);
+        pulse.textContent = cooldown > 0 ? `F PULSE ${Math.ceil(cooldown)}s` : "F PULSE READY";
+        touchPulse.classList.toggle("hidden", !GameState.pulseUnlocked);
+        touchPulse.disabled = cooldown > 0;
+        touchPulse.querySelector(".pulse-state").textContent = cooldown > 0 ? `${Math.ceil(cooldown)}s` : "READY";
+        touchPulse.style.setProperty("--pulse-charge", `${(1 - cooldown / CFG.PULSE_COOLDOWN) * 100}%`);
+        touchPulse.setAttribute("aria-label", cooldown > 0
+            ? `Arcane pulse, ready in ${Math.ceil(cooldown)} seconds` : "Arcane pulse ready");
     },
 
     toggleGallery(force) {

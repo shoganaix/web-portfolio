@@ -13,7 +13,8 @@ const DIALOGUES = {
             { who: "Guide", text: "Move with WASD or the arrow keys." },
             { who: "Guide", text: "Hold SHIFT while moving to sprint!" },
             { who: "Guide", text: "Press E close to people, chests and signs to interact." },
-            { who: "Guide", text: "Press SPACE to attack when enemies show up." },
+            { who: "Guide", text: "Press SPACE to attack. Your projectiles follow the mouse cursor: move it to guide them towards enemies." },
+            { who: "Guide", text: "Rest at the bench with E to recover hearts. Move to leave; damage interrupts your rest." },
             { who: "Guide", text: "Collect the scattered artworks — the Sage to the east is looking for them." },
         ],
     },
@@ -21,11 +22,15 @@ const DIALOGUES = {
     sage: {
         // Reacts to how many gems the player has gathered.
         lines: (state) => {
+            if (state.sageSpoken) return [
+                { who: "Sage", text: "The west tower holds the arcane pulse. The east tower holds the final trial." },
+                { who: "Sage", text: "Defeat its wave and find every artwork to restore the valley." },
+            ];
             if (state.gems >= state.requiredGems) {
                 return [
                     { who: "Sage", text: "Magnificent! Five artworks, just as the prophecy said." },
-                    { who: "Sage", text: "Give me five artworks and I will open the portal to my studio." },
-                    { who: "Sage", text: "Walk to the old tower in the west and press E to cross into the outer world." },
+                    { who: "Sage", text: "With this energy I can awaken the west tower's forgotten magic. Your collection stays yours." },
+                    { who: "Sage", text: "Visit the west tower and press E to learn the arcane pulse. Then face the east tower's trial." },
                 ];
             }
             return [
@@ -56,26 +61,27 @@ const DIALOGUES = {
 
     sign: {
         lines: [
-            { who: "Sign", text: "TOWER OF CREATION — press E near the tower to visit my website." },
-            { who: "Sign", text: "Tip: enemies knock you back, keep your distance and time your SPACE attack." },
+            { who: "Sign", text: "TOWER OF CREATION — bring five artworks to the Sage, then press E at the west tower to learn the arcane pulse." },
+            { who: "Sign", text: "Press SPACE to cast projectiles; they follow your mouse cursor. Keep your distance and guide them towards enemies." },
         ],
     },
 
     portal: {
         lines: [
-            { who: "Tower", text: "The tower hums with energy... E to step through, ESC to stay." },
+            { who: "Tower", text: "ARCANE PULSE UNLOCKED! Press F, or PULSE on mobile, to strike nearby enemies and push them back." },
+            { who: "Tower", text: "The pulse deals two damage and recharges in five seconds. Use it when the slimes surround you." },
         ],
     },
 
     portalLocked: {
         lines: [
-            { who: "Tower", text: "It seems I cannot enter yet... the tower gives off a strange magical energy." },
+            { who: "Tower", text: "The pulse sleeps. Collect five artworks and speak to the Sage in the east to awaken it." },
         ],
     },
 
     enemyPortal: {
         lines: [
-            { who: "Portal", text: "The portal awakens... enemies will keep coming from the darkness." },
+            { who: "Portal", text: "The final trial begins: defeat fifteen enemies. Collect their polaroids and claim the reward chest." },
         ],
     },
 
@@ -88,6 +94,18 @@ const DIALOGUES = {
     empty: {
         lines: [
             { who: "Chest", text: "Empty. Someone got here first..." },
+        ],
+    },
+    pulseReady: {
+        lines: [{ who: "Tower", text: "Your arcane pulse is ready. Press F or PULSE on mobile; it recharges in five seconds." }],
+    },
+    trialComplete: {
+        lines: [{ who: "Portal", text: "The trial is complete. Claim your reward chest and collect the remaining polaroids." }],
+    },
+    collectionComplete: {
+        lines: [
+            { who: "Sage", text: "Every artwork has returned, and the final trial is complete. The valley is restored!" },
+            { who: "Sage", text: "You earned the Curator's Halo and an extra heart. Your complete gallery awaits. Thank you for exploring my world." },
         ],
     },
 
