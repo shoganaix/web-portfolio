@@ -3627,3 +3627,9 @@ and
     .game-card .sprig-top { top: -26px; right: -7px; }
     .game-card .sprig-bottom { bottom: -42px; left: -7px; }
 }
+
+/* Give the landing title a little more prominence. */
+.choice-heading h1 { font-size: clamp(46px, 4.7vw, 70px); }
+@media (max-width: 960px) {
+    .choice-heading h1 { font-size: clamp(46px, 6.9vw, 60px); }
+}
