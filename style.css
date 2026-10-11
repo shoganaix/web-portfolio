@@ -211,7 +211,7 @@ body[data-world="engineering"] .world-glow { background: radial-gradient(ellipse
     .portfolio-card:not(.is-entering) { animation-delay: 140ms; }
     .game-card:not(.is-entering) { animation-delay: 260ms; }
     .engineering-card:not(.is-entering) { animation-delay: 380ms; }
-    .fireflies i { animation: particle-drift var(--duration, 24s) ease-in-out var(--delay) infinite alternate; }
+    .fireflies i { animation: particle-drift calc(var(--duration, 24s) * .7) ease-in-out var(--delay) infinite alternate; }
     .experience.is-entering { z-index: 5; animation: enter-world 240ms ease-out forwards; }
 }
 

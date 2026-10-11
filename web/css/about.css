@@ -63,7 +63,7 @@ body {
 
     background-size:
         cover,
-        contain,
+        cover,
         240% 240%;
 
     background-position:
@@ -84,7 +84,7 @@ body {
 }
 
 
-/* Keep the landscape fully framed; only the ambient gradient drifts. */
+/* Fill the screen with the landscape; only the ambient gradient drifts. */
 
 @keyframes aboutFlow {
 
@@ -717,7 +717,7 @@ body {
 
         background-size:
             cover,
-            contain,
+            cover,
             240% 240%;
 
         background-repeat:
