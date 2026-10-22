@@ -318,9 +318,9 @@ html {
    PROJECT MODAL
 ===================================================== */
 
-.project-modal {
+.modal-content.project-modal {
     background: #000000;
-    border: 5px solid rgba(255, 255, 255, 0.95);
+    border: none;
     border-radius: 18px;
     color: #ffffff;
     position: relative;
@@ -440,6 +440,38 @@ html {
     /* Allow scrolling for projects with multiple images */
     max-height: calc(100dvh - 110px);
     overflow-y: auto;
+    margin-inline: 82px;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #b59a60 #171613;
+}
+
+.project-modal .modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-modal .modal-body::-webkit-scrollbar-track {
+    background: #171613;
+    border-radius: 999px;
+    margin-block: 24px;
+}
+
+.project-modal .modal-body::-webkit-scrollbar-thumb {
+    background: #b59a60;
+    border: 2px solid #171613;
+    border-radius: 999px;
+}
+
+.project-modal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #ffd166;
+}
+
+/* Use the rounded scrollbar styling in browsers that support it. */
+@supports selector(::-webkit-scrollbar) {
+    .project-modal .modal-body {
+        scrollbar-width: auto;
+        scrollbar-color: auto;
+    }
 }
 
 
@@ -743,7 +775,27 @@ html {
 
         gap: 20px;
 
-        padding: 24px;
+        padding: 80px 16px 24px;
+        margin-inline: 8px 16px;
+    }
+
+    .nav-arrow {
+        width: 42px;
+        height: 42px;
+        top: 18px;
+        transform: none;
+    }
+
+    .nav-arrow.prev {
+        left: 20px;
+    }
+
+    .nav-arrow.next {
+        right: 76px;
+    }
+
+    .nav-arrow:hover {
+        transform: scale(1.04);
     }
 
     .project-modal .modal-info {
@@ -972,8 +1024,7 @@ html {
         margin: 20px auto;
     }
 
-    .project-modal {
-        border-width: 3px;
+    .modal-content.project-modal {
         border-radius: 14px;
     }
 
@@ -984,6 +1035,7 @@ html {
 
         gap: 26px;
         padding: 65px 30px 30px;
+        margin-inline: 8px 16px;
 
         min-height: 0;
         max-height: calc(100dvh - 50px);
