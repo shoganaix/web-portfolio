@@ -37,6 +37,7 @@
     src="orbit.js"
     defer
   ></script>
+  <script src="gallery.js" defer></script>
 </head>
 
 
@@ -97,6 +98,10 @@
 
       <a href="#projects">
         Projects
+      </a>
+
+      <a href="#gallery">
+        Gallery
       </a>
 
       <a href="#about">
@@ -1308,6 +1313,49 @@
 
     </section>
 
+
+    <!-- ====================================================
+         EVENTS & COMPETITIONS
+    ===================================================== -->
+
+    <section id="gallery" class="section event-gallery" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">EVENTS &amp; COMPETITIONS</p>
+          <h2 id="gallery-title">Built together.<br><span>Put to the test.</span></h2>
+        </div>
+        <p>A few moments from hackathons<br>and robotics competitions.</p>
+      </div>
+
+      <div class="event-carousel">
+      <div class="event-gallery-track" id="event-gallery-track" role="region" aria-roledescription="carousel" aria-label="Events and competitions photos" tabindex="0">
+        <figure class="event-entry" role="group" aria-roledescription="slide" aria-label="1 of 2: Hackathon winner">
+          <a class="event-photo" href="Foto.jpg" target="_blank" rel="noopener" aria-label="View the hackathon team photo at full size (opens in a new tab)">
+            <img src="Foto.jpg" alt="Hackathon team gathered around laptops, working on a project together." width="1188" height="792" loading="lazy" decoding="async">
+          </a>
+          <figcaption>
+            <div class="event-meta"><span>HACKATHON</span><span class="event-award">WINNER</span></div>
+            <p>A moment from a hackathon I won, working with a team to bring a project to life.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="event-entry" role="group" aria-roledescription="slide" aria-label="2 of 2: Robotics competition">
+          <a class="event-photo" href="Cybertech.jpg" target="_blank" rel="noopener" aria-label="View the robotics competition photo at full size (opens in a new tab)">
+            <img src="Cybertech.jpg" alt="Robots with exposed electronics and custom chassis on a yellow competition arena." width="1024" height="758" loading="lazy" decoding="async">
+          </a>
+          <figcaption>
+            <div class="event-meta"><span>ROBOTICS COMPETITION</span></div>
+            <p>My robotics competition experience, bringing code, electronics and mechanics together.</p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="event-gallery-controls" hidden>
+        <button type="button" class="gallery-previous" aria-label="Previous photo" aria-controls="event-gallery-track">←</button>
+        <span class="gallery-counter" role="status" aria-live="polite" aria-atomic="true">01 / 02</span>
+        <button type="button" class="gallery-next" aria-label="Next photo" aria-controls="event-gallery-track">→</button>
+      </div>
+      </div>
+    </section>
 
     <!-- ====================================================
          ABOUT

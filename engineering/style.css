@@ -688,12 +688,12 @@ button[aria-pressed=true] {
 
 .section {
   padding:
-    108px
+    64px
     0;
 }
 
 .projects {
-  padding-top: 76px;
+  padding-top: 52px;
 }
 
 .section-heading {
@@ -701,7 +701,7 @@ button[aria-pressed=true] {
   justify-content: space-between;
   align-items: end;
   gap: 30px;
-  margin-bottom: 43px;
+  margin-bottom: 28px;
 }
 
 .section-heading .eyebrow {
@@ -1103,6 +1103,178 @@ details p:last-child {
   border-top:
     1px solid
     var(--line);
+}
+
+/* ==========================================================
+   EVENTS & COMPETITIONS
+========================================================== */
+
+.event-gallery {
+  border-top: 1px solid var(--line);
+}
+
+.event-carousel {
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.event-gallery-track {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 8px;
+}
+
+.event-gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.event-entry {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.event-photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: clamp(340px, 43vw, 560px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.event-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(.8);
+  transition: transform .5s ease, filter .5s ease;
+}
+
+.event-entry figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 72px 32px 28px;
+  background: linear-gradient(transparent, #090910ed 65%);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.event-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font: 9px / 1.5 var(--mono);
+  letter-spacing: 1.3px;
+}
+
+.event-award {
+  padding: 3px 8px;
+  border: 1px solid #c9b88140;
+  border-radius: 3px;
+  color: #d9c690;
+  background: #c9b8810c;
+}
+
+.event-entry figcaption > p {
+  max-width: 64ch;
+  margin: 0;
+  color: #d5cfe0;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.event-photo:focus-visible img {
+  filter: saturate(1);
+  transform: scale(1.025);
+}
+
+.event-entry:focus-within figcaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-gallery-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.event-gallery-controls[hidden] {
+  display: none;
+}
+
+.event-gallery-controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text);
+  background: var(--panel);
+  font-size: 20px;
+  transition: border-color .2s ease, color .2s ease;
+}
+
+.event-gallery-controls button:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.event-gallery-controls button:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.gallery-counter {
+  color: var(--muted);
+  font: 10px / 1.5 var(--mono);
+  letter-spacing: 1.5px;
+}
+
+@media (hover: hover) {
+  .event-photo:hover img {
+    filter: saturate(1);
+    transform: scale(1.025);
+  }
+  .event-entry:hover figcaption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .event-entry figcaption {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .event-photo {
+    height: clamp(300px, 85vw, 440px);
+  }
+  .event-entry figcaption {
+    padding: 60px 20px 20px;
+  }
 }
 
 /* ==========================================================
@@ -2232,7 +2404,7 @@ details.constellation-center {
 
   overflow: hidden;
 
-  padding-block: 125px;
+  padding-block: 76px;
 
   text-align: center;
 }
@@ -2762,11 +2934,11 @@ footer a span {
   }
 
   .section {
-    padding-block: 65px;
+    padding-block: 40px;
   }
 
   .projects {
-    padding-top: 48px;
+    padding-top: 36px;
   }
 
   .section-heading {
@@ -2934,7 +3106,7 @@ footer a span {
   }
 
   .contact {
-    padding-block: 85px;
+    padding-block: 48px;
   }
 
   .contact h2 {
