@@ -41,7 +41,7 @@ const ARTWORKS = [
     { title: "Wonderland — Character Design", file: "Portfolio_01.1_OriginalCharacterDesigns.png" },
     { title: "Sunlit Forest", file: "Portfolio_02_Landscape.png" },
     { title: "Hatsune Miku — Fan Art", file: "Portfolio_03_HatsuneMikuFanArt-WIP.png" },
-    { title: "Princess Mononoke — Portrait Study", file: "Portfolio_04_MononokePricessFanart.png" },
+    { title: "Princess Mononoke — Portrait Study", file: "Portfolio_04_MononokePricessFanart.jpg" },
     { title: "A Day at Sea", file: "Portfolio_05_WIPPokemon.png" },
     { title: "Character Turnaround", file: "Portfolio_06_Character_TurnAround.png" },
     { title: "Little Croco — The Explorer", file: "Portfolio_07_AnimalCroco.png" },

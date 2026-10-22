@@ -52,7 +52,7 @@ body {
             rgba(18, 20, 30, 0.8) 40%,
             rgba(18, 20, 30, 0.92) 100%
         ),
-        url('../images/0.png'),
+        none,
         linear-gradient(
             135deg,
             #191c2c 0%,
@@ -83,6 +83,22 @@ body {
     padding: 155px 24px 28px;
 }
 
+
+/* Independent landscape layer: crisp centre, feathered edges and a slow float. */
+.landscape-edge {
+    position: absolute;
+    inset: -20px;
+    z-index: 0;
+    pointer-events: none;
+    background: url('../images/0.png') center bottom / cover no-repeat;
+    opacity: 0.32;
+    animation: landscapeFloat 12s ease-in-out infinite;
+}
+
+@keyframes landscapeFloat {
+    0%, 100% { transform: translateY(30px); }
+    50% { transform: translateY(50px); }
+}
 
 /* Fill the screen with the landscape; only the ambient gradient drifts. */
 
@@ -430,7 +446,7 @@ body {
     height: auto;
 
     max-width: 100%;
-    max-height: 36dvh;
+    max-height: 48dvh;
 
     object-fit: contain;
 
@@ -1009,6 +1025,7 @@ body {
     .about,
     .about::before,
     .about::after,
+    .landscape-edge,
     .animate span,
     .textme,
     .info-grid,
