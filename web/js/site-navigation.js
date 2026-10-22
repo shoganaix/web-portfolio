@@ -20,7 +20,7 @@
         ],
 
         "portfolio.html": [
-            "js/portfolio.js"
+            "js/portfolio.js?v=20261022-3"
         ],
 
         "contact.html": []

@@ -8,17 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" data-page-style href="css/portfolio.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" data-page-style href="css/portfolio.css?v=20261022-5">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="css/navigation.css">
-<link rel="stylesheet" href="css/music-player.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/music-player.css">
 </head>
 
 <body>
@@ -75,7 +74,7 @@
                 </div>
             </article>
             <article
-                class="work"
+                class="work work-sunlit-forest"
                 tabindex="0"
                 data-title="Sunlit Forest"
                 data-category="Environment Art"
@@ -270,11 +269,11 @@
                 data-category="Final Degree Project"
                 data-description="Visual development for The Fool, including its visual identity, character design, concept art and research."
                 data-tags="The Fool, Concept Art, Character Design, Visual Development"
-                data-image="images/Portfolio_12.00_TFG.png">
+                data-image="images/Portfolio_12.00_TFG.PNG">
 
                 <div class="img-wrap">
                     <img
-                        src="images/Portfolio_12.00_TFG.png"
+                        src="images/Portfolio_12.00_TFG.PNG"
                         alt="The Fool — Cover">
                 </div>
                 <div class="caption">
@@ -304,17 +303,20 @@
                     id="prevProject"
                     aria-label="Previous project">
 
-                    <i class="fas fa-chevron-left"></i>
-
+                    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
                 </button>
                 <button
                     type="button"
                     class="nav-arrow next"
                     id="nextProject"
                     aria-label="Next project">
-                    <i class="fas fa-chevron-right"></i>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="m9 18 6-6-6-6"></path>
+                    </svg>
                 </button>
-                <div class="modal-body">
+                <div class="modal-body" id="projectModalBody">
                     <div class="modal-img" id="modalImages">
                         <img
                             id="modalImg"
@@ -328,6 +330,20 @@
                         <p class="modal-desc" id="modalDesc"></p>
                         <div class="modal-tags" id="modalTags"></div>
                     </div>
+                </div>
+                <div
+                    class="project-scrollbar"
+                    id="projectScrollbar"
+                    role="scrollbar"
+                    tabindex="0"
+                    aria-label="Project content scroll"
+                    aria-controls="projectModalBody"
+                    aria-orientation="vertical"
+                    aria-valuemin="0"
+                    aria-valuemax="0"
+                    aria-valuenow="0"
+                    hidden>
+                    <span class="project-scrollbar-thumb"></span>
                 </div>
             </div>
         </div>

@@ -22,12 +22,121 @@
 
     const modalImageContainer = img.parentElement;
     const modalBody = modalEl.querySelector(".modal-body");
+    const scrollbar = document.getElementById("projectScrollbar");
+    const scrollbarThumb = scrollbar?.querySelector(".project-scrollbar-thumb");
 
     const bootstrapModal = (typeof bootstrap !== "undefined")
         ? new bootstrap.Modal(modalEl)
         : null;
 
     let current = 0;
+    let scrollbarDrag = null;
+    let scrollbarResizeObserver = null;
+
+    function updateScrollbar() {
+        if (!modalBody || !scrollbar || !scrollbarThumb) return;
+
+        const maxScroll = modalBody.scrollHeight - modalBody.clientHeight;
+        const isScrollable = maxScroll > 1;
+        scrollbar.hidden = !isScrollable;
+        scrollbar.setAttribute("aria-valuemax", String(Math.max(0, Math.ceil(maxScroll))));
+        scrollbar.setAttribute("aria-valuenow", String(Math.round(modalBody.scrollTop)));
+
+        if (!isScrollable) return;
+
+        const trackHeight = scrollbar.clientHeight;
+        const thumbHeight = Math.min(
+            trackHeight,
+            Math.max(32, trackHeight * modalBody.clientHeight / modalBody.scrollHeight)
+        );
+        const thumbTravel = trackHeight - thumbHeight;
+        const scrollRatio = modalBody.scrollTop / maxScroll;
+
+        scrollbarThumb.style.height = thumbHeight + "px";
+        scrollbarThumb.style.transform = "translateY(" + thumbTravel * scrollRatio + "px)";
+    }
+
+    function onScrollbarPointerDown(event) {
+        if (!scrollbar || !scrollbarThumb || scrollbar.hidden || event.button !== 0) return;
+
+        event.preventDefault();
+        const trackRect = scrollbar.getBoundingClientRect();
+        const thumbRect = scrollbarThumb.getBoundingClientRect();
+        const maxThumbTravel = trackRect.height - thumbRect.height;
+        if (maxThumbTravel <= 0) return;
+        const isThumbHit = event.clientY >= thumbRect.top && event.clientY <= thumbRect.bottom;
+        const thumbOffset = isThumbHit
+            ? event.clientY - thumbRect.top
+            : thumbRect.height / 2;
+
+        scrollbarDrag = { pointerId: event.pointerId, thumbOffset };
+        scrollbar.setPointerCapture(event.pointerId);
+        modalBody.scrollTop = Math.max(
+            0,
+            Math.min(
+                modalBody.scrollHeight - modalBody.clientHeight,
+                (event.clientY - trackRect.top - thumbOffset) /
+                    maxThumbTravel *
+                    (modalBody.scrollHeight - modalBody.clientHeight)
+            )
+        );
+    }
+
+    function onScrollbarPointerMove(event) {
+        if (!scrollbarDrag || !scrollbar || event.pointerId !== scrollbarDrag.pointerId) return;
+
+        const trackRect = scrollbar.getBoundingClientRect();
+        const thumbHeight = scrollbarThumb.getBoundingClientRect().height;
+        const maxScroll = modalBody.scrollHeight - modalBody.clientHeight;
+        const maxThumbTravel = trackRect.height - thumbHeight;
+
+        if (maxThumbTravel <= 0 || maxScroll <= 0) return;
+
+        const thumbTop = Math.max(
+            0,
+            Math.min(maxThumbTravel, event.clientY - trackRect.top - scrollbarDrag.thumbOffset)
+        );
+        modalBody.scrollTop = thumbTop / maxThumbTravel * maxScroll;
+    }
+
+    function onScrollbarPointerUp(event) {
+        if (!scrollbarDrag || event.pointerId !== scrollbarDrag.pointerId) return;
+        scrollbarDrag = null;
+    }
+
+    function onScrollbarKeyDown(event) {
+        if (!modalBody) return;
+
+        const step = Math.max(40, modalBody.clientHeight * 0.15);
+        if (event.key === "ArrowDown") modalBody.scrollTop += step;
+        else if (event.key === "ArrowUp") modalBody.scrollTop -= step;
+        else if (event.key === "PageDown") modalBody.scrollTop += modalBody.clientHeight * 0.9;
+        else if (event.key === "PageUp") modalBody.scrollTop -= modalBody.clientHeight * 0.9;
+        else if (event.key === "Home") modalBody.scrollTop = 0;
+        else if (event.key === "End") modalBody.scrollTop = modalBody.scrollHeight;
+        else return;
+
+        event.preventDefault();
+    }
+
+    if (modalBody && scrollbar) {
+        modalBody.addEventListener("scroll", updateScrollbar, { passive: true });
+        modalImageContainer.addEventListener("load", updateScrollbar, true);
+        modalEl.addEventListener("shown.bs.modal", updateScrollbar);
+        scrollbar.addEventListener("pointerdown", onScrollbarPointerDown);
+        scrollbar.addEventListener("pointermove", onScrollbarPointerMove);
+        scrollbar.addEventListener("pointerup", onScrollbarPointerUp);
+        scrollbar.addEventListener("pointercancel", onScrollbarPointerUp);
+        scrollbar.addEventListener("keydown", onScrollbarKeyDown);
+
+        if (typeof ResizeObserver !== "undefined") {
+            scrollbarResizeObserver = new ResizeObserver(updateScrollbar);
+            scrollbarResizeObserver.observe(modalBody);
+            scrollbarResizeObserver.observe(modalImageContainer);
+        } else {
+            window.addEventListener("resize", updateScrollbar);
+        }
+    }
 
 
     // =====================================================
@@ -305,70 +414,70 @@
             },
 
             {
-                src: "images/Portfolio_12.02_TFG.png",
+                src: "images/Portfolio_12.02_TFG.PNG",
                 title: "The Fool — Early Character Development",
                 description:
                     "Early character explorations focusing on silhouettes, proportions and the visual language of the project."
             },
 
             {
-                src: "images/Portfolio_12.03_TFG.png",
+                src: "images/Portfolio_12.03_TFG.PNG",
                 title: "The Fool — Research & Studies",
                 description:
                     "Initial visual research and concept studies used to establish the foundations of the character designs."
             },
 
             {
-                src: "images/Portfolio_12.04_TFG.png",
+                src: "images/Portfolio_12.04_TFG.PNG",
                 title: "The Fool — Character Exploration",
                 description:
                     "A collection of exploratory sketches, character variations and colour studies developed during the early design process."
             },
 
             {
-                src: "images/Portfolio_12.05_TFG.png",
+                src: "images/Portfolio_12.05_TFG.PNG",
                 title: "The Fool — Concept Development",
                 description:
                     "Further concept sketches and annotated studies exploring character details, forms and design alternatives."
             },
 
             {
-                src: "images/Portfolio_12.06_TFG.png",
+                src: "images/Portfolio_12.06_TFG.PNG",
                 title: "The Fool — Symbol & Visual Identity",
                 description:
                     "Exploration of the project's emblem and signature, focusing on creating a recognisable visual identity."
             },
 
             {
-                src: "images/Portfolio_12.07_TFG.png",
+                src: "images/Portfolio_12.07_TFG.PNG",
                 title: "The Fool — Character Design Studies",
                 description:
                     "Character development sheets exploring anatomy, costume details, proportions and colour palettes."
             },
 
             {
-                src: "images/Portfolio_12.08_TFG.png",
+                src: "images/Portfolio_12.08_TFG.PNG",
                 title: "The Fool — Character & Creature Concepts",
                 description:
                     "Additional concept studies exploring character features, organic forms and visual references."
             },
 
             {
-                src: "images/Portfolio_12.09_TFG.png",
+                src: "images/Portfolio_12.09_TFG.PNG",
                 title: "The Fool — Character Turnaround",
                 description:
                     "A full-body character design study featuring front and back views, colour references and costume details."
             },
 
             {
-                src: "images/Portfolio_12.10_TFG.png",
+                src: "images/Portfolio_12.10_TFG.PNG",
                 title: "The Fool — Character Variations",
                 description:
                     "Further character explorations, including alternative silhouettes, facial studies and costume development."
             },
 
             {
-                src: "images/Portfolio_12.11_TFG.png",
+                src: "images/Portfolio_12.11_TFG.PNG",
                 title: "The Fool — Background Design",
                 description:
                     "A decorative background developed for the project's visual presentation, using warm copper tones and circular ornamental elements."
@@ -548,6 +657,7 @@
             modalBody.scrollTop = 0;
 
         }
+        requestAnimationFrame(updateScrollbar);
 
 
         // =================================================
@@ -678,5 +788,22 @@
 
     };
     document.addEventListener("keydown", handleKeys);
-    window.pageCleanup = () => { document.removeEventListener("keydown", handleKeys); if (bootstrapModal) bootstrapModal.dispose(); };
+    window.pageCleanup = () => {
+        document.removeEventListener("keydown", handleKeys);
+        if (modalBody) modalBody.removeEventListener("scroll", updateScrollbar);
+        modalImageContainer.removeEventListener("load", updateScrollbar, true);
+        modalEl.removeEventListener("shown.bs.modal", updateScrollbar);
+        if (typeof ResizeObserver === "undefined") {
+            window.removeEventListener("resize", updateScrollbar);
+        }
+        if (scrollbar) {
+            scrollbar.removeEventListener("pointerdown", onScrollbarPointerDown);
+            scrollbar.removeEventListener("pointermove", onScrollbarPointerMove);
+            scrollbar.removeEventListener("pointerup", onScrollbarPointerUp);
+            scrollbar.removeEventListener("pointercancel", onScrollbarPointerUp);
+            scrollbar.removeEventListener("keydown", onScrollbarKeyDown);
+        }
+        if (scrollbarResizeObserver) scrollbarResizeObserver.disconnect();
+        if (bootstrapModal) bootstrapModal.dispose();
+    };
 })();

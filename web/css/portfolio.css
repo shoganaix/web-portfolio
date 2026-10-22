@@ -84,7 +84,8 @@ html {
         overflow: hidden;
         cursor: pointer;
         border: none;
-        outline: 2px solid transparent;
+        outline: none;
+        box-shadow: none;
         background: #000;
 
         opacity: 0;
@@ -220,7 +221,8 @@ html {
 ===================================================== */
 
 .work:focus-visible {
-    outline: 2px solid #ffd166;
+    outline: 3px solid #ffd166;
+    outline-offset: -3px;
 }
 
 
@@ -258,6 +260,10 @@ html {
     image-rendering: auto;
 
     transition: transform 0.55s ease;
+}
+
+.work-sunlit-forest .img-wrap img {
+    object-position: 55% center;
 }
 
 .work:hover .img-wrap img {
@@ -320,7 +326,7 @@ html {
 
 .modal-content.project-modal {
     background: #000000;
-    border: 2px solid #b59a60;
+    border: 0;
     border-radius: 18px;
     color: #ffffff;
     position: relative;
@@ -329,6 +335,13 @@ html {
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
 
     padding: 2px;
+}
+
+.work,
+.work:hover,
+.work:focus-visible {
+    border: 0;
+    box-shadow: none;
 }
 
 
@@ -340,28 +353,34 @@ html {
     position: absolute;
     top: 14px;
     right: 14px;
-    z-index: 5;
-
-    background-color: #000000;
-
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    border-radius: 50%;
-
-    padding: 10px;
-    opacity: 1;
-    box-shadow: none;
+    z-index: 10;
 }
 
 .project-modal .btn-close {
-    width: 38px;
-    height: 38px;
-    border: 1px solid #b59a60;
-    border-radius: 50%;
-    background-color: #000000;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23b59a60' stroke-linecap='round' stroke-width='2'%3E%3Cpath d='m4 4 8 8M12 4l-8 8'/%3E%3C/svg%3E");
-    background-size: 14px;
-    filter: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffd166' stroke-linecap='round' stroke-width='2.25'%3E%3Cpath d='m4 4 8 8M12 4l-8 8'/%3E%3C/svg%3E");
+    background-size: 20px;
     opacity: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.project-modal .btn-close:hover {
+    background-color: transparent;
+    transform: scale(1.05);
+}
+
+.project-modal .btn-close:focus-visible,
+.nav-arrow:focus-visible {
+    outline: 2px solid #ffd166;
+    outline-offset: 3px;
 }
 
 
@@ -375,49 +394,41 @@ html {
     transform: translateY(-50%);
     z-index: 5;
 
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    appearance: none;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 2px solid rgba(255, 255, 255, 0.28);
-
-    background: rgba(255, 255, 255, 0.08);
+    border: 0;
+    background: transparent;
     color: #ffd166;
-
-    font-size: 1.45rem;
     line-height: 1;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        border-color 0.2s ease;
-
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-
-    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 0;
     transform-origin: center;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
-.nav-arrow i {
+.nav-arrow svg {
     display: block;
-    transform: translateY(-1px);
-    color: #ffd166;
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .nav-arrow:hover {
-    background: #ffd166;
-    color: #11131d;
-
-    border-color: rgba(255, 209, 102, 0.9);
-
+    background: transparent;
+    color: #ffe2a0;
     transform: translateY(-50%) scale(1.04);
-}
-
-.nav-arrow:hover i {
-    color: #11131d;
 }
 
 .nav-arrow.prev {
@@ -434,6 +445,7 @@ html {
 ===================================================== */
 
 .project-modal .modal-body {
+    position: relative;
     display: grid;
 
     grid-template-columns:
@@ -453,29 +465,39 @@ html {
     max-height: calc(100dvh - 110px);
     overflow-y: auto;
     margin-inline: 82px;
-    scrollbar-gutter: stable;
-    scrollbar-width: thin;
-    scrollbar-color: #b59a60 #171613;
+    scrollbar-width: none;
 }
 
 .project-modal .modal-body::-webkit-scrollbar {
+    display: none;
+}
+
+.project-scrollbar {
+    position: absolute;
+    top: 32px;
+    right: 64px;
+    bottom: 32px;
     width: 8px;
-}
-
-.project-modal .modal-body::-webkit-scrollbar-track {
-    background: #171613;
     border-radius: 999px;
-    margin-block: 24px;
+    background: rgba(255, 209, 102, 0.2);
+    cursor: pointer;
+    touch-action: none;
 }
 
-.project-modal .modal-body::-webkit-scrollbar-thumb {
-    background: #b59a60;
-    border: 2px solid #171613;
+.project-scrollbar[hidden] {
+    display: none;
+}
+
+.project-scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 32px;
     border-radius: 999px;
-}
-
-.project-modal .modal-body::-webkit-scrollbar-thumb:hover {
     background: #ffd166;
+    box-shadow: 0 0 8px rgba(255, 209, 102, 0.55);
+    pointer-events: none;
 }
 
 /* =====================================================
@@ -801,6 +823,11 @@ html {
         transform: scale(1.04);
     }
 
+    .nav-arrow svg {
+        width: 20px;
+        height: 20px;
+    }
+
     .project-modal .modal-info {
         position: static;
     }
@@ -823,67 +850,6 @@ html {
     .img-wrap img,
     .caption {
         transition: none;
-    }
-
-}
-
-
-/* =====================================================
-   MODAL ARROWS — VISIBLE WITHOUT ICON LIBRARIES
-===================================================== */
-
-.nav-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #ffd166;
-}
-
-/* Hide the original icon if it is not rendering correctly */
-.nav-arrow i {
-    display: none;
-}
-
-/* Draw the arrows using CSS */
-.nav-arrow::before {
-    content: "";
-
-    display: block;
-
-    width: 11px;
-    height: 11px;
-
-    border-top: 3px solid currentColor;
-    border-right: 3px solid currentColor;
-
-    flex-shrink: 0;
-}
-
-/* Previous — left arrow */
-.nav-arrow.prev::before {
-    transform: rotate(-135deg);
-    margin-left: 5px;
-}
-
-/* Next — right arrow */
-.nav-arrow.next::before {
-    transform: rotate(45deg);
-    margin-right: 5px;
-}
-
-/* Hover */
-.nav-arrow:hover {
-    color: #11131d;
-}
-
-/* Mobile */
-@media (max-width: 767px) {
-
-    .nav-arrow::before {
-        width: 10px;
-        height: 10px;
-        border-width: 2.5px;
     }
 
 }
@@ -1114,6 +1080,12 @@ html {
         transform: none;
 
         z-index: 6;
+    }
+
+    .project-scrollbar {
+        top: 18px;
+        right: 8px;
+        bottom: 18px;
     }
 
     .nav-arrow.prev {
