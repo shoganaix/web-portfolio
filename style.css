@@ -174,7 +174,6 @@ body[data-world="engineering"] .world-glow { background: radial-gradient(ellipse
 .engineering-card .card-caption p { font-family: var(--mono); letter-spacing: -.035em; }
 .engineering-card .card-arrow { border: 1px solid #8dd8dd66; border-radius: 8px; color: #b5eced; background: linear-gradient(135deg, #66bac31a, #477c9410); box-shadow: inset 0 1px #d5faff0a; }
 .engineering-card .card-art::before { content: ""; position: absolute; z-index: 2; inset: -40% 0 auto; height: 35%; opacity: 0; pointer-events: none; background: linear-gradient(transparent, #b6f4ff0b, #b6f4ff24); border-bottom: 1px solid #b6f4ff55; }
-.engineering-card .card-art::before { animation: panel-scan 6s ease-out infinite; }
 
 .engineering-card .card-frame { z-index: 0; }
 .engineering-orbit { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; opacity: 0; pointer-events: none; }
@@ -192,6 +191,7 @@ body[data-world="engineering"] .world-glow { background: radial-gradient(ellipse
 .experience:focus-visible { outline: 2px solid #d6e5f4; outline-offset: 10px; }
 .experience:focus-visible .card-arrow { transform: translateX(3px); }
 @media (hover: hover) {
+    .engineering-card:hover .card-art::before { animation: panel-scan 6s ease-out infinite; }
     .experience:hover { z-index: 3; transform: rotate(0deg) translateY(-9px); filter: drop-shadow(0 24px 23px var(--shadow)); }
     .experience:hover::before { opacity: .9; }
     .experience:hover .card-arrow { transform: translateX(3px); }
@@ -201,7 +201,7 @@ body[data-world="engineering"] .world-glow { background: radial-gradient(ellipse
 @keyframes photo-reflection { to { transform: translateX(100%); } }
 @keyframes code-type { 0%, 8% { clip-path: inset(0 100% 0 0); } 48%, 94% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 100% 0 0); } }
 @keyframes code-caret { 50% { opacity: 0; } }
-@keyframes panel-scan { 0%, 20% { transform: translateY(0); opacity: 0; } 25% { opacity: .55; } 75% { transform: translateY(430%); opacity: .4; } 80%, 100% { transform: translateY(430%); opacity: 0; } }
+@keyframes panel-scan { 0% { transform: translateY(20%); opacity: .55; } 65% { transform: translateY(430%); opacity: .4; } 70%, 100% { transform: translateY(430%); opacity: 0; } }
 @keyframes arrive { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
 @keyframes particle-drift { 0% { transform: translate(0, 25px); opacity: .15; } 45% { opacity: .65; } 100% { transform: translate(var(--drift, 15px), -65px); opacity: .25; } }
 @keyframes enter-world { to { transform: translateY(-10px) rotate(0deg) scale(1.025); } }
