@@ -320,7 +320,7 @@ html {
 
 .modal-content.project-modal {
     background: #000000;
-    border: none;
+    border: 2px solid #b59a60;
     border-radius: 18px;
     color: #ffffff;
     position: relative;
@@ -350,6 +350,18 @@ html {
     padding: 10px;
     opacity: 1;
     box-shadow: none;
+}
+
+.project-modal .btn-close {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #b59a60;
+    border-radius: 50%;
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23b59a60' stroke-linecap='round' stroke-width='2'%3E%3Cpath d='m4 4 8 8M12 4l-8 8'/%3E%3C/svg%3E");
+    background-size: 14px;
+    filter: none;
+    opacity: 1;
 }
 
 
@@ -465,15 +477,6 @@ html {
 .project-modal .modal-body::-webkit-scrollbar-thumb:hover {
     background: #ffd166;
 }
-
-/* Use the rounded scrollbar styling in browsers that support it. */
-@supports selector(::-webkit-scrollbar) {
-    .project-modal .modal-body {
-        scrollbar-width: auto;
-        scrollbar-color: auto;
-    }
-}
-
 
 /* =====================================================
    MODAL IMAGE CONTAINER
@@ -1182,4 +1185,3 @@ html {
     }
 
 }
-
