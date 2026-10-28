@@ -414,70 +414,70 @@
             },
 
             {
-                src: "images/Portfolio_12.02_TFG.PNG",
+                src: "images/Portfolio_12.02_TFG.png",
                 title: "The Fool — Early Character Development",
                 description:
                     "Early character explorations focusing on silhouettes, proportions and the visual language of the project."
             },
 
             {
-                src: "images/Portfolio_12.03_TFG.PNG",
+                src: "images/Portfolio_12.03_TFG.png",
                 title: "The Fool — Research & Studies",
                 description:
                     "Initial visual research and concept studies used to establish the foundations of the character designs."
             },
 
             {
-                src: "images/Portfolio_12.04_TFG.PNG",
+                src: "images/Portfolio_12.04_TFG.png",
                 title: "The Fool — Character Exploration",
                 description:
                     "A collection of exploratory sketches, character variations and colour studies developed during the early design process."
             },
 
             {
-                src: "images/Portfolio_12.05_TFG.PNG",
+                src: "images/Portfolio_12.05_TFG.png",
                 title: "The Fool — Concept Development",
                 description:
                     "Further concept sketches and annotated studies exploring character details, forms and design alternatives."
             },
 
             {
-                src: "images/Portfolio_12.06_TFG.PNG",
+                src: "images/Portfolio_12.06_TFG.png",
                 title: "The Fool — Symbol & Visual Identity",
                 description:
                     "Exploration of the project's emblem and signature, focusing on creating a recognisable visual identity."
             },
 
             {
-                src: "images/Portfolio_12.07_TFG.PNG",
+                src: "images/Portfolio_12.07_TFG.png",
                 title: "The Fool — Character Design Studies",
                 description:
                     "Character development sheets exploring anatomy, costume details, proportions and colour palettes."
             },
 
             {
-                src: "images/Portfolio_12.08_TFG.PNG",
+                src: "images/Portfolio_12.08_TFG.png",
                 title: "The Fool — Character & Creature Concepts",
                 description:
                     "Additional concept studies exploring character features, organic forms and visual references."
             },
 
             {
-                src: "images/Portfolio_12.09_TFG.PNG",
+                src: "images/Portfolio_12.09_TFG.png",
                 title: "The Fool — Character Turnaround",
                 description:
                     "A full-body character design study featuring front and back views, colour references and costume details."
             },
 
             {
-                src: "images/Portfolio_12.10_TFG.PNG",
+                src: "images/Portfolio_12.10_TFG.png",
                 title: "The Fool — Character Variations",
                 description:
                     "Further character explorations, including alternative silhouettes, facial studies and costume development."
             },
 
             {
-                src: "images/Portfolio_12.11_TFG.PNG",
+                src: "images/Portfolio_12.11_TFG.png",
                 title: "The Fool — Background Design",
                 description:
                     "A decorative background developed for the project's visual presentation, using warm copper tones and circular ornamental elements."
